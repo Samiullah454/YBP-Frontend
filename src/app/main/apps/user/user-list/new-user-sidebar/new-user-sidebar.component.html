@@ -1,0 +1,114 @@
+
+      <form class="add-new-user modal-content pt-0" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">    
+       <div class="modal-body flex-grow-1">
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-fullname">First Name <span style="color:red;">*</span></label>
+            <input
+              type="text"
+              class="form-control dt-full-name"
+              id="basic-icon-default-fullname"
+              placeholder="John Doe"
+              name="user-fullname"
+              [(ngModel)]="user.userName"
+              [class.error]="newUserForm.submitted && FNameRef.invalid"
+              #FNameRef="ngModel"
+              required
+              aria-label="user name"
+              aria-describedby="basic-icon-default-fullname2"
+            />
+            <span *ngIf="newUserForm.submitted && FNameRef.invalid" class="invalid-form">
+              <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-uname">Last Name<span style="color:red;">*</span></label>
+            <input
+              type="text"
+              id="basic-icon-default-uname"
+              class="form-control dt-uname"
+              placeholder="Surname"
+              aria-label="jdoe1"
+              aria-describedby="basic-icon-default-uname2"
+              name="user-surname"
+              [(ngModel)]="user.surname"
+              [class.error]="newUserForm.submitted && FSurNameRef.invalid"
+              #FSurNameRef="ngModel"
+              required
+            />
+            <span *ngIf="newUserForm.submitted && FSurNameRef.invalid" class="invalid-form">
+              <small class="form-text text-danger" *ngIf="FSurNameRef.errors.required">This field is required!</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-uname">Username <span style="color:red;">*</span></label>
+            <input
+              type="text"
+              id="basic-icon-default-uname"
+              class="form-control dt-uname"
+              placeholder="Username"
+              aria-label="jdoe1"
+              aria-describedby="basic-icon-default-uname2"
+              name="user-name"
+              [(ngModel)]="user.name"
+              [class.error]="newUserForm.submitted && FUserNameRef.invalid"
+              #FUserNameRef="ngModel"
+              required
+            />
+            <span *ngIf="newUserForm.submitted && FUserNameRef.invalid" class="invalid-form">
+              <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+            </span>
+          </div>
+          
+        
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-email">Email <span style="color:red;">*</span></label>
+            <input
+              type="text"
+              id="basic-icon-default-email"
+              class="form-control dt-email"
+              placeholder="john.doe@example.com"
+              aria-label="john.doe@example.com"
+              aria-describedby="basic-icon-default-email2"
+              name="user-email"
+              [(ngModel)]="user.emailAddress"
+              [class.error]="newUserForm.submitted && FEmailRef.invalid"
+              #FEmailRef="ngModel"
+              required
+            />
+            <span *ngIf="newUserForm.submitted && FEmailRef.invalid" class="invalid-form">
+              <small class="form-text text-danger" *ngIf="FEmailRef.errors.required">This field is required!</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="basic-icon-default-uname">Password <span style="color:red;">*</span></label>
+            <input
+              type="password"
+              id="basic-icon-default-uname"
+              class="form-control dt-uname"
+              placeholder="Password"
+              aria-label="jdoe1"
+              aria-describedby="basic-icon-default-uname2"
+              name="FpasswordRef"
+              [(ngModel)]="user.password"
+              [class.error]="newUserForm.submitted && FpasswordRef.invalid"
+              #FpasswordRef="ngModel"
+              required
+            />
+            <span *ngIf="newUserForm.submitted && FpasswordRef.invalid" class="invalid-form">
+              <small class="form-text text-danger" *ngIf="FpasswordRef.errors.required">This field is required!</small>
+            </span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="user-role">User Role <span class="text-danger">*</span></label>
+            <ng-select [items]="roles" [closeOnSelect]="false" [searchable]="true" bindLabel="name" name="selectLanguage" placeholder="Select Role" [(ngModel)]="selectMultiSelected">
+                        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                          <span class="ng-value-label"> {{ item.displayName }}</span>
+                          <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                        </ng-template>
+                      </ng-select>
+          </div>        
+          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
+          <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+        </div>
+      </form>
+

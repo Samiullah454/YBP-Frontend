@@ -1,0 +1,24 @@
+<svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="steering-wheel">
+<g id="Oval">
+<circle cx="11" cy="11" r="8.25" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="11" cy="11" r="8.25" stroke="white" stroke-opacity="0.1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Oval_2">
+<circle cx="10.9998" cy="10.9998" r="1.83333" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="10.9998" cy="10.9998" r="1.83333" stroke="white" stroke-opacity="0.1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Path">
+<path d="M10.9998 12.8335V19.2502" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M10.9998 12.8335V19.2502" stroke="white" stroke-opacity="0.1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Path_2">
+<path d="M9.1665 10.9998L2.979 9.1665" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M9.1665 10.9998L2.979 9.1665" stroke="white" stroke-opacity="0.1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+<g id="Path_3">
+<path d="M12.8335 10.9998L19.021 9.1665" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M12.8335 10.9998L19.021 9.1665" stroke="white" stroke-opacity="0.1" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</g>
+</g>
+</svg>

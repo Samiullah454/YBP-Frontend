@@ -1,0 +1,115 @@
+@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/base//bootstrap-extended/include'; // Components includes
+@import '@core/scss/angular/libs/datatables.component.scss';
+
+
+
+.viewchangeli
+{
+    margin-left: 35%;
+    border-bottom: 1px solid lightgrey;
+    color: blueviolet;
+}
+.contact {
+    display: flex;
+    column-gap: 20px;
+    color: #999;
+}
+.vilue-box {
+    display: flex;
+    column-gap: 10px;
+}
+.user-info-title {
+    display: flex;
+    column-gap: 14px;
+}
+.status-pin {
+    display: flex;
+}
+button.btn.btn-primary.button-account {
+    float: right;
+}
+@media only screen and (max-width: 600px) {
+ 
+    .contact{
+        display: block;  
+    }
+    .vilue-box {
+        display: block;
+    }
+    .col-md-2 {
+        margin-bottom: 14px;
+    }
+    .user-info-title {
+        display: block;
+        -moz-column-gap: 14px;
+        column-gap: 14px;
+    }
+    .status-pin {
+        display: flex;
+    }
+    .button-account {
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+    }
+    .showli
+    {
+        display: flex;
+    }
+    .nav-tabs .nav-link:after {
+        content: "";
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 72%;
+        height: 3px;
+        background: linear-gradient(30deg, #7367f0, rgba(115, 103, 240, 0.5)) !important;
+        transition: transform 0.3s;
+        transform: translate3d(0, 150%, 0);
+    }
+    .nav-tabs .nav-link {
+        color: #6e6b7b;
+        border: none;
+        min-width: auto;
+        font-weight: 450;
+        padding: 6px 12px;
+        border-radius: 0;
+        position: relative;
+        overflow: hidden;
+    }
+    .viewchangeli
+{
+    margin-left: 0%;
+    border-bottom: 1px solid lightgrey;
+    color: blueviolet;
+}
+}
+label {
+    color: #5e5873;
+    font-size: 0.857rem;
+    font-weight: 400;
+  }
+
+  .transparent-input {
+    background-color: transparent;
+    border: none;
+    padding: 5px; /* Add padding for better appearance */
+  }
+
+  .responsive-textarea {
+    width: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    resize: none;
+  }
+
+  @media only screen and (max-width: 600px) {
+    .responsive-textarea {
+      width: 100%;
+    }
+  }

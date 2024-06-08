@@ -1,0 +1,85 @@
+<form class="add-new-user modal-content pt-0" (ngSubmit)="(newPackageForm.form.valid)" #newPackageForm="ngForm">
+  <div class="modal-body flex-grow-1">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-fullname">Band width username <span style="color:red;">*{{ bwusername }}</span> </label>
+      <input
+        type="text"
+        class="form-control dt-full-name"
+        id="BWUserName"
+        placeholder="Band wdith User Name"
+        name="BWUserName"
+        [(ngModel)]="setting.BWUserName"
+        [class.error]="newPackageForm.submitted && FNameRef.invalid"
+        #FNameRef="ngModel"
+        required
+        aria-label="user name"
+        aria-describedby="basic-icon-default-fullname2"
+      />
+      <span *ngIf="newPackageForm.submitted && FNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Band width Account Password<span style="color:red;">*</span></label>
+      <input
+        type="text"
+        id="BWPassword"
+        class="form-control dt-uname"
+        placeholder="Account Password"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="BWPassword"
+        [(ngModel)]="setting.BWPassword"
+        [class.error]="newPackageForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newPackageForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Bandwidth Application Id<span style="color:red;">*</span></label>
+      <input
+        type="text"
+        id="basic-icon-default-uname"
+        class="form-control dt-uname"
+        placeholder="Application id"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="BWApplicationId"
+        [(ngModel)]="setting.BWApplicationId"
+        [class.error]="newPackageForm.submitted && FSurNameRef.invalid"
+        #FSurNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newPackageForm.submitted && FSurNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FSurNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+  
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-email">Bandwidth Account Number<span style="color:red;">*</span></label>
+      <input
+        type="text"
+        id="BWAccoundId"
+        class="form-control dt-email"
+        placeholder="Account Number"
+        aria-label="john.doe@example.com"
+        aria-describedby="basic-icon-default-email2"
+        name="BWAccoundId"
+        [(ngModel)]="setting.BWAccoundId"
+        [class.error]="newPackageForm.submitted && FEmailRef.invalid"
+        #FEmailRef="ngModel"
+        required
+      />
+      <span *ngIf="newPackageForm.submitted && FEmailRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FEmailRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    
+
+   <button type="submit" class="btn btn-primary mr-1" (click)="submit(newPackageForm)" rippleEffect>Submit</button>
+    <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+  </div>
+</form>

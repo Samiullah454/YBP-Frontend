@@ -1,0 +1,20 @@
+<form   [formGroup]="CategoryForm" (ngSubmit)="onSubmit()" class="row g-3">
+    <div class="col-12">
+      <div class="form-group">
+        <label class="form-label">Account Type&nbsp;*<span><label style="font-weight: lighter;" *ngIf="submitted && f.name.errors" style="color:red;">&nbsp;Required</label></span></label>
+        <input
+          type="text"
+          id="name"
+          name="name"
+          class="form-control"
+          formControlName="name"
+          placeholder="Enter Rate Category"
+          [ngClass]="{ 'is-invalid': submitted && f.name.errors }"
+          tabindex="1" />
+      </div>
+     </div>
+       <div class="col-12">
+        <button [disabled]="Saving" class="btn btn-primary" rippleEffect type="submit" style="margin-right:10px;"><i data-feather="check"></i><span style="margin-left:5px;"> <span *ngIf="Saving" class="spinner-border spinner-border-sm mr-1"></span>Submit</span></button>
+        <a class="btn btn-outline-primary" (click)="closeModel()" rippleEffect>Discard</a>
+      </div>
+    </form>

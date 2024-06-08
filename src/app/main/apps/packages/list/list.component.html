@@ -1,0 +1,146 @@
+<div class="content-wrapper container-xxl p-0">
+    <div class="content-body">
+      <section class="users-list-wrapper">
+       <div class="card">
+          <div class="row">
+            <div class="col-md-6 col-12">
+              <div class="d-flex justify-content-between align-items-center m-1">
+                <label class="d-flex align-items-center"
+                  >Show
+                  <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                    <option value="10">10</option>
+                    <option value="25">25</option>
+                    <option value="50">50</option>
+                    <option value="100">100</option>
+                  </select>
+                  entries</label
+                >
+              </div>
+            </div>
+            <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                <label class="d-flex align-items-center ml-1 ml-md-0"
+                  >Search:<input
+                    [(ngModel)]="searchValue"
+                    name="searchValue"
+                    type="search"
+                    class="form-control ml-25"
+                    (keyup)="filterUpdate($event)"
+                    (search)="filterUpdate($event)"
+                /></label>
+                <button *ngIf="userHasPermission('Pages.Package.Create')" class="btn btn-primary ml-1" rippleEffect (click)="modalAddRole(modalForm)">
+                  <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i
+                  ><span class="d-none d-sm-inline-block">Add Package</span>
+                </button>
+              </div>
+            </div>
+          </div>
+          <ngx-datatable
+            [rows]="rows"
+            [rowHeight]="50"
+            class="bootstrap core-bootstrap"
+            [limit]="selectedOption"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [scrollbarH]="true">
+           
+            <!-- <ngx-datatable-column name="Package Type" prop="isPaid" frozenLeft="true">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.isPaid ? 'Paid' : 'Trail' }}
+              </ng-template>
+            </ngx-datatable-column> -->
+
+
+            <ngx-datatable-column name="Package Name" prop="packageName" frozenLeft="true">
+              <ng-template ngx-datatable-cell-template let-row="row">
+                <div (click)="modalOpenPrimary(editmodalForm, row)" style="cursor: pointer;">
+                  {{ row.packageName }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="Package Name" prop="packageName" frozenLeft="true" (click)="modalOpenPrimary(editmodalForm,row)"></ngx-datatable-column> -->
+
+            <ngx-datatable-column name="Industry" prop="industryId">
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ getIndustryNameById(row.industryId) }}
+              </ng-template>
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="Fee" prop="fee" ></ngx-datatable-column>
+
+            <!-- <ngx-datatable-column name="Personal Inbox" prop="personalInbox" >
+              <ng-template let-row="row" ngx-datatable-cell-template>
+                {{ row.personalInbox ? 'Yes' : 'No' }}
+              </ng-template>
+            </ngx-datatable-column> -->
+
+            <ngx-datatable-column name="OtsetupFee" prop="otsetupFee"></ngx-datatable-column>
+
+            <ngx-datatable-column name="Technicians" prop="includedTechnicians" >
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="SystemUsers" prop="includedSystemUsers">
+            </ngx-datatable-column>
+
+            <ngx-datatable-column name="pricePerTech" prop="pricePerTech">
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="pricePerSysUser" prop="pricePerSysUser"></ngx-datatable-column>
+     
+            <ngx-datatable-column name="Status" prop="isActive">
+              <ng-template let-status="value" ngx-datatable-cell-template>
+                <div class="badge badge-pill" [ngClass]="{'badge-light-success': status == true, 'badge-light-secondary': status == false}">
+                  {{ status }}
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+            
+            <ngx-datatable-column name="Actions" [sortable]="false">
+              <ng-template ngx-datatable-cell-template let-row="row">
+                <div ngbDropdown container="body">
+                  <button ngbDropdownToggle type="button" class="btn icon-btn btn-sm hide-arrow" rippleEffect>
+                    <span [data-feather]="'more-vertical'" [class]="'cursor-pointer'"></span>
+                  </button>
+                  <div ngbDropdownMenu>
+                   <a *ngIf="userHasPermission('Pages.Package.Edit')" ngbDropdownItem (click)="modalOpenPrimary(editmodalForm,row)">
+                    <span [data-feather]="'edit'" [size]="16" [class]="'mr-50'"></span> Edit</a>
+                  <a *ngIf="userHasPermission('Pages.Package.Delete')" href="javascript:;" ngbDropdownItem (click)="delete(row);">
+                    <span [data-feather]="'trash'" [size]="16" [class]="'mr-50'"></span> Delete</a
+                    >
+                  </div>
+                </div>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </section>
+      </div>
+  </div>
+  
+
+  <ng-template #modalForm let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">{{SettingLabel}}</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+      <app-new-package-sidebar (dataEvent)="receiveData($event)"></app-new-package-sidebar> 
+    </div>
+   
+</ng-template>
+
+<ng-template #editmodalForm let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">{{SettingLabel}}</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <app-new-package-sidebar [inputObj]="settingObj" (dataEvent)="receiveData($event)"></app-new-package-sidebar>     
+  </div> 
+</ng-template>

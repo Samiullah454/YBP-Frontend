@@ -1,0 +1,47 @@
+<form class="add-new-user modal-content pt-0" (ngSubmit)="(newPermissionForm.form.valid)" #newPermissionForm="ngForm">    
+    <div class="modal-body flex-grow-1">
+      <div class="form-group">
+        <label class="form-label" for="basic-icon-default-fullname">Permission Name <span style="color:red;">*</span></label>
+        <input
+          type="text"
+          class="form-control dt-full-name"
+          id="basic-icon-default-fullname"
+          placeholder="Permission Name"
+          name="user-fullname"
+          [(ngModel)]="permission.name"
+          [class.error]="newPermissionForm.submitted && FNameRef.invalid"
+          #FNameRef="ngModel"
+          required
+          aria-label="user name"
+          aria-describedby="basic-icon-default-fullname2"
+        />
+        <span *ngIf="newPermissionForm.submitted && FNameRef.invalid" class="invalid-form">
+          <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
+        </span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="basic-icon-default-uname">Description <span style="color:red;">*</span></label>
+        <input
+          type="text"
+          id="basic-icon-default-uname"
+          class="form-control dt-uname"
+          placeholder="Description"
+          aria-label="jdoe1"
+          aria-describedby="basic-icon-default-uname2"
+          name="user-name"
+          [(ngModel)]="permission.description"
+          [class.error]="newPermissionForm.submitted && FUserNameRef.invalid"
+          #FUserNameRef="ngModel"
+          required
+        />
+        <span *ngIf="newPermissionForm.submitted && FUserNameRef.invalid" class="invalid-form">
+          <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+        </span>
+      </div>
+
+  
+      <button type="submit" class="btn btn-primary mr-1" (click)="submit(newPermissionForm)" rippleEffect>Submit</button>
+      <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+    </div>
+  </form>
+  

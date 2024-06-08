@@ -1,0 +1,134 @@
+<div class="modal-header">
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+      <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div *ngIf="rowData" >
+    <!-- Dynamic title based on caller type -->
+    <h5 *ngIf="caller === 'shift'" >Shift Details</h5>
+    <h5 *ngIf="caller === 'crewgroup'" >Crew Group Details</h5>
+    <h5 *ngIf="caller === 'servicearea'" >Service Area Details</h5>
+    <h5 *ngIf="caller === 'types'" >Technician Type Details</h5>
+
+    <!-- Display for 'shift' caller type -->
+    <div *ngIf="caller === 'shift'" class="shift-details-row">
+      <p><strong>Shift :</strong> {{ rowData.shiftName }}</p>
+      <p><strong>Start Time:</strong> {{ rowData.startTime | timeFormat }}</p>
+      <p><strong>End Time:</strong> {{ rowData.endTime | timeFormat }}</p>
+    </div>
+  
+    <!-- Display for 'crew group' caller type -->
+    <div *ngIf="caller === 'crewgroup'" class="shift-details-row">
+      <p><strong>Crew Group:</strong> {{ rowData.crewGroupName }}</p>
+    <p><strong>Status:</strong> 
+        <span class="badge badge-pill" [ngClass]="{
+            'badge-light-success': rowData.isActive,
+            'badge-light-danger': !rowData.isActive
+        }">
+            {{
+              rowData.isActive ? 'Active' : 'Deactive'
+            }}
+        </span>
+    </p>
+    </div>
+    <div *ngIf="caller === 'servicearea'" class="shift-details-row">
+      <p><strong>Service Area:</strong> {{ rowData.serviceAreaName }}</p>
+    <p><strong>Status:</strong> 
+        <span class="badge badge-pill" [ngClass]="{
+            'badge-light-success': rowData.isActive,
+            'badge-light-danger': !rowData.isActive
+        }">
+            {{
+              rowData.isActive ? 'Active' : 'Deactive'
+            }}
+        </span>
+    </p>
+    </div>
+    <div *ngIf="caller === 'types'" class="shift-details-row">
+      <p><strong>Technician Type :</strong> {{ rowData.technicianTypeName }}</p>
+    <p><strong>Status:</strong> 
+        <span class="badge badge-pill" [ngClass]="{
+            'badge-light-success': rowData.isActive,
+            'badge-light-danger': !rowData.isActive
+        }">
+            {{
+              rowData.isActive ? 'Active' : 'Deactive'
+            }}
+        </span>
+    </p>
+    </div>
+  </div>
+  
+  <h4 class="modal-title">Technician Details</h4>
+
+  <!-- Check if rowData.technicians is not empty -->
+  <div *ngIf="filteredTechnicians && filteredTechnicians.length > 0; else noTechnicians">
+    <!-- Use rowData.technicians as the rows data source -->
+    <ngx-datatable [rows]="filteredTechnicians" class="material" [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'">
+      <ngx-datatable-column name="Name">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          {{ technician.technicianName }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Email">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          {{ technician.email }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Phone">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          {{ technician.contactNumber }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column [name]="columnName">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          <ng-container *ngIf="caller === 'shift'">
+            {{ technician.shifts.shiftName }}
+          </ng-container>
+          <ng-container *ngIf="caller === 'crewgroup'">
+            {{ technician.crewGroups.crewGroupName }}
+          </ng-container>
+          <ng-container *ngIf="caller === 'types'">
+            {{ technician.technicianTypes.technicianTypeName }}
+          </ng-container>
+          <ng-container *ngIf="caller === 'servicearea'">
+            {{ technician.serviceAreas.serviceAreaName }}
+          </ng-container>
+ 
+        </ng-template>
+      </ngx-datatable-column>
+      
+      <ngx-datatable-column name="Address">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          {{ technician.address }}
+        </ng-template>
+      </ngx-datatable-column>
+      
+      <ngx-datatable-column name="Select" [width]="50">
+        <ng-template let-technician="row" ngx-datatable-cell-template>
+          <input 
+            type="checkbox" 
+            [checked]="isTechnicianSelected(technician.id)"
+            (change)="onTechnicianCheckboxChange(technician.id, $event.target.checked)" />
+        </ng-template>
+      </ngx-datatable-column>
+      
+  
+      <!-- Add other columns as needed -->
+    </ngx-datatable>
+  </div>
+  <div class="col-sm-6 col-12">
+    <button 
+    class="btn btn-primary mt-2"
+    
+
+    (click)="assignTechnicians()">Update</button>
+    </div>
+
+  <ng-template #noTechnicians>
+    <p>No technicians available.</p>
+  </ng-template>
+</div>
+
+

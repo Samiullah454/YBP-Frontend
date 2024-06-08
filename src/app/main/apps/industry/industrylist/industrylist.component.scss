@@ -1,0 +1,18 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+@import '@core/scss/base/plugins/forms/form-validation.scss';
+@import 'app/main/pages/authentication/onborading-s1/onborading-s1.component.scss';
+/* CSS classes for different status styles */
+.active {
+  color: green; /* Style for Active status */
+}
+
+.deactive {
+  color: red; /* Style for Deactive status */
+}
+
+.draft {
+  color: blue; /* Style for Draft status */
+}

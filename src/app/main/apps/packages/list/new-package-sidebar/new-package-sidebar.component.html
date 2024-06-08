@@ -1,0 +1,200 @@
+<form class="add-new-user modal-content pt-0" (ngSubmit)="(newPackageForm.form.valid)" #newPackageForm="ngForm">    
+  <div class="modal-body flex-grow-1">
+ <div class="row">
+      <div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-packageName">Package Name <span style="color:red;">*</span></label>
+      <input
+        type="text"
+        class="form-control dt-packageName"
+        id="basic-icon-default-packageName"
+        placeholder="Package Name"
+        name="packageName"
+        [(ngModel)]="package.packageName"
+        [class.error]="newPackageForm.submitted && packageName.invalid"
+        #packageName="ngModel"
+        required
+        aria-label="packageName"
+        aria-describedby="basic-icon-default-packageName"
+      />
+      <span *ngIf="newPackageForm.submitted && packageName.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="packageName.errors.required">This field is required!</small>
+      </span>
+    </div>
+  </div>
+<!-- Inside the form -->
+<div class="col-md-6">
+  <div class="form-group">
+    <label for="register-industry" class="form-label">Industry <span class="text-danger">*</span></label>
+    <select
+      class="form-control dt-industryId"
+      name="industryId"
+      id="register-industry"
+      tabindex="2"
+      [(ngModel)]="package.industryId"
+    >
+      <option value="">Select Industry</option>
+      <option *ngFor="let industry of rows" [value]="industry.id">{{ industry.industryName }}</option>
+    </select>
+  </div>
+</div>
+
+</div>  
+<div class="row">
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-fee">Package Fee<span style="color:red;">*</span></label>
+      <input
+        type="number"
+        id="basic-icon-default-fee"
+        class="form-control dt-fee"
+        placeholder="Package Fee"
+        aria-label="john.doe@example.com"
+        aria-describedby="basic-icon-default-fee"
+        name="fee"
+        [(ngModel)]="package.fee"
+        [class.error]="newPackageForm.submitted && fee.invalid"
+        #fee="ngModel"
+        required
+        step="0.01" 
+        inputmode="decimal"
+      />
+      <span *ngIf="newPackageForm.submitted && fee.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="fee.errors.required">This field is required!</small>
+      </span>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-otsetupFee">One Time Setup Fee<span style="color:red;">*</span></label>
+      <div class="d-flex align-items-center">
+        <input
+          type="number"
+          class="form-control dt-otsetupFee"
+          placeholder="One Time Setup Fee"
+          name="otsetupFee"
+          [(ngModel)]="package.otsetupFee"
+          [class.error]="newPackageForm.submitted && otsetupFee.invalid"
+          #otsetupFee="ngModel"
+          required
+          
+          style="margin-right: 10px;"
+        />
+
+      </div>
+      <span *ngIf="newPackageForm.submitted && otsetupFee.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="otsetupFee.errors.required">This field is required!</small>
+      </span>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+<div class="form-group">
+  <label class="form-label" for="basic-icon-default-includedTechnicians">Technicians Allowed<span style="color:red;">*</span></label>
+  <input
+    type="number"
+    id="basic-icon-default-includedTechnicians"
+    class="form-control dt-includedTechnicians"
+    placeholder="Technicians Allowed"
+    aria-label="john.doe@example.com"
+    aria-describedby="basic-icon-default-includedTechnicians"
+    name="includedTechnicians"
+    [(ngModel)]="package.includedTechnicians"
+    [class.error]="newPackageForm.submitted && includedTechnicians.invalid"
+    #includedTechnicians="ngModel"
+    required
+  />
+  <span *ngIf="newPackageForm.submitted && includedTechnicians.invalid" class="invalid-form">
+    <small class="form-text text-danger" *ngIf="includedTechnicians.errors.required">This field is required!</small>
+  </span>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-includedSystemUsers">System User Allowed<span style="color:red;">*</span></label>
+      <div class="d-flex align-items-center">
+      <input
+        type="number"
+        class="form-control dt-includedSystemUsers"
+        placeholder="System User Allowed"
+        name="includedSystemUsers"
+        [(ngModel)]="package.includedSystemUsers"
+        [class.error]="newPackageForm.submitted && includedSystemUsers.invalid"
+        #includedSystemUsers="ngModel"
+        required
+      
+        style="margin-right: 10px;"
+        />
+
+      </div>
+      <span *ngIf="newPackageForm.submitted && includedSystemUsers.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="includedSystemUsers.errors.required">This field is required!</small>
+      </span>
+    </div>
+  </div>
+  
+</div>
+<div class="row">
+  <div class="col-md-6">
+<div class="form-group">
+  <label class="form-label" for="basic-icon-default-pricePerTech">Price Per Technicians <span style="color:red;">*</span></label>
+  <input
+    type="number"
+    id="basic-icon-default-pricePerTech"
+    class="form-control dt-pricePerTech"
+    placeholder="Price Per Technicians"
+    aria-label="john.doe@example.com"
+    aria-describedby="basic-icon-default-pricePerTech"
+    name="pricePerTech"
+    [(ngModel)]="package.pricePerTech"
+    [class.error]="newPackageForm.submitted && pricePerTech.invalid"
+    #pricePerTech="ngModel"
+    required
+  />
+  <span *ngIf="newPackageForm.submitted && pricePerTech.invalid" class="invalid-form">
+    <small class="form-text text-danger" *ngIf="pricePerTech.errors.required">This field is required!</small>
+  </span>
+</div>
+</div>
+
+<div class="col-md-6">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-pricePerSysUser">Price Per System User <span style="color:red;">*</span></label>
+      <div class="d-flex align-items-center">
+      <input
+        type="number"
+        class="form-control dt-pricePerSysUser"
+        placeholder="Srice Per System User"
+        name="pricePerSysUser"
+        [(ngModel)]="package.pricePerSysUser"
+        [class.error]="newPackageForm.submitted && pricePerSysUser.invalid"
+        #pricePerSysUser="ngModel"
+        required
+      
+        style="margin-right: 10px;"
+        />
+
+      </div>
+      <span *ngIf="newPackageForm.submitted && pricePerSysUser.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="pricePerSysUser.errors.required">This field is required!</small>
+      </span>
+    </div>
+  </div>
+  
+</div>
+<div class="form-group">
+  <div class="custom-control custom-radio">
+    <input type="checkbox" id="activeRadioButton" name="isActive" class="custom-control-input" [(ngModel)]="package.isActive" [value]="true" />
+      <label class="custom-control-label" for="activeRadioButton">Active</label>
+  </div>
+</div>
+    
+
+
+    <button type="submit" class="btn btn-primary mr-1" (click)="submit(newPackageForm)" rippleEffect>Submit</button>
+    <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+  </div>
+</form>

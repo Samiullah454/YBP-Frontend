@@ -1,0 +1,55 @@
+<div class="modal-header">
+    <h4 *ngIf="callerParameter === 'crewgroup'" class="modal-title">{{ crewgroupToEdit ? 'Edit Crew Group' : 'Add Crew
+        Group' }}</h4>
+    <h4 *ngIf="callerParameter === 'servicearea'" class="modal-title">{{ crewgroupToEdit ? 'Edit Service Area' : 'Add
+        Service Area' }}</h4>
+    <h4 *ngIf="callerParameter === 'types'" class="modal-title">{{ crewgroupToEdit ? 'Edit Technician Type' : 'Add
+        Technician Type' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="saveCrewGroup()" #crewgroupform="ngForm">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label *ngIf="callerParameter === 'crewgroup'" for="crewGroupName">Crew Group Name:</label>
+                <label *ngIf="callerParameter === 'servicearea'" for="crewGroupName">Service Area Name:</label>
+                <label *ngIf="callerParameter === 'types'" for="crewGroupName">Technician Type  Name:</label>
+                <input *ngIf="callerParameter === 'crewgroup'" type="text" class="form-control" id="crewGroupName"
+                    name="crewGroupName" [(ngModel)]="newcrewgroup.crewGroupName" required>
+                <input *ngIf="callerParameter === 'servicearea'" type="text" class="form-control" id="crewGroupName"
+                    name="crewGroupName" [(ngModel)]="newcrewgroup.serviceAreaName" required>
+                <input *ngIf="callerParameter ==='types'" type="text" class="form-control" id="crewGroupName"
+                    name="crewGroupName" [(ngModel)]="newcrewgroup.technicianTypeName" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Is Active:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="isActive"
+                        [(ngModel)]="newcrewgroup.isActive" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="isActive"
+                        [(ngModel)]="newcrewgroup.isActive" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="newcrewgroup.description">
+            </textarea>
+        </div>
+        <button *ngIf="callerParameter === 'crewgroup'" type="submit" class="btn btn-primary">{{ crewgroupToEdit ?
+            'Update' : 'Add' }} Crew Group</button>
+        <button *ngIf="callerParameter === 'servicearea'" type="submit" class="btn btn-primary">{{ crewgroupToEdit ?
+            'Update' : 'Add' }} Service Area</button>
+        <button *ngIf="callerParameter === 'types'" type="submit" class="btn btn-primary">{{ crewgroupToEdit ? 'Update'
+            : 'Add' }} Technician Type</button>
+
+
+    </form>
+</div>

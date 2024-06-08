@@ -1,0 +1,625 @@
+<div class="content-wrapper container-xxl p-0">
+
+  <div class="content-body">
+    <section class="vertical-wizard">
+      <div id="stepper2" class="bs-stepper vertical vertical-wizard-example" style="border-radius: 1rem;">
+
+        <div class="col-sm-12 col-lg-3" style="background-color: white;">
+
+          <div id="parentDiv" class="bs-stepper-header hidonMobileonly" style="    padding-top: 0.23rem;">
+            <!-- <app-verticalprogressbar [progress]="50"></app-verticalprogressbar> -->
+            <div id="s-information" class="step" (click)="NavigateToinformation()" data-target="#account-information">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="BasicInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!BasicInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Technician Information</span>
+                  <span class="bs-stepper-subtitle">Technician Details</span>
+                </span>
+              </button>
+
+            </div>
+            <div class="vertical-hr">
+              <hr>
+            </div>
+            <div id="s-billing" class="step" (click)="NavigateToBilling()" data-target="#account-billing">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="BillingInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!BillingInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Employment Info</span>
+                  <span class="bs-stepper-subtitle">Add Employment Info</span>
+                </span>
+              </button>
+              <!-- <span class="pull-right hidonMobile" style="margin-top:10%;">20%</span> -->
+            </div>
+            <div class="vertical-hr">
+              <hr>
+            </div>
+            <div id="s-contacts" class="step" (click)="NavigateToContact()" data-target="#account-contacts">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="ContactsInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!ContactsInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Other Info</span>
+                  <span class="bs-stepper-subtitle">Other Info</span>
+                </span>
+              </button>
+              <!-- <span class="pull-right hidonMobile" style="margin-top:10%;">20%</span> -->
+            </div>
+            <div class="vertical-hr">
+              <hr>
+            </div>
+
+            <div id="s-rates" class="step" (click)="NavigateTorates()" data-target="#account-rates">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="RatesInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!RatesInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Shift</span>
+                  <span class="bs-stepper-subtitle">Select Shift</span>
+                </span>
+              </button>
+              <!-- <span class="pull-right hidonMobile"  style="margin-top:10%;">40%</span> -->
+            </div>
+            <div class="vertical-hr">
+              <hr>
+            </div>
+            <div id="s-portals" class="step" (click)="NavigateToportals()" data-target="#account-portals">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="PortalInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!PortalInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Crew group</span>
+                  <span class="bs-stepper-subtitle">Add To Crew group</span>
+                </span>
+              </button>
+              <!-- <span class="pull-right hidonMobile" c style="margin-top:10%;">60%</span> -->
+            </div>
+            <div class="vertical-hr">
+              <hr>
+            </div>
+            <div id="s-notes" class="step" (click)="NavigateTonotes()" data-target="#account-notes">
+              <button type="button" class="step-trigger">
+                <span class="bs-stepper-box" *ngIf="NotesInfoFilled" style="background-color:#28C76F ;"><img
+                    src="assets/img/check.svg" /></span>
+                <span class="bs-stepper-box" *ngIf="!NotesInfoFilled"
+                  style="border: 1px solid orange;background-color: white;"><img
+                    src="assets/img/alert-triangle.svg" /></span>
+                <span class="bs-stepper-label">
+                  <span class="bs-stepper-title">Services</span>
+                  <span class="bs-stepper-subtitle">Add Services</span>
+                </span>
+              </button>
+              <!-- <span class="pull-right hidonMobile" style="margin-top:10%;">100%</span> -->
+            </div>
+          </div>
+        </div>
+        <div id="progress_bar" class="row hidonMobile">
+
+          <div class="progress  bg-success" [style.height.rem]="progressBarHeight">
+            <div class="progress-bar progress-bar-vertical" role="progressbar" style="height: 500px; width: 20px;">25%
+            </div>
+            <!-- <app-verticalprogressbar [progress]="50"></app-verticalprogressbar> -->
+          </div>
+
+        </div>
+        <div class="col-sm-12 col-lg-9">
+          <div class="bs-stepper-content scrollable-div responsive-div" style="background-color: white;">
+            <form [formGroup]="technicianForm" (ngSubmit)="onSubmit()">
+              <div #information id="account-information" tabindex="0" (mouseover)="checkFocusOnDiv('#s-information')"
+                class="content">
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">
+                    Personal Info
+                  </span>
+                  <span class="log">
+                    <span class="pull-right" *ngIf="!selectedLogo && !f.photo_url.value" (click)="OpenLogoUploader()"><a
+                        style="color: rgb(43, 128, 226);" class="logo">Upload Logo</a></span>
+                    <div style="position: relative;float:right;">
+                      <img *ngIf="selectedLogo && f.photo_url.value" class="clickable-image" [src]="selectedLogo"
+                        alt="Selected Image" width="60" height="50" style="border-radius: 50%;"
+                        (click)="OpenLogoUploader()" />
+                      <img *ngIf="f.photo_url.value && !selectedLogo" class="clickable-image" [src]="f.photo_url.value"
+                        alt="Selected Image" width="60" height="50" style="border-radius: 50%;"
+                        (click)="OpenLogoUploader()" />
+                      <span class="fa fa-pencil" *ngIf="selectedLogo || f.photo_url.value"
+                        style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></span>
+                    </div>
+                  </span>
+                  <div class="card-body">
+                    <div class="row">
+
+                      <div class="form-group col-md-12">
+
+                        <input (change)="onLogoSelected($event)" type="file" accept="image/*" style="display:none;"
+                          class="custom-file-input" type="file" id="file-upload-logo" #logouploader />
+
+                        <!-- <img *ngIf="!selectedLogo && !f.photo_url.value" class="clickable-image"   src="assets/images/logo/uploader.jpg" alt="Selected Image" (click)="OpenLogoUploader()" width="80px" height="80px" style="border-radius:50%;" /> -->
+
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username"> Name&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.technicianName.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <input type="text" id="name" name="name" class="form-control" formControlName="technicianName"
+                          [ngClass]="{ 'is-invalid': submitted && f.technicianName.errors }"
+                          placeholder="Technician Name" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-language"> Type&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.technicianTypeId.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <ng-select [items]="TechnicianTypesList" [multiple]="false" [closeOnSelect]="true"
+                          [searchable]="true" bindLabel="technicianTypeName" bindValue="id" name="technician_type"
+                          id="technician_type" placeholder="Select Technician Type" formControlName="technicianTypeId"
+                          [ngClass]="{ 'is-invalid': submitted && f.technicianTypeId.errors }">
+                          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label"> {{ item.technicianTypeName }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="address"> Address&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.address.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <input type="text" id="address" class="form-control" formControlName="address"
+                          [ngClass]="{ 'is-invalid': submitted && f.address.errors }" placeholder="Physical Address" />
+                      </div>
+
+                    </div>
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username">Contact Number&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.contactNumber.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <input type="text" id="phone" class="form-control" formControlName="contactNumber"
+                          [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" placeholder="(XXX) XXX-XXXX"
+                          (input)="onInput($event)" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username"> Alternate Contact Number</label>
+                        <input type="text" id="secondary_phone" class="form-control" formControlName="alt_ContactNumber"
+                          placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username">Email&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.email.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <input type="text" id="email" name="email" class="form-control" formControlName="email"
+                          [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email" />
+                      </div>
+
+                    </div>
+                    <span class="card-title">
+                      Incase Of Emergency
+                    </span>
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username"> Contact Name&nbsp;*<span><label
+                              style="font-weight: lighter;"></label></span></label>
+                        <input type="text" id="emr_ContactName" name="emr_ContactName" class="form-control"
+                          formControlName="emr_ContactName"
+                          [ngClass]="{ 'is-invalid': submitted && f.emr_ContactName.errors }"
+                          placeholder=" Contact Name" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username"> Relationship<span><label
+                              style="font-weight: lighter;"></label></span></label>
+                        <input type="text" id="emr_ContactRelationship" name="emr_ContactRelationship"
+                          class="form-control" formControlName="emr_ContactRelationship"
+                          [ngClass]="{ 'is-invalid': submitted && f.emr_ContactRelationship.errors }"
+                          placeholder=" Relationship" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="vertical-username"> Contact Number</label>
+                        <input type="text" id="emr_ContactPhone" class="form-control" formControlName="emr_ContactPhone"
+                          placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+                      </div>
+                    </div>
+
+                  </div>
+                </core-card>
+              </div>
+              <hr>
+              <div #billing id="account-billing" class="content" tabindex="0"
+                (mouseover)="checkFocusOnDiv('#s-billing')">
+
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">
+                    Employment Information
+                  </span>
+                  <div class="card-body">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group col-md-4">
+                          <label class="form-label" for="vertical-language"> Type&nbsp;*<span><label
+                                style="font-weight: lighter;" *ngIf="submitted && f.employmentType.errors"
+                                style="color:red;">&nbsp;Required</label></span></label>
+                          <ng-select [items]="emptype" [multiple]="false" [closeOnSelect]="true" [searchable]="true"
+                            bindLabel="name" bindValue="id" name="employmentType" id="employmentType"
+                            placeholder="Select   Type " formControlName="employmentType"
+                            [ngClass]="{ 'is-invalid': submitted && f.employmentType.errors }">
+                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                              <span class="ng-value-label"> {{ item.name }}</span>
+                              <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                            </ng-template>
+                          </ng-select>
+                        </div>
+                      </div>
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h6 class="mb-1">Select a Compensation Mode</h6>
+                          <div class="form-inline">
+                            <!-- Hourly Rate Radio -->
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="compensationType"
+                                  id="rate-type-standard" value="hourly" formControlName="compensationType">
+                                <label class="form-check-label mr-2" for="rate-type-standard">Hourly</label>
+                                <input *ngIf="technicianForm.get('compensationType').value === 'hourly'"
+                                  formControlName="hourlyRate" type="number" class="form-control"
+                                  id="compensation-value-hourly" placeholder="Enter Hourly Rate" style="width: auto;">
+                              </div>
+                            </div>
+                            <!-- Salary Radio -->
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" name="compensationType"
+                                  id="rate-type-customized" value="salary" formControlName="compensationType">
+                                <label class="form-check-label mr-2" for="rate-type-customized">Salary</label>
+                                <input *ngIf="technicianForm.get('compensationType').value === 'salary'"
+                                  formControlName="salary" type="number" class="form-control"
+                                  id="compensation-value-salary" placeholder="Enter Salary" style="width: auto;">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+                      <div class="row">
+                        <div class="col-md-12">
+                          <h6 class="mb-1">Select Incentive Type</h6>
+                          <div class="form-inline">
+                            <!-- Hourly Rate Radio -->
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" formControlName="incentiveType"
+                                  id="rate-type-standard" (change)="updateIncentiveType('No')" value='No'
+                                  [checked]="selectedIncentiveType === 'No'">
+                                <label class="form-check-label mr-2" for="rate-type-standard">No</label>
+
+                              </div>
+                            </div>
+                            <!-- Salary Radio -->
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="incentive-type-job"
+                                  (change)="updateIncentiveType('perjob')" value='perjob'
+                                  formControlName="incentiveType" [checked]="selectedIncentiveType === 'perjob'">
+                                <label class="form-check-label mr-2" for="incentive-type-job">Per Job</label>
+                                <input *ngIf="selectedIncentiveType === 'perjob'" formControlName="inc_perjob"
+                                  type="number" class="form-control" id="incentive-value" [(ngModel)]="incentiveValue"
+                                  placeholder="Enter Salary" style="width: auto;">
+                              </div>
+                            </div>
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="incentive-type-hour"
+                                  (change)="updateIncentiveType('perhour')" value='perhour'
+                                  formControlName="incentiveType" [checked]="selectedIncentiveType === 'perhour'">
+                                <label class="form-check-label mr-2" for="incentive-type-hour">Per Hour</label>
+                                <input *ngIf="selectedIncentiveType === 'perhour'" formControlName="inc_perHourJob"
+                                  type="number" class="form-control" id="incentive-value" [(ngModel)]="incentiveValue"
+                                  placeholder="Enter Salary" style="width: auto;">
+                              </div>
+                            </div>
+                            <div class="form-group mr-3">
+                              <div class="form-check form-check-inline">
+                                <input class="form-check-input" type="radio" id="rate-type-per"
+                                  (change)="updateIncentiveType('perpercentage')" value='perpercentage'
+                                  formControlName="incentiveType" [checked]="selectedIncentiveType === 'perpercentage'">
+                                <label class="form-check-label mr-2" for="rate-type-per">Per Percentage Job</label>
+                                <input *ngIf="selectedIncentiveType === 'perpercentage'"
+                                  formControlName="inc_percentageJob" type="number" class="form-control"
+                                  id="incentive-value" [(ngModel)]="incentiveValue" placeholder="Enter Salary"
+                                  style="width: auto;">
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+                    </div>
+
+
+                  </div>
+                </core-card>
+
+
+              </div>
+              <hr>
+              <div #contacts id="account-contacts" class="content" tabindex="0"
+                (mouseover)="checkFocusOnDiv('#s-contacts')">
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">Other Info</span>
+                  <div class="card-body">
+                    <!-- New fields for Driver License #, SSN #, Date of Birth, and Service Areas -->
+                    <div class="row">
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="driver_license">Driver License #</label>
+                        <input type="text" id="driver_license" formControlName="driverLicense" class="form-control"
+                          placeholder="Driver License Number" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="ssn">SSN #</label>
+                        <input type="text" id="ssn" class="form-control" formControlName="ssn"
+                          placeholder="Social Security Number" />
+                      </div>
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="dob">Date of Birth</label>
+                        <input type="date" id="dob" class="form-control" formControlName="dob"
+                          placeholder="Date of Birth" />
+                      </div>
+
+
+                      <div class="form-group col-md-4">
+                        <label class="form-label" for="service_area"> Service Areas&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && f.serviceAreasId.errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <ng-select [items]="ServiceAreaList" [multiple]="false" [closeOnSelect]="true"
+                          [searchable]="true" bindLabel="serviceAreaName" bindValue="id" name="serviceAreaName"
+                          id="serviceAreaName" placeholder="Select Service Area" formControlName="serviceAreasId"
+                          [ngClass]="{ 'is-invalid': submitted && f.serviceAreasId.errors }">
+                          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label"> {{ item.serviceAreaName }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                  </div>
+                </core-card>
+
+              </div>
+              <hr>
+              <div #rates id="account-rates" class="content" tabindex="0" (mouseover)="checkFocusOnDiv('#s-rates')">
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">
+                    Shift
+                  </span>
+                  <div class="card-body">
+                    <div class="col-md-12">
+                      <div class="row ">
+                        <div class="col-md-4 "> <!-- Adjust alignment to suit your layout -->
+                          <div class="form-group">
+                            <label class="form-label" for="vertical-language">Available Shifts&nbsp;*<span><label
+                                  style="font-weight: lighter;" *ngIf="submitted && f.shiftId.errors"
+                                  style="color:red;">&nbsp;Required</label></span></label>
+                            <div class="d-flex">
+                              <ng-select [items]="ShiftsList" [multiple]="false" [closeOnSelect]="true"
+                                [searchable]="true" bindLabel="shiftName" bindValue="id" name="shiftId" id="shiftId"
+                                placeholder="Select Shift" formControlName="shiftId"
+                                [ngClass]="{ 'is-invalid': submitted && f.shiftId.errors }" class="flex-grow-1"
+                                (change)="onShiftSelect($event)">
+                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                  <span class="ng-value-label">{{ item.shiftName }}</span>
+                                  <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                </ng-template>
+                              </ng-select>
+
+                            </div>
+                          </div>
+
+                        </div>
+                        <div class="col-md-6">
+                          <div class="form-group">
+                            <label class="form-label" for="vertical-language">Add Shift</label>
+                            <div class="d-flex">
+                              <button type="button" class="btn btn-primary" (click)="openAddShfitModal()"
+                                id="createShift">Add</button>
+                            </div>
+                          </div>
+                        </div>
+
+                      </div>
+                      <div *ngIf="selectedShift">
+                        <h2 style="text-align: left; margin-bottom: 20px;">Shift Details</h2>
+
+                        <ngx-datatable class="material" [rows]="[selectedShift]" [columnMode]="'force'"
+                          [headerHeight]="50" [footerHeight]="50" [rowHeight]="'auto'"
+                          style="box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; font-family: 'Arial', sans-serif;">
+
+                          <ngx-datatable-column name="Shift Name" prop="shiftName"></ngx-datatable-column>
+                          <ngx-datatable-column name="Start Time" prop="startTime">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                              {{ row.startTime | timeFormat }}
+                            </ng-template>
+                          </ngx-datatable-column>
+
+                          <!-- End Time Column -->
+                          <ngx-datatable-column name="End Time" prop="endTime">
+                            <ng-template ngx-datatable-cell-template let-row="row">
+                              {{ row.endTime | timeFormat }}
+                            </ng-template>
+                          </ngx-datatable-column>
+                          <!-- Add other relevant columns -->
+                        </ngx-datatable>
+                      </div>
+
+
+
+                    </div>
+                  </div>
+
+                </core-card>
+              </div>
+              <hr>
+              <div #portals id="account-portals" class="content" tabindex="0"
+                (mouseover)="checkFocusOnDiv('#s-portals')">
+
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">
+                    Select crew Group
+                  </span>
+                  <div class="card-body">
+                    <div class="col-md-12">
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <div class="form-group">
+                            <label class="form-label" for="vertical-language">Available Crew Group&nbsp;*<span><label
+                                  style="font-weight: lighter;" *ngIf="submitted && f.crewGroupId.errors"
+                                  style="color:red;">&nbsp;Required</label></span></label>
+                            <div class="d-flex">
+                              <ng-select [items]="crewgrouplist" [multiple]="false" [closeOnSelect]="true"
+                                [searchable]="true" bindLabel="crewGroupName" bindValue="id" name="crewgroupid"
+                                id="crewgroupid" placeholder="Select Crew group" formControlName="crewGroupId"
+                                [ngClass]="{ 'is-invalid': submitted && f.crewGroupId.errors }" class="flex-grow-1">
+                                <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                  <span class="ng-value-label">{{ item.crewGroupName }}</span>
+                                  <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                </ng-template>
+                              </ng-select>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
+                  </div>
+                </core-card>
+
+
+              </div>
+              <hr>
+              <div #notes id="account-notes" class="content" tabindex="0" (mouseover)="checkFocusOnDiv('#s-notes')">
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">
+                    Services
+                  </span>
+                  <div class="card-body">
+                    <div class="row">
+                      <!-- Service Type Dropdown -->
+                      <div class="form-group col-md-6">
+                        <div class="form-group">
+                          <label class="form-label" for="vertical-language">Select Service Type *<span><label
+                                style="font-weight: lighter;" *ngIf="submitted && f.serviceType.errors"
+                                style="color:red;">&nbsp;Required</label></span></label>
+                          <div class="d-flex">
+                            <ng-select
+                             [items]="servicetype" 
+                             [multiple]="false"
+                              [closeOnSelect]="true"
+                              [searchable]="true"
+                               bindLabel="name" 
+                               bindValue="id" 
+                               (ngModelChange)="onServiceChange($event)"
+
+                              name="crewgroupid" 
+                              id="crewgroupid" 
+                              placeholder="Select Service"
+                              formControlName="serviceType"
+                              [ngClass]="{ 'is-invalid': submitted && f.serviceType.errors }" class="flex-grow-1">
+                              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label">{{ item.name }}</span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <!-- Multiple Selected Services Dropdown (using ng-select) -->
+                      <div class="form-group col-md-6">
+                        <div class="form-group">
+                          <label class="form-label" for="vertical-language">Select Service *<span><label
+                                style="font-weight: lighter;" *ngIf="submitted && f.selectedServices.errors"
+                                style="color:red;">&nbsp;Required</label></span></label>
+                          <div class="d-flex">
+                            <ng-select
+                             [items]="services" 
+                             [multiple]="true"
+                              [closeOnSelect]="true"
+                               [searchable]="true"
+                              bindLabel="serviceName"
+                               bindValue="id"
+                                name="services"
+                                 id="services"
+                                 placeholder="Select Service"
+                              formControlName="selectedServices"
+                              
+                              [ngClass]="{ 'is-invalid': submitted && f.selectedServices.errors }" class="flex-grow-1">
+                              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label">{{ item.serviceName }}</span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                        </div>
+                      </div>
+
+
+
+
+
+                    </div>
+                  </div>
+                </core-card>
+
+                <hr>
+
+              </div>
+              <div style="margin-left: 20px;margin-bottom: 20px;">
+                <button  class="btn btn-primary" rippleEffect type="submit"
+                  style="margin-right:10px;"><i data-feather="check"></i><span style="margin-left:5px;"> <span
+                      *ngIf="savingData" class="spinner-border spinner-border-sm mr-1"></span>Save</span></button>
+                <a class="btn btn-outline-primary" (click)="BacktoList()" rippleEffect>Discard</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </div>
+</div>
+
+<ng-template #LeavePageModel let-modal>
+  <div class="modal-header">
+    <h5 class="modal-title" id="myModalLabel160">Discard Changes</h5>
+    <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" tabindex="0" ngbAutofocus>
+    <p>Are you sure you want to discard changes to Add Account?</p>
+    <button class="btn btn-primary">Save changes</button> <button class="btn btn-outline-primary"
+      style="margin-left: 15px;">Discard</button>
+  </div>
+</ng-template>

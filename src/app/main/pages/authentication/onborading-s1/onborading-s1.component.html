@@ -1,0 +1,770 @@
+<div class="content-wrapper container-xxl p-0" style="width: 95%;margin-top: 2%;">
+    <div class="content-body">
+        <section class="horizontal-wizard">
+            <div id="stepper1" class="bs-stepper vertical vertical-wizard-example">
+
+                <div class="bs-stepper-header" style="background-color: darkslateblue; border-radius: 35px;">
+                    <img alt="brand-logo" src="assets/images/logo/LogoWhite.png" class="mb-1 mt-1" style="width: 100%;height: 58px;">
+
+                    <div class="step" data-target="#onboarding-purpose">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">1</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Package</span>
+                                <span class="bs-stepper-subtitle">Please Select the Package First</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+
+                    <div class="step" data-target="#onboarding-billing">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">2</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Billing Info</span>
+                                <span class="bs-stepper-subtitle">Please Provide Billing Info</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                    <div class="step" data-target="#transection-detail">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">3</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Transection Info</span>
+                                <span class="bs-stepper-subtitle">Please Provide Transection Info</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+                    <div class="step" data-target="#onboarding-workspace-setting">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">4</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Workspace Settings </span>
+                                <span class="bs-stepper-subtitle">Please Provide Workspace Settings Info</span>
+                            </span>
+                        </button>
+                    </div>
+
+                    <div class="line"><i data-feather="chevron-right" class="font-medium-2"></i></div>
+
+                    <div class="step" data-target="#onboarding-complete">
+                        <button class="step-trigger">
+                            <span class="bs-stepper-box">5</span>
+                            <span class="bs-stepper-label">
+                                <span class="bs-stepper-title">Complete</span>
+                                <span class="bs-stepper-subtitle">You are all Set</span>
+                            </span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="bs-stepper-content">
+                    
+
+                        <div id="onboarding-purpose" class="content">
+                            <div class="content-buttons col-md-12">
+                                <div class="content2">
+                                    <div class="heading">
+                                        <div class="choose-the-purpose">Choose the Package</div>
+                                    </div>
+                                    <div class="row pricing-card">
+                                        <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                                            <div class="row">
+                                                <div class="col-12 col-md-4" *ngFor="let row of rows">
+                                                    <div class="card basic-pricing popular text-center">
+                                                        <div class="card-body" [ngClass]="{ 'selected': row.isSelected }" (click)="selectCard(row)">
+                                                            <h1 class="mb-1">{{row.packageName}}</h1>
+
+                                                            <h6 class="mb-2">Business texting inbox accessible on all devices.</h6>
+
+                                                            <div class="annual-plan mb-2">
+                                                                <div class="plan-price">
+                                                                    <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                                                                    <span class="pricing-basic-value font-weight-bolder text-primary">{{row.fee}}</span>
+                                                                    <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/{{row.validity ? 'Month' : 'Year' }}</sub>
+                                                                </div>
+                                                            </div>
+
+                                                            <h6 class="mb-0 font-weight-bolder">
+                                                                System User Included
+                                                                <span class="pricing-basic-value font-weight-bolder text-primary">{{row.includedSystemUsers}}</span>
+                                                            </h6>
+
+                                                            <h6 class="mt-1 font-weight-bolder">
+                                                              Technicians  Included
+                                                              <span class="pricing-basic-value font-weight-bolder text-primary"> {{row.includedTechnicians}}</span>
+                                                            </h6>
+
+                                                            <hr>
+                                                            <ul class="list-group list-group-circle text-left">
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    One Time Setup Price :
+                                                                    <span class="pricing-basic-value font-weight-bolder text-primary">{{row.otsetupFee}}$</span>
+                                                                    
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    Price Per System User :
+                                                                    <span class="pricing-basic-value font-weight-bolder text-primary">{{row.pricePerSysUser}}$</span>
+                                                                    
+                                                                </li>
+
+                                                                <li class="list-group-item pb-sm-0">
+                                                                   Price Per Technician : 
+                                                                    <span class="pricing-basic-value font-weight-bolder text-primary">{{row.pricePerTech}}$</span>
+                                                                </li>
+<!-- 
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    {{row.teamInbox ? 'Basic' : 'Advanced' }} Team Inbox
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    {{row.contacts}} Contacts
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    Team Delegation For Contacts:
+                                                                    <ng-container *ngIf="row.teamDelegationForContacts">
+                                                                        <ng-container *ngIf="row.teamMembers == 1; else noMinUsers">
+                                                                            Yes (2 User min)
+                                                                        </ng-container>
+                                                                        <ng-template #noMinUsers>
+                                                                            Yes
+                                                                        </ng-template>
+                                                                    </ng-container>
+                                                                    <ng-container *ngIf="!row.teamDelegationForContacts">
+                                                                        No
+                                                                    </ng-container>
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    {{row.smsSender}} SMS Sender (Mobile Number)
+                                                                    <ng-container *ngIf="row.addNumberPrice == 0; else addSenderPrice">
+
+                                                                    </ng-container>
+                                                                    <ng-template #addSenderPrice>
+                                                                        <small>Additional Sender will be Charged as ${{row.addNumberPrice}}/Sender/{{row.validity ? 'Month' : 'Year' }}</small>
+                                                                    </ng-template>
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    SMS Sender Delegation To Member: {{row.smsSenderDelegationToMember ? 'Yes' : 'No'}}
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    {{row.templates}} SMS Templates
+                                                                </li>
+                                                                <li class="list-group-item pb-sm-0">
+                                                                    Broadcast to {{row.broadcasts}} Contacts
+                                                                </li> -->
+
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button (click)="SignUp()"
+                                        class="btn btn-primary btn-prev"
+                                        rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                </button>
+                                <button (click)="horizontalWizardStepperNext()"
+                                        type="submit"
+                                        class="btn btn-primary btn-next"
+                                        rippleEffect
+                                        [disabled]="!isPlanSelected">
+                                    <span class="align-middle d-sm-inline-block d-none">Next</span>
+                                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="onboarding-billing" class="content">
+                            <div class="content-buttons col-md-12">
+                                <div class="content2">
+                                    <div class="heading">
+                                        <div class="choose-the-purpose">Billing Information</div>
+                                        <div class="what-will-you-be-using-this-tool-for">
+                                            Provide Billing Information?
+                                        </div>
+                                    </div>
+                                    <div class="options">
+                                        
+
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="payment-type">
+                                                    <div class="card mb-0">
+                                                        <div class="card-header">
+                                                            <h2 class="card-title">Account Details</h2>
+                                                        </div>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                            <div class="col-sm-4 ">
+                                                                <label class="mb-50" for="card-holder-name">
+                                                                    <strong>Account No:</strong>
+                                                                    
+                                                                </label>
+                                                                <p>{{accountnumber}}</p>
+                                                                
+                                                            </div>
+                                                            <div class="col-sm-4 ">
+                                                                <label class="mb-50" for="card-holder-name">
+                                                                    <strong>Account Title:</strong>
+                                                                    
+                                                                </label>
+                                                                <p>Samiullah</p>
+                                                            </div>
+                                                            <div class="col-sm-4 ">
+                                                                <label class="mb-50" for="card-holder-name">
+                                                                    <strong>Account Type:</strong>
+                                                                    
+                                                                </label>
+                                                                <p>Jazzcash</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-12 row ">
+                                                            <div class=" col-md-12 row">
+                                                            <label class="mb-50" for="card-holder-name">
+                                                                <strong>Account Type:</strong>
+                                                                <!-- <span>Pay Server Charges to account given above.</span> -->
+                                                            </label>
+                                                        </div>
+                                                        <div class=" col-md-12 row">
+                                                            <div class="col-md-12">
+                                                                <ng-select [(ngModel)]="selectedPaymentMethod" [items]="paymentmethods" [searchable]="true" bindLabel="name" bindValue="name"  placeholder="Select Payment Method" >
+                                                                    <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                                      <span class="ng-value-label">{{ item.name }}</span>
+                                                                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                                    </ng-template>
+                                                                  </ng-select>                    
+                                                                    </div>
+                                                            
+                                                            </div>
+                                                            <p class="text-danger">* Save your transaction Id and   Receipt Screen Shot.</p>
+                                                        </div>
+                                                            <!-- <div class="row mb-50">
+                                                                <div class="col-sm-12">
+                                                                    <label class="mb-50" for="card-holder-name">
+                                                                        <strong>Name On Card:</strong>
+                                                                        <span style="color:red"> *</span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           class="form-control pull-right"
+                                                                           id="card-holder-name"
+                                                                           placeholder="Name on Card"
+                                                                           formControlName="nameoncard" />
+                                                                    <label *ngIf="NameonCardErrorMessage" class="error-message">{{NameonCardErrorMessage}}</label>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-50">
+                                                                <div class="col-sm-12">
+                                                                    <label class="mb-50" for="card-holder-cvv">
+                                                                        <strong>Card Number:</strong>
+                                                                        <span style="color:red">
+                                                                            *
+                                                                            <label *ngIf="CardNumberErrorMessage" class="error-message">
+                                                                                {{CardNumberErrorMessage}}
+                                                                            </label>
+                                                                        </span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           class="form-control"
+                                                                           id="cardnumber"
+                                                                           placeholder="Card Number"
+                                                                           formControlName="cardnumber"
+                                                                           (input)="checkMaxLength()" />
+                                                                </div>
+                                                            </div>
+                                                            <div class="row mb-50">
+                                                                <div class="col-sm-6">
+                                                                    <label class="mb-50" for="card-holder-cvv">
+                                                                        <strong>EXP Date:</strong>
+                                                                        <span style="color:red"> *</span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           class="form-control pull-right"
+                                                                           id="cardexpiry"
+                                                                           placeholder="MM/YY"
+                                                                           formControlName="cardexpiry"
+                                                                           (input)="validateCardExpiry($event.target.value)" />
+                                                                    <label *ngIf="cardexpiryMessage" class="error-message">{{cardexpiryMessage}}</label>
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <label class="mb-50" for="card-holder-cvv">
+                                                                        <strong>CVV:</strong>
+                                                                        <span style="color:red"> *</span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           class="form-control pull-right"
+                                                                           id="cardcvv"
+                                                                           placeholder="Enter CVV"
+                                                                           formControlName="cardcvv"
+                                                                           (input)="validateCVV($event.target.value)" />
+                                                                    <label *ngIf="cardcvvMessage" class="error-message">{{cardcvvMessage}}</label>
+                                                                </div>
+                                                            </div> -->
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-6" *ngIf="selectedRow">
+                                                <div class="payment-type">
+                                                    <div class="amount-payable checkout-options">
+                                                        <div class="card mb-0">
+                                                            <div class="card-header">
+                                                                <h2 class="card-title">Payment Summary</h2>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <ul class="list-unstyled price-details">
+                                                                    <li class="price-detail">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <label><strong>Description</strong></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"><strong>Qty</strong></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"><strong>Unit Price</strong></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label><strong>Amount</strong></label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <hr class="mt-0">
+                                                                    <li class="price-detail">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <label>{{selectedRow.packageName}} Package Price</label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="float:right">${{selectedRow.fee}}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>
+                                                                    <li class="price-detail">
+                                                                        <div class="row">
+                                                                            <div class="col-6">
+                                                                                <label>One Time Setup Fee</label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="text-align: center;"></label>
+                                                                            </div>
+                                                                            <div class="col-2">
+                                                                                <label style="float:right">${{selectedRow.otsetupFee}}</label>
+                                                                            </div>
+                                                                        </div>
+                                                                    </li>                                                                    
+                                                                </ul>
+                                                                <hr />
+                                                                <ul class="list-unstyled mb-0">
+                                                                    <li class="price-detail">
+                                                                        <label><strong>Total</strong></label>
+                                                                        <label style="float:right">
+                                                                            <strong>${{selectedRow.otsetupFee + selectedRow.fee}}</strong>
+                                                                        </label>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- <div class="mt-1 mb-1"> 
+                                        <div class="row m-0">
+                                                                                                                                   
+                                            <label>Do you have a different billing address ?</label>                                        
+                                            <div class="custom-control custom-switch">
+                                                <input 
+                                                type="checkbox"                                                 
+                                                class="custom-control-input" 
+                                                id="customSwitch10"
+                                                (change)="onCheckboxChange()" 
+                                                [checked]="isDifferentBillingAddress"/>
+                                                <label class="custom-control-label" for="customSwitch10">
+                                                    <span class="switch-icon-left"><i data-feather="check"></i></span>
+                                                    <span class="switch-icon-right"><i data-feather="x"></i></span>
+                                                </label>
+                                            </div> 
+                                        </div>                                           
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-header">
+                                                <h2 class="card-title">Billing Address</h2>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <label for="register_firstname">First Name<span style="color:red"> *</span></label>
+                                                        <input type="text"
+                                                               class="form-control pull-right"
+                                                               id="b_firstName"
+                                                               placeholder="First Name"
+                                                               formControlName="b_firstName"                                                               
+                                                               (input)="validateFirstName()" />
+                                                        <label *ngIf="b_firstNameErrorMessage" class="error-message" style="color:red">{{b_firstNameErrorMessage}}</label>
+                                                    </div>
+
+                                                    <div class="col-6">
+                                                        <label for="register_lastname">Last Name<span style="color:red"> *</span></label>
+                                                        <input type="text"
+                                                               class="form-control pull-right"
+                                                               id="b_lastName"
+                                                               placeholder="Last Name"
+                                                               formControlName ="b_lastName"                                                               
+                                                               (input)="validateLastName()" />
+                                                        <label *ngIf="b_lastNameErrorMessage" class="error-message" style="color:red">{{b_lastNameErrorMessage}}</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <label for="register_address">Address<span style="color:red"> *</span></label>
+                                                        <input type="text"
+                                                               class="form-control pull-right"
+                                                               id="address"
+                                                               placeholder="Address"
+                                                               formControlName ="b_address"/>
+                                                        <label *ngIf="b_addressErrorMessage" class="error-message" style="color:red">{{b_addressErrorMessage}}</label>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-4">
+                                                        <label class="form-label" for="register_state">State<span class="text-danger"> *</span></label>
+                                                        <ng-select [items]="states" [searchable]="true" bindLabel="stateName" placeholder="Select State" formControlName ="b_state" (change)="onStateChange()">
+                                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                                <span class="ng-value-label">{{ item.stateName }}</span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                            </ng-template>
+                                                        </ng-select>
+                                                        <label *ngIf="b_stateErrorMessage" class="error-message" style="color:red">{{b_stateErrorMessage}}</label>
+                                                    </div>
+
+
+                                                    <div class="col-4">
+                                                        <label class="form-label" for="register_city">City <span class="text-danger">*</span></label>
+                                                        <ng-select [items]="cities" [searchable]="true" bindLabel="cityName" formControlName ="b_city" placeholder="Select City">
+                                                            <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                                <span class="ng-value-label">{{ item.cityName }}</span>
+                                                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                            </ng-template>
+                                                        </ng-select>
+                                                        <label *ngIf="b_cityErrorMessage" class="error-message" style="color:red">{{b_cityErrorMessage}}</label>
+                                                    </div>
+
+                                                    <div class="col-4">
+                                                        <label for="register_zipCode">Zip Code<span style="color:red"> *</span></label>
+                                                        <input type="text"
+                                                               class="form-control pull-right"
+                                                               id="b_zipCode"
+                                                               placeholder="Zip Code"
+                                                               formControlName ="b_zipCode"/>
+                                                        <label *ngIf="b_zipCodeErrorMessage" class="error-message" style="color:red">{{b_zipCodeErrorMessage}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button"
+                                        (click)="horizontalWizardStepperPrevious()"
+                                        class="btn btn-primary btn-prev mt-2"
+                                        rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                </button>
+                                <button (click)="billingsubmit()" class="btn btn-primary btn-next mt-2" rippleEffect>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    <span class="align-middle d-sm-inline-block d-none">Save</span>
+                                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div id="transection-detail" class="content">
+                            <div class="content-buttons col-md-12">
+                                <div class="content2">
+                                    <div class="heading">
+                                        <div class="choose-the-purpose">Transection Information</div>
+                                        <div class="what-will-you-be-using-this-tool-for">
+                                            Provide Transection Information?
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="options">
+                                        
+
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <div class="payment-type">
+                                                    <div class="card mb-0">
+                                                        <div class="card-header">
+                                                            <h2 class="card-title">Transection Details</h2>
+                                                        </div>
+                                                        <div class="card-body">
+                                                          
+                                                        
+                                                            <div class="row mb-50">
+                                                                <div class="col-sm-6">
+                                                                    <label class="mb-50" for="card-holder-name">
+                                                                        <strong>Transection Id::</strong>
+                                                                        <span style="color:red"> *</span>
+                                                                    </label>
+                                                                    <input type="text"
+                                                                           class="form-control pull-right"
+                                                                           id="card-holder-name"
+                                                                           [(ngModel)]="transactionId"
+                                                                           placeholder="Please Enter Transection Id"
+                                                                           />
+                                                                    
+                                                                </div>
+                                                                <div class="col-sm-6">
+                                                                    <fieldset class="form-group">
+                                                                        <label for="file-upload-single">Select Image:</label>
+                                                                        <div class="custom-file">
+                                                                            <input
+                                                                                type="file"
+                                                                                class="custom-file-input"
+                                                                                type="file"
+                                                                                ng2FileSelect
+                                                                                [uploader]="uploader"
+                                                                                id="file-upload-single"
+                                                                                name="image"
+                                                                                required
+                                                                            />
+                                                                            <label class="custom-file-label">Choose file</label>
+                                                                        </div>
+                                                                    </fieldset>
+                                                                </div>
+                                                            </div>
+                                                            <div class="col-lg-12 overflow-auto">
+                                                                <div class="d-flex justify-content-between mb-1">
+                                                                  <h4>Upload</h4>
+                                                                  <!-- <p>Queue length: {{ uploader?.queue?.length }}</p> -->
+                                                                </div>
+                                                      
+                                                                <table class="table">
+                                                                  <thead>
+                                                                    <tr>
+                                                                      <th width="50%">Name</th>
+                                                                      <th>Size</th>
+                                                                      <th>Progress</th>
+                                                                      <th>Status</th>
+                                                                      <th>Actions</th>
+                                                                    </tr>
+                                                                  </thead>
+                                                                  <tbody>
+                                                                    <tr *ngFor="let item of uploader.queue">
+                                                                      <td>
+                                                                        <strong>{{ item?.file?.name }}</strong>
+                                                                      </td>
+                                                                      <td *ngIf="uploader.options.isHTML5" nowrap>
+                                                                        {{ item?.file?.size / 1024 / 1024 | number : ".2" }} MB
+                                                                      </td>
+                                                                      <td *ngIf="uploader.options.isHTML5">
+                                                                        <ngb-progressbar
+                                                                          type="primary"
+                                                                          [value]="item.progress"
+                                                                        ></ngb-progressbar>
+                                                                      </td>
+                                                                      <td class="text-center">
+                                                                        <span *ngIf="item.isSuccess"
+                                                                          ><i data-feather="check"></i
+                                                                        ></span>
+                                                                        <span *ngIf="item.isCancel"
+                                                                          ><i data-feather="slash"></i
+                                                                        ></span>
+                                                                        <span *ngIf="item.isError"
+                                                                          ><i data-feather="x-circle"></i
+                                                                        ></span>
+                                                                      </td>
+                                                                      <td nowrap>
+                                                                        <button
+                                                                          type="button"
+                                                                          class="btn btn-raised btn-outline-success btn-sm mr-50"
+                                                                          (click)="item.upload()"
+                                                                          [disabled]="
+                                                                            item.isReady || item.isUploading || item.isSuccess
+                                                                          "
+                                                                          rippleEffect
+                                                                        >
+                                                                          <span data-feather="upload"></span>
+                                                                        </button>
+                                                                        <button
+                                                                          type="button"
+                                                                          class="btn btn-raised btn-outline-warning btn-sm mr-50"
+                                                                          (click)="item.cancel()"
+                                                                          [disabled]="!item.isUploading"
+                                                                          rippleEffect
+                                                                        >
+                                                                          <i data-feather="slash"></i>
+                                                                        </button>
+                                                                        <button
+                                                                          type="button"
+                                                                          class="btn btn-raised btn-outline-danger btn-sm"
+                                                                          (click)="item.remove()"
+                                                                          rippleEffect
+                                                                        >
+                                                                          <i data-feather="trash"></i>
+                                                                        </button>
+                                                                      </td>
+                                                                    </tr>
+                                                                  </tbody>
+                                                                </table>
+                                                              </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                           
+                                        </div>
+
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="button"
+                                        (click)="horizontalWizardStepperPrevious()"
+                                        class="btn btn-primary btn-prev mt-2"
+                                        rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                </button>
+                                <button (click)="onregister()" class="btn btn-primary btn-next mt-2" rippleEffect>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    <span class="align-middle d-sm-inline-block d-none">Register</span>
+                                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+
+                        <div id="onboarding-workspace-setting" class="content">
+                            <div class="content-buttons col-md-12">
+                                <div class="content2">
+                                    <div class="heading">
+                                        <div class="choose-the-purpose">
+                                            Workspace settings
+                                        </div>
+                                        <div class="what-will-you-be-using-this-tool-for">
+                                            Please provide workspace settings info
+                                        </div>
+                                    </div>
+                                    <div class="options">
+                                        <div class="row">
+                                            <div class="col-sm-12">
+                                                <h3 class="d-flex align-items-center form-label" style="margin-bottom: 1rem;font-size: 16px;color: var(--black, #232323);font-family: Montserrat;font-size: 16px;font-style: normal;font-weight: 600;line-height: normal;">Workspace Url?<span><label style="color: red;">*</label></span></h3>
+                                                <div class="row mb-2">
+                                                    <div class="col-sm-12">
+                                                        <div class="input-group">
+                                                            <div class="input-group-prepend">
+                                                                <span class="input-group-text" id="basic-addon3" style="background-color: #f5f4f4;">
+                                                                    <label class="fw-bold fs-3">https://</label>
+                                                                </span>
+                                                            </div>
+                                                            <input type="text"
+                                                                   class="form-control"
+                                                                   id="workspace"
+                                                                   placeholder="workspace.chatroster.com"
+                                                                   formControlName="workspace"
+                                                                   (keydown.space)="preventSpace($event)"
+                                                                   (blur)="hideError()" />
+                                                            <div class="input-group-append">
+                                                                <span class="input-group-text" id="basic-addon3" style="background-color: #f5f4f4;">
+                                                                    <label class="fw-bold fs-3">.ezjobmanager.com</label>
+                                                                </span>
+                                                            </div>
+                                                        </div>
+                                                        <label *ngIf="spaceError" class="error-message">{{spaceErrorMessage}}</label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between" style="margin-top: 05%;">
+                                <button type="button"
+                                        (click)="horizontalWizardStepperPrevious()"
+                                        class="btn btn-primary btn-prev"
+                                        rippleEffect>
+                                    <i data-feather="arrow-left" class="align-middle mr-sm-25 mr-0"></i>
+                                    <span class="align-middle d-sm-inline-block d-none">Previous</span>
+                                </button>
+                                <button (click)="ValidateWorkSpaceNext()"
+                                        class="btn btn-primary btn-next"
+                                        rippleEffect>
+                                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                    <span class="align-middle d-sm-inline-block d-none">Submit</span>
+                                    <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="onboarding-complete" class="content">
+                            <div class="content-buttons col-md-12">
+                                <div class="content2">
+                                    <div class="heading">
+                                        <div class="choose-the-purpose">Welcome To</div>
+                                        <div class="what-will-you-be-using-this-tool-for">
+                                            EZ Job Manager
+                                        </div>
+                                    </div>
+                                    <div class="options">
+                                        <div class="row">
+                                            <div class="col-sm-12 col-xs-12 col-md-12 col-lg-12">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="80" height="81" viewBox="0 0 80 81" fill="none">
+                                                    <g clip-path="url(#clip0_1024_22659)">
+                                                        <path d="M71.7025 16.187C65.7517 8.45102 57.9728 3.43858 48.4023 1.44304C36.4484 -1.05009 25.4845 1.3959 15.7517 8.77052C7.92562 14.6943 2.99633 22.5665 0.906234 32.1724C0.534311 33.8641 0.392876 35.6135 0.141435 37.3315C0.104767 37.6091 0.0471451 37.8867 0 38.1643V42.852C0.204295 44.3604 0.340492 45.8898 0.623363 47.3878C2.86014 59.3611 9.24044 68.5165 19.6019 74.8698C24.945 78.1381 30.8015 79.9294 37.056 80.3693C37.2603 80.385 37.4594 80.4531 37.6585 80.5003H42.3468C43.8659 80.296 45.3903 80.1441 46.8989 79.877C48.1299 79.657 49.3347 79.3899 50.5134 79.0704C58.1561 77.0225 64.6674 72.9318 70.0367 66.8666C75.6888 60.4767 78.9785 52.9868 79.7957 44.5071C79.8114 44.3185 79.8324 44.1247 79.8428 43.9362C80.7019 33.6965 78.0094 24.384 71.7025 16.187ZM63.5202 33.0733C63.2216 33.4661 62.8811 33.8327 62.5354 34.1836C54.4369 42.2811 46.3384 50.3785 38.2399 58.4759C36.1341 60.5814 33.714 61.0738 31.4615 59.9529C30.77 59.6177 30.0943 59.1201 29.4447 58.4759C25.3955 54.4324 21.341 50.389 17.297 46.3298C14.945 43.9676 14.7459 40.8198 16.7627 38.3947C18.6537 36.1216 22.1949 35.7707 24.4893 37.63C24.835 37.9076 25.1598 38.2114 25.4688 38.5204C28.0723 41.1131 30.6653 43.7109 33.2635 46.3036C33.4416 46.4817 33.6302 46.6545 33.9759 46.9792C34.1645 46.7069 34.2954 46.4398 34.4945 46.2355C41.2048 39.5156 47.9309 32.8009 54.6412 26.081C56.3698 24.3526 58.3656 23.6664 60.7543 24.4102C61.5977 24.6721 62.3206 25.1225 62.902 25.6986L62.944 25.7405L63.1482 25.9658C64.8507 27.8723 65.186 30.9049 63.5202 33.0733Z" fill="#E3E1FC" />
+                                                        <path opacity="0.2" d="M63.1482 25.9654L79.8428 43.9358C79.8323 44.1243 79.8114 44.3181 79.7957 44.5067C78.9785 52.9864 75.6888 60.4763 70.0366 66.8662C64.6673 72.9315 58.1561 77.0221 50.5133 79.07L31.3672 60.0939L31.4615 59.9525L42.5668 43.1501L51.0948 35.2936L62.902 25.6982L62.9439 25.7401L63.1482 25.9654Z" fill="#28C76F" />
+                                                        <path d="M33.9759 46.9787C34.1644 46.7064 34.2954 46.4392 34.4945 46.2402C41.21 39.5151 47.9308 32.8056 54.6464 26.0805C56.375 24.352 58.3708 23.6659 60.7595 24.4097C64.3373 25.5253 65.804 30.103 63.5254 33.0727C63.2268 33.4656 62.8863 33.8322 62.5406 34.1779C54.4368 42.2805 46.3384 50.378 38.2399 58.4754C35.4845 61.2252 32.2001 61.2252 29.4499 58.4806C25.4007 54.4319 21.3462 50.3884 17.3022 46.3345C14.945 43.9723 14.7459 40.8192 16.7627 38.3942C18.6537 36.1211 22.1948 35.7701 24.4892 37.6295C24.8297 37.9071 25.1597 38.2109 25.4688 38.5199C28.067 41.1125 30.6652 43.7052 33.2582 46.2978C33.4416 46.4811 33.6301 46.654 33.9759 46.9787Z" fill="#28C76F" />
+                                                    </g>
+                                                    <defs>
+                                                        <clipPath id="clip0_1024_22659">
+                                                            <rect width="80" height="80" fill="white" transform="translate(0 0.5)" />
+                                                        </clipPath>
+                                                    </defs>
+                                                </svg>
+                                                <div>
+                                                    <h2 style="margin-top: 5%;color: var(--black, #232323);font-family: Montserrat;font-size: 36px;font-style: normal;font-weight: 600;line-height: normal;">You're All Set!</h2>
+                                                    <label style="margin-bottom: 15%;color: var(--dark-gray, #7F7F7F);font-family: Montserrat;font-size: 16px;font-style: normal;font-weight: 400;line-height: 24px;">Thank you for registering with EZ Job Manager! We're excited to have you on board and look forward to helping you achieve your goals.</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex justify-content-between">
+
+                                <button class="btn btn-success btn-submit" rippleEffect (click)="gotodashboard()"><span class="fa fa-cpu"></span>Go to Dashboard</button>
+                            </div>
+                        </div>
+                    
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+

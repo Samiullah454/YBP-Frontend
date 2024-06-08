@@ -1,0 +1,124 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ shiftToEdit ? 'Edit Shift' : 'Add Shift' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="saveShift()" #shiftForm="ngForm">
+        <!-- Shift Name -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="shiftName">Shift Name:</label>
+                <input type="text" class="form-control" id="shiftName" name="shiftName" [(ngModel)]="newShift.shiftName"
+                    required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="shiftType">Shift Type:</label>
+                <select class="form-control " id="shiftType" name="shiftType" [(ngModel)]="newShift.shiftType" required>
+                    <option [value]=0>AfterHours</option>
+                    <option [value]=1>Emergency</option>
+                    <option [value]=2>HolidayShift</option>
+                    <option [value]=3>Normal</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="startTime">Start Time:</label>
+                <input type="time" class="form-control" id="startTime" name="startTime" [(ngModel)]="newShift.startTime"
+                    required>
+            </div>
+
+            <!-- End Time -->
+            <div class="form-group col-md-6">
+                <label for="endTime">End Time:</label>
+                <input type="time" class="form-control" id="endTime" name="endTime" [(ngModel)]="newShift.endTime"
+                    required>
+            </div>
+        </div>
+        <!-- Frequency -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="frequency">Frequency:</label>
+                <select class="form-control" id="frequency" name="frequency" [(ngModel)]="newShift.frequency" required>
+                    <option [value]=0>Daily</option>
+                    <option [value]=1>Weekly</option>
+                    <option [value]=2>Monthly</option>
+                </select>
+            </div>
+
+            <!-- Shift Type -->
+
+
+
+            <!-- Is Active -->
+            <div class="form-group col-md-6">
+                <label>Is Active:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="isActive"
+                    [(ngModel)]="newShift.isActive" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="isActive"
+                    [(ngModel)]="newShift.isActive" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+
+        </div>
+        <!-- Days of the Week -->
+        <div class="form-group">
+            <label>Shift Days:</label><br>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dayMonday" name="dayMonday"
+                    [(ngModel)]="newShift?.shiftDays.monday">
+                <label class="form-check-label" for="dayMonday">Monday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dayTuesday" name="dayTuesday"
+                    [(ngModel)]="newShift.shiftDays.tuesday">
+                <label class="form-check-label" for="dayTuesday">Tuesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dayWednesday" name="dayWednesday"
+                    [(ngModel)]="newShift.shiftDays.wednesday">
+                <label class="form-check-label" for="dayWednesday">Wednesday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dayThursday" name="dayThursday"
+                    [(ngModel)]="newShift.shiftDays.thursday">
+                <label class="form-check-label" for="dayThursday">Thursday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="dayFriday" name="dayFriday"
+                    [(ngModel)]="newShift.shiftDays.friday">
+                <label class="form-check-label" for="dayFriday">Friday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="daySaturday" name="daySaturday"
+                    [(ngModel)]="newShift.shiftDays.saturday">
+                <label class="form-check-label" for="daySaturday">Saturday</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" id="daySunday" name="daySunday"
+                    [(ngModel)]="newShift.shiftDays.sunday">
+                <label class="form-check-label" for="daySunday">Sunday</label>
+            </div>
+        </div>
+
+        <!-- Notes -->
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea class="form-control" id="notes" name="notes" [(ngModel)]="newShift.notes">
+            </textarea>
+        </div>
+
+
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">{{ shiftToEdit ? 'Update' : 'Add' }} Shift</button>
+    </form>
+
+</div>

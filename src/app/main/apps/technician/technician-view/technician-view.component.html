@@ -1,0 +1,704 @@
+<div class="content-wrapper container-xxl p-0">
+  <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="content-body">
+      <!-- page users view start -->
+      <section class="app-user-view">
+        <!-- User Card & Plan Starts -->
+        <div class="row">
+          <!-- User Card starts-->
+          <div class="col-xl-12 col-lg-12 col-md-12">
+            <div class="card user-card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-xl-9 col-md-9 col-lg-9 d-flex flex-column justify-content-between border-container-lg">
+                    <div class="user-avatar-section">
+                      <div class="d-flex justify-content-start">
+                        <div *ngIf="data?.photo_url?.length > 0; else customAvatar">
+                          <img class="img-fluid rounded" [src]="data.photo_url" height="104" width="104" alt="User avatar" />
+                        </div>
+                        <ng-template #customAvatar>
+                          <div class="mr-1 ml-0">
+                            <div
+                              [ngClass]="{
+                                'bg-light-success': data?.status == 'active',
+                                'bg-light-secondary': data?.status == 'in_active',
+                                'bg-light-warning': data?.status == 'suspended'
+                              }"
+                              class="rounded p-3"
+                            >
+                              <h2
+                                [ngClass]="{
+                                  'text-success': data?.status == 'active',
+                                  'text-secondary': data?.status == 'in_active',
+                                  'text-warning': data?.status == 'suspended'
+                                }"
+                                class="m-0"
+                              >
+                                {{ data?.technicianName | initials }}
+                              </h2>
+                            </div>
+                          </div>
+                        </ng-template>
+                       
+                        <div class="d-flex flex-column ml-1">
+                          <div class="user-info">
+                            <div class="user-info-title">
+                                <div class="card-text user-info-title mb-0" style="font-weight: 700 !important;">{{data.technicianName}} </div>
+                              <div class="status-pin">
+                                <div class="card-text user-info-title font-weight-bold">Status
+                                  <p class="badge badge-pill badge-light-success">{{ data?.status=='active'?'Active':data?.status=='in_active'?'In_Active':'Suspended' }}</p>
+                                </div>
+                              </div>
+                              </div>
+                          </div>
+                          <div class="contact">
+                            <p class="card-text" *ngIf="data?.work_phone && data?.primary_contact=='home'"><i data-feather="phone" ></i><span style="margin-left:8px;"><input type="text" [(ngModel)]="data.work_phone" placeholder="Type here" class="transparent-input" (change)="UpdatePatient()"  placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" /></span></p>
+                            <p class="card-text" *ngIf="data?.cell_phone && data?.primary_contact=='cell'"><i data-feather="phone"></i><span style="margin-left:8px;"><input type="text" [(ngModel)]="data.cell_phone" placeholder="Type here" class="transparent-input" (change)="UpdatePatient()"  placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" /></span></p>
+                            <p class="card-text" *ngIf="data?.home_phone && data?.primary_contact=='work'"><i data-feather="phone"></i><span style="margin-left:8px;"><input type="text" [(ngModel)]="data.home_phone" placeholder="Type here" class="transparent-input" (change)="UpdatePatient()"  placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" /></span></p>
+                            <p class="card-text" *ngIf="data?.is_auth==1 && data?.user"><i data-feather="mail"></i><span style="margin-left:8px;"><input type="text" [(ngModel)]="data.user.email" placeholder="Type here" class="transparent-input" (change)="UpdatePatient()" /></span></p>
+                            <p class="card-text"><i data-feather="map-pin" style="margin-right:8px;"></i><span style="margin-left:8px;"><input (change)="UpdatePatient()" type="text" [(ngModel)]="data.address" placeholder="Type here" class="transparent-input"/></span> </p>
+                          </div>
+                        </div>
+                      </div>
+                   
+                    </div>
+                    <div class="vilue-box" style="margin-top:20px">
+                        
+                            <div class="col-md-3" style="border: 1px dashed;border-radius: 6px;text-align: center;padding: 5px;">
+                                 <h5 style="margin-bottom: 0px; margin-top: 6px;font-weight: 800;">50</h5>
+                                 <label>Total Appointments</label>
+                            </div>
+                            <div class="col-md-3" style="border: 1px dashed;border-radius: 6px;text-align: center;padding: 5px;">
+                                <h5 style="margin-bottom: 0px; margin-top: 6px;font-weight: 800;">5</h5>
+                                <label>Incoming Appointments</label>
+                            </div>
+                            <div class="col-md-3" style="border: 1px dashed;border-radius: 6px;text-align: center;padding: 5px;">
+                                <h5 style="margin-bottom: 0px; margin-top: 6px;font-weight: 800;">2</h5>
+                                <label>Cancelled Appointments</label>
+                            </div>
+                      </div>
+                            
+                   
+                  </div>
+                
+                  <div class="col-xl-3 col-lg-3 mt-2 mt-xl-0" style="display: inline-grid;">
+                   <div> <button class="btn btn-primary button-account" routerLink="/apps/patients/edit/{{ data?.id }}">Edit Profile</button></div>
+                   &nbsp;
+                   &nbsp;
+                    <div class="progress-wrapper">
+                      <h5>Profile Completion</h5>
+                        <ngb-progressbar
+                          showValue="true"
+                          type="success"
+                          [value]="80"
+                        ></ngb-progressbar>
+                      </div>
+                        
+                  </div>
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- User Card & Plan Ends -->
+  
+       
+        <div class="row">
+          <div class="col-md-12">
+            <div class="card">
+              
+           <div class="card-body">
+               
+  <ul ngbNav #navWithIcons="ngbNav" class="nav-tabs" style="border-bottom: 1px solid lightgrey;">
+    <li ngbNavItem>
+      <a ngbNavLink><span [data-feather]="'user-check'"></span><span class="showli">Technician Info</span></a>
+      <ng-template ngbNavContent>
+        <div class="row" style="padding-bottom: 15px;">
+           <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                <label><b> Name</b></label>
+           </div>
+           <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+            <input type="text" [(ngModel)]="data.technicianName" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+           
+           </div>
+           <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+            <label><b>Last Name</b></label>
+              
+           </div>
+           <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+            <input type="text" [(ngModel)]="data.last_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+           </div>
+        </div>
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                 <label><b>Address</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.address" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+             <label><b>Email</b></label>
+             
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.email" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            
+            </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.work_phone">
+                 <label><b>Work Phone</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.work_phone">
+              <input type="text" [(ngModel)]="data.work_phone" placeholder="Type here" (change)="UpdatePatient()" class="transparent-input" placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+                
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.cell_phone">
+             <label><b>Mobile Phone</b></label>
+               
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.cell_phone">
+              <input type="text" [(ngModel)]="data.cell_phone" placeholder="Type here" (change)="UpdatePatient()" class="transparent-input" placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+            </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.home_phone">
+                 <label><b>Home Phone</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="data?.home_phone">
+              <input type="text" [(ngModel)]="data.home_phone" placeholder="Type here" (change)="UpdatePatient()" class="transparent-input" placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+                
+            </div>
+         </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink><span [data-feather]="'dollar-sign'"></span><span class="showli">Employment Info</span></a>
+      <ng-template ngbNavContent>
+        <div *ngIf="data?.payment_profiles?.length>0" class="col-12" style="padding-bottom: 15px;">
+          <div class="row" *ngFor="let savedcard of data?.payment_profiles; let ui = index" style="border:0.1px solid lightgrey;margin-top:20px">
+            <div class="col-md-12" style="margin-top: 10px;">
+                 <h5>Card {{ui+1}} Details</h5>
+                 <a style="float:right;" href="javascript:;" [swal]="SweetAlertConfirmText" [class]="'cursor-pointer'"
+                 ><span [data-feather]="'trash'"  [size]="16"  [class]="'mr-50'"></span></a
+                 >
+                <swal #SweetAlertConfirmText (open)="ConfirmTextOpenForCard(data?.payment_profiles[ui])"></swal>
+                 <hr>
+              </div>
+              
+             <div class="form-group col-md-2">
+              <label class="form-label"><b>Card Number</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.card_last_four}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Name on Card</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.holder_name}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Card Expiry</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.card_expiry}}</label>
+            </div>
+
+
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Billing Address </b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_address}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Billing Address 2</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_suit}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>State</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_state}}</label>
+            </div>
+
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>City</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_city}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Zip Code</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_zip_code}}</label>
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label"><b>Country</b></label>
+              
+              
+            </div>
+            <div class="form-group col-md-2">
+              <label class="form-label">{{savedcard?.billing_country}}</label>
+            </div>
+            
+          </div>
+        </div>
+        <div class="col-12" style="padding-bottom: 15px;"  *ngFor="let insurance of data?.patientInsurances; let ui = index" style="border:0.1px solid lightgrey;margin-top:20px">
+             
+          <div class="row" style="padding-bottom: 15px;">
+              <div class="col-12 col-md-12">
+                <h5 style="margin-top: 10px;">Insurance Detail</h5>
+                <a style="float:right;" href="javascript:;" [swal]="SweetAlertConfirmText" [class]="'cursor-pointer'"
+                ><span [data-feather]="'trash'"  [size]="16"  [class]="'mr-50'"></span></a
+                >
+               <swal #SweetAlertConfirmText (open)="ConfirmTextOpenForInsurance(data?.payment_profiles[ui])"></swal>
+                <hr/>
+              </div>
+           </div>
+          <div class="row" style="padding-bottom: 15px;">
+            
+            <div class="col-6 col-md-3">
+                 <label><b>Insurance Type:</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="insurance.insurance_type" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+             <label><b>Insurance Name:</b></label>
+               
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                 <input type="text" [(ngModel)]="insurance.insurance_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;">
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label *ngIf="insurance?.insurance_type=='medicare'"><b>Medicare Id</b></label>
+                  <label *ngIf="insurance?.insurance_type=='medicaid'"><b>Medicaid Id</b></label>
+                  <label *ngIf="insurance?.insurance_type=='private_provider'"><b>Policy #</b></label>
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="insurance.insurance_number" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                 
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Member ID</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.member_id" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type!='private_provider'">
+              <label><b>Subscriber GP Number</b></label>
+                
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type!='private_provider'">
+              <input type="text" [(ngModel)]="insurance.subcriber_gp_number" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             
+             </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.insurance_type!='private_provider'">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Subscriber Relation</b></label>
+          </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type!='private_provider'">
+              <input type="text" [(ngModel)]="insurance.subscriber_relation" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type!='private_provider'">
+              <label><b>Is Primary Insurance:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type!='private_provider'">
+             <label>{{ insurance?.is_primary_insurance==true?'Yes':'No' }}</label>
+            </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.insurance_type=='private_provider'">
+            
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Group ID:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.group_id" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Same As Client Account</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+                 <label>{{ insurance?.insurance_same==true?'Yes':'No' }}</label>
+             </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.insurance_type=='private_provider'">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Primary Isnured First Name</b></label>
+          </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_first_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Primary Isnured Middle Name:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_meddle_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+           
+            </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.insurance_type=='private_provider'">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Primary Isnured Last Name</b></label>
+          </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_last_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Insurance Phone Number:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_phone_number" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             
+            </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.insurance_type=='private_provider'">
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Insurance Billing Address</b></label>
+          </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_billing_address" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                 
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <label><b>Invoice Notes:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3" *ngIf="insurance?.insurance_type=='private_provider'">
+              <input type="text" [(ngModel)]="insurance.insurance_invoice_note" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+            <div class="col-12">
+              <hr/>
+                 <h4 style="text-align:center;">Subscriber Details</h4>
+                 <hr/>
+            </div>
+         
+           
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+                <div class="col-6 col-md-3">
+                     <label><b>First Name:</b></label>
+                </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_first_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                 <label><b>Middle Name:</b></label>
+                   
+                </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_middle_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                 
+                </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                      <label><b>Last Name</b></label>
+                 </div>
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_last_name" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                 </div>
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label><b>Phone Number</b></label>
+                    
+                 </div>
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_phone" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                 </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                      <label><b>Date Of Birth</b></label>
+                 </div>
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="date" [(ngModel)]="insurance.subscriber_date_of_birth" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                    
+                 </div>
+                 <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label><b>Gender:</b></label>
+                 </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_gender" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+               </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                     <label><b>Address Line 1</b></label>
+                </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <input type="text" [(ngModel)]="insurance.subscriber_address_primary" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+                </div>
+                <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                 <label><b>Address Line 2:</b></label>
+                </div>
+               <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                <input type="text" [(ngModel)]="insurance.subscriber_address_secondary" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+               </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                   <label><b>Country</b></label>
+              </div>
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                <input type="text" [(ngModel)]="insurance.subscriber_country" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+              </div>
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+               <label><b>State:</b></label>
+              </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="insurance.subscriber_state" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+           </div>
+           <div class="row" style="padding-bottom: 15px;" *ngIf="insurance?.subscriber_relation!='self'">
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label><b>City</b></label>
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="insurance.subscriber_city" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>zip Code:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="insurance.subscriber_zip_code" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            </div>
+           </div>
+           <div class="row">
+            <div class="col-12">
+              <hr/>
+              <h5>Billing Information</h5>
+              <hr/>
+            </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+               <label><b>Address</b></label>
+          </div>
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+            <input type="text" [(ngModel)]="insurance.billing_address_primary" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+          </div>
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+           <label><b>Suite#/Bldg/Apt:</b></label>
+          </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <input type="text" [(ngModel)]="insurance.billing_address_secondary" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+         
+         </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>City</b></label>
+         </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <input type="text" [(ngModel)]="insurance.billing_city" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             
+         </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <label><b>State:</b></label>
+         </div>
+        <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <input type="text" [(ngModel)]="insurance.billing_state" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+        
+        </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+               <label><b>Zip Code</b></label>
+          </div>
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+            <input type="text" [(ngModel)]="insurance.billing_zip_code" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+              
+          </div>
+          <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+           <label><b>Insurance Phone Number:</b></label>
+          </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <input type="text" [(ngModel)]="insurance.insurance_phone_number" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+         </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Insurance Card Image Front</b></label>
+         </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+             <label><a href="{{insurance?.insurance_card_front_image}}" target="_blank"><span class="fa fa-file">View</span></a> </label>
+         </div>
+         <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+          <label><b>Insurance Card Image Back:</b></label>
+         </div>
+        <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+         <label><a href="{{insurance?.insurance_card_back_image}}" target="_blank"><span class="fa fa-file">View</span></a> </label>
+        </div>
+         </div>
+        </div>
+           
+             
+           
+           
+         
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink><span [data-feather]="'navigation'"></span><span class="showli">Other Info</span></a>
+      <ng-template ngbNavContent>
+        <div class="row" style="padding-bottom: 15px;">
+            <div class="col-6 col-md-3">
+                 <label><b>Address:</b></label>
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.address" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+               
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+             <label><b>Suite#/Bldg/Apt:</b></label>
+               
+            </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.room_suite" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+           
+            </div>
+         </div>
+         <div class="row" style="padding-bottom: 15px;">
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label><b>City</b></label>
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.city" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>State</b></label>
+                
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.state" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+          </div>
+          <div class="row" style="padding-bottom: 15px;">
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                  <label><b>Zip Code</b></label>
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.zip_code" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <label><b>Country:</b></label>
+             </div>
+            <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.country" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+            </div>
+          </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+      <a ngbNavLink><span [data-feather]="'file-text'"></span><span class="showli">Documents({{data?.documents?.length}})</span></a>
+      <ng-template ngbNavContent>
+        <div class="card">
+          <ngx-datatable
+            [rows]="data?.documents"
+            [rowHeight]="50"
+            class="bootstrap core-bootstrap"
+            [limit]="selectedOption"
+            [columnMode]="ColumnMode.force"
+            [headerHeight]="50"
+            [footerHeight]="50"
+            [scrollbarH]="true"
+          >
+            <ngx-datatable-column name="Document Name" prop="title" [width]="200">
+              <ng-template let-description="value" ngx-datatable-cell-template>
+                <label>{{description |  truncate:20}}</label>
+             </ng-template>
+            </ngx-datatable-column>
+            <ngx-datatable-column name="Description" prop="description" [width]="400">
+              <ng-template let-description="value" ngx-datatable-cell-template>
+                <label>{{description |  truncate:40}}</label>
+             </ng-template>
+             </ngx-datatable-column>
+           <ngx-datatable-column name="FILE" prop="image">
+              <ng-template let-row="row" let-files="value" ngx-datatable-cell-template>
+                 <label><a href="{{files}}" target="_blank"><span class="fa fa-file">View</span></a></label>
+                 <a style="margin-left: 10px;" href="javascript:;" [swal]="SweetAlertConfirmText" [class]="'cursor-pointer'"
+                 ><span [data-feather]="'trash'"  [size]="16"  [class]="'mr-50'"></span></a
+                 >
+                <swal #SweetAlertConfirmText (open)="ConfirmTextOpenForDoc(row)"></swal>
+              </ng-template>
+            </ngx-datatable-column>
+          </ngx-datatable>
+        </div>
+      </ng-template>
+    </li>
+    <li ngbNavItem>
+        <a ngbNavLink><span [data-feather]="'settings'"></span><span class="showli">Shift</span></a>
+        <ng-template ngbNavContent> 
+          <div class="row" style="padding-bottom: 15px;" *ngIf="data.is_auth==1">
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                   <label><b>User Name</b></label>
+              </div>
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+                <input type="text" [(ngModel)]="data.user.username" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+              </div>
+              <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+               <label><b>Email:</b></label>
+              </div>
+             <div class="col-6 col-md-3 col-sm-3 col-lg-3">
+              <input type="text" [(ngModel)]="data.user.email" (change)="UpdatePatient()" placeholder="Type here" class="transparent-input" />
+             </div>
+           </div>
+        </ng-template>
+    
+      </li>
+      
+    <li ngbNavItem>
+      <a ngbNavLink><span [data-feather]="'book-open'"></span><span class="showli">Crew Group</span></a>
+      <ng-template ngbNavContent>
+        <textarea (change)="UpdatePatient()" class="responsive-textarea" [(ngModel)]="data.note">
+
+        </textarea>
+      
+      </ng-template>
+    </li>
+   <li ngbNavItem class="pull-right">
+      <a ngbNavLink><span [data-feather]="'clock'"></span><span class="showli">View Changes</span></a>
+    </li>
+  </ul>
+  <div [ngbNavOutlet]="navWithIcons" class="mt-2"></div>
+  
+  </div>
+            </div>
+          </div>
+        </div>
+        
+      </section>
+      <!-- page users view end -->
+    </div>
+  </div>
+  

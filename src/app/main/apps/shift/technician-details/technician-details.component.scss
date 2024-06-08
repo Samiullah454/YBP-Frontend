@@ -1,0 +1,29 @@
+@import '@core/scss/angular/libs/select.component.scss';
+.shift-details {
+  margin-bottom: 20px;
+  h5 {
+    margin-bottom: 10px;
+  }
+  p {
+    margin: 0;
+    line-height: 1.5;
+  }
+}
+.shift-details-row {
+  display: flex;
+  justify-content: space-evenly;
+  margin-bottom: 20px; 
+  margin-right: 20px;/* Space between shift details and the table */
+}
+.shift-details-row > p {
+  margin-bottom: 20px; /* Adjust the value as needed for the desired spacing between <p> elements */
+}
+
+/* Optional: To maintain consistent space between flex items */
+/* You can also use the gap property directly if supported */
+
+
+.custom-dropdown {
+  width: 300px; /* Adjust this value as needed */
+  // Other styling as needed
+}

@@ -1,0 +1,15 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+@import '@core/scss/base/plugins/forms/form-validation.scss';
+
+.ngx-datatable.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell{
+  background-color: #f3f2f7 !important;
+  backface-visibility: hidden;
+}
+
+.ngx-datatable.fixed-row .datatable-scroll .datatable-body-row .datatable-body-cell{
+  background-color: white !important;
+  backface-visibility: hidden;
+}

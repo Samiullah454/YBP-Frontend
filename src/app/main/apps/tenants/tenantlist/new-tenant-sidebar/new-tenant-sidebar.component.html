@@ -1,0 +1,225 @@
+
+  <form class="add-new-user modal-content pt-0" (ngSubmit)="(newTemplateForm.form.valid)" #newTemplateForm="ngForm">
+  <div class="modal-body flex-grow-1">
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-fullname">Workspace<span style="color:red;">*</span></label>
+
+      <input
+        type="text"
+        class="form-control dt-full-name"
+        id="basic-icon-default-fullname"
+        placeholder="Tenant Name"
+        name="user-TenancyName"
+        [(ngModel)]="tenantobj.tenancyName"
+        [class.error]="newTemplateForm.submitted && FNameRef.invalid"
+        #FNameRef="ngModel"
+        required
+        aria-label="user name"
+        aria-describedby="basic-icon-default-fullname2"
+      />
+      <span *ngIf="newTemplateForm.submitted && FNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Name <span style="color:red;">*</span></label>
+      <input
+        type="text"
+        id="basic-icon-default-uname"
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-name"
+        [(ngModel)]="tenantobj.name"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">User Name <span style="color:red;">*</span></label>
+      <input
+        type="text"
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-username"
+        [(ngModel)]="tenantobj.username"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Company Name <span style="color:red;">*</span></label>
+      <input
+        type="text"
+       
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-company"
+        [(ngModel)]="tenantobj.company"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="vertical-language">Package</label>
+      <ng-select
+        [items]="packageitemsList"
+        [closeOnSelect]="true"
+        [searchable]="true"
+        bindLabel="packageName"
+        bindValue="id"
+        placeholder="Select Package"
+        name="package"
+        [(ngModel)]="selectedPackageId"
+      >
+        <ng-template ng-label-tmp let-item="item" let-clear="clear">
+          <span class="ng-value-label"> {{ item.packageName }} (Package Price ${{item.packagePrice}})</span>
+        </ng-template>
+      </ng-select>
+    </div>
+    <!-- <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Purpose</label>
+      <input
+        type="text"
+       
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-purpose"
+        [(ngModel)]="tenantobj.purpose"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div> -->
+  
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Payment Method</label>
+      <input
+        type="text"
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-payment_methode"
+        [(ngModel)]="tenantobj.payment_methode"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Name On Card</label>
+      <input
+        type="text"
+        
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-name_on_card"
+        [(ngModel)]="tenantobj.name_on_card"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Card Number</label>
+      <input
+        type="text"
+        class="form-control dt-uname"
+        placeholder="Template Text"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-cardnumber"
+        [(ngModel)]="tenantobj.cardnumber"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">CVV</label>
+      <input
+        type="text"
+        class="form-control dt-uname"
+        placeholder="CVV"
+        aria-label="jdoe1"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-cardnumber"
+        [(ngModel)]="tenantobj.cvv"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label class="form-label" for="basic-icon-default-uname">Mobile Number</label>
+      <input
+        type="text"
+        class="form-control dt-uname"
+        placeholder="Mobile Number"
+        aria-label="mobilenumber"
+        aria-describedby="basic-icon-default-uname2"
+        name="user-mobileNumber"
+        [(ngModel)]="tenantobj.mobileNumber"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <div class="form-group">
+      <label style="margin-right:20px;" class="form-label" for="basic-icon-default-uname">Active</label>
+      <input
+        type="checkbox"
+        name="user-IsActive"
+        [(ngModel)]="tenantobj.isActive"
+        [class.error]="newTemplateForm.submitted && FUserNameRef.invalid"
+        #FUserNameRef="ngModel"
+        required
+      />
+      <span *ngIf="newTemplateForm.submitted && FUserNameRef.invalid" class="invalid-form">
+        <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+      </span>
+    </div>
+    <button type="submit" class="btn btn-primary mr-1" (click)="submit(newTemplateForm)" rippleEffect>Submit</button>
+    <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+  </div>
+</form>

@@ -1,0 +1,190 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <section class="users-list-wrapper">
+      <div class="card">
+        <div class="row">
+          <div class="col-md-6 col-12">
+            <div class="d-flex justify-content-between align-items-center m-1">
+              <label class="d-flex align-items-center"
+                >Show
+                <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                  <option value="100">100</option>
+                </select>
+                entries</label
+              >
+            </div>
+          </div>
+          <div
+            class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end"
+          >
+            <div
+              class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0"
+            >
+              <label class="d-flex align-items-center ml-1 ml-md-0"
+                >Search:<input
+                  [(ngModel)]="searchValue"
+                  name="searchValue"
+                  type="search"
+                  class="form-control ml-25"
+              /></label>
+
+              <button class="btn btn-primary ml-1" (click)="openAddJobModal()">
+                <i
+                  data-feather="plus"
+                  class="d-sm-none d-inline-block mr-0 mr-sm-1"
+                ></i>
+                <span class="d-none d-sm-inline-block">Add Job</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content-wrapper container-xxl p-0">
+        <div class="content-body">
+          <section class="industries-list-wrapper">
+            <div class="card">
+              <!-- Similar structure as user list, adjust as needed -->
+              <ngx-datatable
+                [rows]="rows"
+                [rowHeight]="50"
+                class="bootstrap core-bootstrap"
+                [limit]="selectedOption"
+                [columnMode]="ColumnMode.force"
+                [headerHeight]="50"
+                [footerHeight]="50"
+                [scrollbarH]="true"
+              >
+                <ngx-datatable-column name="Job Title" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Job Title"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+             
+                <ngx-datatable-column name="Image" [width]="100">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <img [src]="row.Image" alt="Image" width="50" height="50" />
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Priority" [width]="100">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.Priority }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Status" [width]="100">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.Status }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Video" [width]="100">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    <a [href]="row.Video" target="_blank">View Video</a>
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Vendor Info" [width]="200">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Vendor Info"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Reward (PKR)" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Reward (PKR)"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Starting Reward" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Starting Reward"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Completion Proofs" [width]="250">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Completion Proofs"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Stallion Comments" [width]="200">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Stallion Comments"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Assignee" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row.Assignee }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Target Audience Level"
+                  [width]="200"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Target Audience Level"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Number of Stallions Required"
+                  [width]="200"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Number of Stallions Required"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Task Category" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Task Category"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Target Stallion Skills"
+                  [width]="250"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Target Stallion Skills"].join(", ") }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Estimated Duration" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Estimated Duration"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Marketing Related" [width]="150">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Marketing Related"] ? "Yes" : "No" }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="Target Audience" [width]="300">
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{
+                      "Age: " +
+                        row["Target Audience"].Age +
+                        ", Gender: " +
+                        row["Target Audience"].Gender +
+                        ", Area: " +
+                        row["Target Audience"].Area
+                    }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Social Media Channels"
+                  [width]="250"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Social Media Channels"].join(", ") }}
+                  </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column
+                  name="Expected Output Result"
+                  [width]="250"
+                >
+                  <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{ row["Expected Output Result"] }}
+                  </ng-template>
+                </ngx-datatable-column>
+              </ngx-datatable>
+            </div>
+          </section>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

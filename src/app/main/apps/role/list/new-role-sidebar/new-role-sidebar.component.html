@@ -1,0 +1,50 @@
+
+<form class="add-new-user modal-content pt-0" (ngSubmit)="(newRoleForm.form.valid)" #newRoleForm="ngForm">    
+    <div class="modal-body flex-grow-1">
+       <div class="form-group">
+         <label class="form-label" for="basic-icon-default-fullname">Role Name <span style="color:red;">*</span></label>
+         <input
+           type="text"
+           class="form-control dt-full-name"
+           id="basic-icon-default-fullname"
+           placeholder="Admin"
+           name="role-name"
+           [(ngModel)]="role.name"
+           [class.error]="newRoleForm.submitted && FNameRef.invalid"
+           #FNameRef="ngModel"
+           required
+           aria-label="user name"
+           aria-describedby="basic-icon-default-fullname2"
+         />
+         <span *ngIf="newRoleForm.submitted && FNameRef.invalid" class="invalid-form">
+           <small class="form-text text-danger" *ngIf="FNameRef.errors.required">This field is required!</small>
+         </span>
+       </div>
+
+       <h3>Permissions</h3>
+       <hr>
+       <div *ngFor="let moduleName of groupedPermissionKeys()">
+       
+        <div class="row">
+          <div class="col-sm-2">
+            <h5>{{ moduleName }}</h5>
+          </div>
+          
+          <div class="col-sm-1 mb-2" *ngFor="let permission of groupedPermissions[moduleName]" >
+            <div class="form-check form-check-inline">
+              <input type="checkbox" class="custom-checkbox"  id="chk_{{permission}}" [checked]="isChecked(permission)" value="{{permission}}" name="chk_{{permission}}" (change)="onCheckboxChange(permission)"  />
+              &nbsp;<label class="form-label"  for="chk_{{permission}}">{{permission.split('.')[2]}}</label>&nbsp;
+              <label class="form-label" *ngIf="!permission.split('.')[2]"  for="chk_{{permission}}">View</label>
+            </div>
+           </div>  
+        </div>
+        <hr class="m-0">      
+      </div>
+       
+      
+            
+       <button type="submit" class="btn btn-primary mr-1" (click)="submit(newRoleForm)" rippleEffect>Submit</button>
+       <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+     </div>
+   </form>
+

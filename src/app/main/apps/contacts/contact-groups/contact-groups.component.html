@@ -1,0 +1,147 @@
+<div *ngIf="LoadingData; else content">
+  <app-loader></app-loader>
+</div>
+<ng-template #content>
+  <div class="content-wrapper" *ngIf="userHasPermission('Pages.Contacts.Group')" >
+    <div class="container-xxl flex-grow-1 container-p-y">
+      <h3>Contact Groups</h3>
+      <div class="row g-4">
+        <div *ngFor="let role of tempData" class="col-xl-4 col-lg-6 col-md-6">
+          <div class="card">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-end mt-1">
+                <div class="role-heading">
+                  <h4 class="mb-1">{{ role.name }}</h4>
+                  <button *ngIf="!userHasPermission('Pages.Contacts.Group.Edit')" type="button" class="btn btn-outline-primary" (click)="modalOpenPrimary(editmodalForm, role)" rippleEffect>
+                    Edit role
+                  </button>
+                </div>
+                <a href="javascript:void(0);" class="text-muted">
+                  <i class="ti ti-copy ti-md"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-xl-4 col-lg-6 col-md-6">
+          <div class="card">
+            <div class="row h-100">
+              <div class="col-xl-12 col-lg-12 col-md-12">
+                <div class="card-body text-sm-end text-center ps-sm-0">
+                  <div class="row" style="margin-top: 4rem; margin-bottom: 3%">
+                    <div class="col-lg-6 col-md-6">
+                      <button *ngIf="!userHasPermission('Pages.Contacts.Group.Create')" (click)="modalAddRole(modalForm)" class="btn btn-primary mb-2 text-nowrap add-new-role">
+                        <i data-feather="plus-square"></i>Add Group
+                      </button>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                      <button *ngIf="!userHasPermission('Pages.Contacts.Group.View')" (click)="modalRoleList(modelforrolelist)" class="btn btn-primary mb-2 text-nowrap add-new-role pull-right">
+                        <i data-feather="eye"></i>
+                        View All
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <ng-template #modalForm let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel160">{{ RoleAddEdit }}</h5>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+          <app-add-group (sendDataToParent)="onDataReceived($event)"></app-add-group>
+        </div>
+      </ng-template>
+
+      <ng-template #editmodalForm let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel160">
+            {{ RoleAddEdit }} {{ role.name }}
+          </h5>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+          <app-add-group [Role]="role" (sendDataToParent)="onDataReceived($event)"></app-add-group>
+        </div>
+      </ng-template>
+
+      <ng-template #modelforrolelist let-modal>
+        <div class="modal-header">
+          <h5 class="modal-title" id="myModalLabel160">Roles List</h5>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body" tabindex="0" ngbAutofocus>
+          <div class="row" id="table-bordered">
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body">
+                  <div class="table-responsive">
+                    <table class="table table-bordered">
+                      <thead>
+                        <tr>
+                          <th>Sr#</th>
+                          <th>Role</th>
+                          <th>Actions</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let role of tempData; let i = index">
+                          <td>
+                            {{ i + 1 }}
+                          </td>
+                          <td>{{ role.name }}</td>
+                          <td class="overflow-hidden">
+                            <div ngbDropdown container="body">
+                              <button type="button" class="btn btn-sm hide-arrow" ngbDropdownToggle data-toggle="dropdown">
+                                <i data-feather="more-vertical"></i>
+                              </button>
+                              <div ngbDropdownMenu>
+                                <a ngbDropdownItem (click)="modalOpenPrimary(editmodalForm, role)">
+                                  <i data-feather="edit-2" class="mr-50"></i>
+                                  <span>Edit</span>
+                                </a>
+                                <a ngbDropdownItem (click)="DeleteRole(role)">
+                                  <i data-feather="trash" class="mr-50"></i>
+                                  <span>Delete</span>
+                                </a>
+                              </div>
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+    <div class="content-backdrop fade"></div>
+  </div>
+
+  <div class="misc-wrapper" *ngIf="!userHasPermission('Pages.Contacts.Group')">
+  <div class="misc-inner p-2 p-sm-3">
+    <div class="w-100 text-center">
+      <h2 class="mb-1">You are not authorized to Access this Page! 🔐</h2>
+      <p>You do not have permission to access this page or resource.</p>
+      <p>Please contact your administrator if you believe this is an error.</p>
+    </div>
+  </div>
+</div>
+</ng-template>

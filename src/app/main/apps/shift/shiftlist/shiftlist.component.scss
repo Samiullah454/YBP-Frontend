@@ -1,0 +1,32 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+//@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+.icon-buttons {
+  display: flex;
+}
+
+.icon-button {
+  display: inline-block;
+  padding: 5px;
+  text-decoration: none;
+  color: #333;
+ /* Default icon color */
+}
+
+/* Edit icon style */
+.edit-icon-span {
+  color: green; /* Change to green */
+}
+
+/* Delete icon style */
+.delete-icon-span {
+  color: red; /* Change to red */
+}
+
+.icon-button:hover {
+  background-color: #f0f0f0; /* Change the hover background color as needed */
+}
+
+.icon-button span {
+  margin-right: 5px; /* Adjust spacing between icon and other elements */
+}

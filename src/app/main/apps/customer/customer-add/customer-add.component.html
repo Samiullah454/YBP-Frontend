@@ -1,0 +1,418 @@
+<div class="content-wrapper container-xxl p-0">
+
+    <div class="content-body">
+      <section class="vertical-wizard">
+        <div id="stepper2" class="bs-stepper vertical vertical-wizard-example" style="border-radius: 1rem;">
+  
+          <div class="col-sm-12 col-lg-3" style="background-color: white;">
+  
+            <div id="parentDiv" class="bs-stepper-header hidonMobileonly" style="    padding-top: 0.23rem;">
+              <!-- <app-verticalprogressbar [progress]="50"></app-verticalprogressbar> -->
+              <div id="s-information" class="step" (click)="NavigateToinformation()" data-target="#account-information">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-box" *ngIf="BasicInfoFilled" style="background-color:#28C76F ;"><img
+                      src="assets/img/check.svg" /></span>
+                  <span class="bs-stepper-box" *ngIf="!BasicInfoFilled"
+                    style="border: 1px solid orange;background-color: white;"><img
+                      src="assets/img/alert-triangle.svg" /></span>
+                  <span class="bs-stepper-label">
+                    <span class="bs-stepper-title">Contact Information</span>
+                    <span class="bs-stepper-subtitle">Contact Details</span>
+                  </span>
+                </button>
+  
+              </div>
+              <div class="vertical-hr">
+                <hr>
+              </div>
+              <div id="s-billing" class="step" (click)="NavigateToBilling()" data-target="#account-billing">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-box" *ngIf="BillingInfoFilled" style="background-color:#28C76F ;"><img
+                      src="assets/img/check.svg" /></span>
+                  <span class="bs-stepper-box" *ngIf="!BillingInfoFilled"
+                    style="border: 1px solid orange;background-color: white;"><img
+                      src="assets/img/alert-triangle.svg" /></span>
+                  <span class="bs-stepper-label">
+                    <span class="bs-stepper-title"> Marketing Information </span>
+                    <span class="bs-stepper-subtitle">Add Marketing Info</span>
+                  </span>
+                </button>
+                <!-- <span class="pull-right hidonMobile" style="margin-top:10%;">20%</span> -->
+              </div>
+              <div class="vertical-hr">
+                <hr>
+              </div>
+              <div id="s-contacts" class="step" (click)="NavigateToContact()" data-target="#account-contacts">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-box" *ngIf="ContactsInfoFilled" style="background-color:#28C76F ;"><img
+                      src="assets/img/check.svg" /></span>
+                  <span class="bs-stepper-box" *ngIf="!ContactsInfoFilled"
+                    style="border: 1px solid orange;background-color: white;"><img
+                      src="assets/img/alert-triangle.svg" /></span>
+                  <span class="bs-stepper-label">
+                    <span class="bs-stepper-title">Site Info</span>
+                    <span class="bs-stepper-subtitle">Site Info</span>
+                  </span>
+                </button>
+                <!-- <span class="pull-right hidonMobile" style="margin-top:10%;">20%</span> -->
+              </div>
+              <div class="vertical-hr">
+                <hr>
+              </div>
+  
+              <div id="s-rates" class="step" (click)="NavigateTorates()" data-target="#account-rates">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-box" *ngIf="RatesInfoFilled" style="background-color:#28C76F ;"><img
+                      src="assets/img/check.svg" /></span>
+                  <span class="bs-stepper-box" *ngIf="!RatesInfoFilled"
+                    style="border: 1px solid orange;background-color: white;"><img
+                      src="assets/img/alert-triangle.svg" /></span>
+                  <span class="bs-stepper-label">
+                    <span class="bs-stepper-title">Shift</span>
+                    <span class="bs-stepper-subtitle">Select Shift</span>
+                  </span>
+                </button>
+                <!-- <span class="pull-right hidonMobile"  style="margin-top:10%;">40%</span> -->
+              </div>
+              <div id="s-portals" class="step" (click)="NavigateToportals()" data-target="#account-portals">
+                <button type="button" class="step-trigger">
+                  <span class="bs-stepper-box" *ngIf="PortalInfoFilled" style="background-color:#28C76F ;"><img
+                      src="assets/img/check.svg" /></span>
+                  <span class="bs-stepper-box" *ngIf="!PortalInfoFilled"
+                    style="border: 1px solid orange;background-color: white;"><img
+                      src="assets/img/alert-triangle.svg" /></span>
+                  <span class="bs-stepper-label">
+                    <span class="bs-stepper-title">Crew group</span>
+                    <span class="bs-stepper-subtitle">Add To Crew group</span>
+                  </span>
+                </button>
+                <!-- <span class="pull-right hidonMobile" c style="margin-top:10%;">60%</span> -->
+              </div>
+            </div>
+          </div>
+          <div id="progress_bar" class="row hidonMobile">
+  
+            <div class="progress  bg-success" [style.height.rem]="progressBarHeight">
+              <div class="progress-bar progress-bar-vertical" role="progressbar" style="height: 500px; width: 20px;">25%
+              </div>
+              <!-- <app-verticalprogressbar [progress]="50"></app-verticalprogressbar> -->
+            </div>
+  
+          </div>
+          <div class="col-sm-12 col-lg-9">
+            <div class="bs-stepper-content scrollable-div responsive-div" style="background-color: white;">
+              <form [formGroup]="customerForm" (ngSubmit)="onSubmit()">
+                <div #information id="account-information" tabindex="0" (mouseover)="checkFocusOnDiv('#s-information')"
+                  class="content">
+                  <core-card [actions]="['collapse']">
+                    <span class="card-title">
+                      Contact Info
+                    </span>
+                    <span class="log">
+                      <span class="pull-right" *ngIf="!selectedLogo && !f.photo_url.value" (click)="OpenLogoUploader()"><a
+                          style="color: rgb(43, 128, 226);" class="logo">Upload Logo</a></span>
+                      <div style="position: relative;float:right;">
+                        <img *ngIf="selectedLogo && f.photo_url.value" class="clickable-image" [src]="selectedLogo"
+                          alt="Selected Image" width="60" height="50" style="border-radius: 50%;"
+                          (click)="OpenLogoUploader()" />
+                        <img *ngIf="f.photo_url.value && !selectedLogo" class="clickable-image" [src]="f.photo_url.value"
+                          alt="Selected Image" width="60" height="50" style="border-radius: 50%;"
+                          (click)="OpenLogoUploader()" />
+                        <span class="fa fa-pencil" *ngIf="selectedLogo || f.photo_url.value"
+                          style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);"></span>
+                      </div>
+                    </span>
+                    <div class="card-body">
+                      <div class="row">
+  
+                        <div class="form-group col-md-12">
+  
+                          <input (change)="onLogoSelected($event)" type="file" accept="image/*" style="display:none;"
+                            class="custom-file-input" type="file" id="file-upload-logo" #logouploader />
+  
+                          <!-- <img *ngIf="!selectedLogo && !f.photo_url.value" class="clickable-image"   src="assets/images/logo/uploader.jpg" alt="Selected Image" (click)="OpenLogoUploader()" width="80px" height="80px" style="border-radius:50%;" /> -->
+  
+                        </div>
+                      </div>
+  
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label class="form-label" for="vertical-username"> Name&nbsp;*<span><label
+                                style="font-weight: lighter;" *ngIf="submitted && f.contactName.errors"
+                                style="color:red;">&nbsp;Required</label></span></label>
+                          <input type="text" id="name" name="name" class="form-control" formControlName="contactName"
+                            [ngClass]="{ 'is-invalid': submitted && f.contactName.errors }"
+                            placeholder="Customer Name" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label" for="vertical-username">Email&nbsp;*<span><label
+                                  style="font-weight: lighter;" *ngIf="submitted && f.email.errors"
+                                  style="color:red;">&nbsp;Required</label></span></label>
+                            <input type="text" id="email" name="email" class="form-control" formControlName="email"
+                              [ngClass]="{ 'is-invalid': submitted && f.email.errors }" placeholder="Email" />
+                          </div>
+            
+  
+                      </div>
+                      <div class="row">
+                        <div class="form-group col-md-6">
+                          <label class="form-label" for="vertical-username">Contact Number&nbsp;*
+                            <span>
+                              <label style="font-weight: lighter;" *ngIf="submitted && f.contactNumber.errors" style="color:red;">
+                                &nbsp;Required
+                              </label>
+                            </span>
+                          </label>
+                          <input type="text" id="phone" class="form-control" formControlName="contactNumber"
+                            [ngClass]="{ 'is-invalid': submitted && f.contactNumber.errors }" placeholder="(XXX) XXX-XXXX"
+                            (input)="onInput($event)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                          <label class="form-label">Is it a Cell Phone?</label>
+                          <div>
+                            <label><input type="radio" formControlName="isCn_CellPhone" [value]="true"> Yes</label>
+                          </div>
+                          <div>
+                            <label><input type="radio" formControlName="isCn_CellPhone" [value]="false"> No</label>
+                          </div>
+                          <div *ngIf="submitted && f.isCn_CellPhone.errors" style="color: red;">Please select an option</div>
+                        </div>
+                      </div>
+                      
+                        <div class="row">
+                        <div class="form-group col-md-6">
+                          <label class="form-label" for="vertical-username"> Alternate Contact Number</label>
+                          <input type="text" id="secondary_phone" class="form-control" formControlName="altCn_Number"
+                            placeholder="(XXX) XXX-XXXX" (input)="onInput($event)" />
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="form-label">Is it a Cell Phone?</label>
+                            <div>
+                              <label><input type="radio" formControlName="isAltCn_CellPhone" [value]="true"> Yes</label>
+                            </div>
+                            <div>
+                              <label><input type="radio" formControlName="isAltCn_CellPhone" [value]="false"> No</label>
+                            </div>
+                            <div *ngIf="submitted && f.isCn_CellPhone.errors" style="color: red;">Please select an option</div>
+                          </div>
+  
+                      </div>
+
+
+  
+                    </div>
+                  </core-card>
+                </div>
+                <div class="vertical-hr">
+                    <hr>
+                  </div>
+                  <div #billing id="account-billing" class="content" tabindex="0"
+                  (mouseover)="checkFocusOnDiv('#s-billing')">
+  
+                  <core-card [actions]="['collapse']">
+                    <span class="card-title">
+                  Marketing Information
+                    </span>
+                    <div class="card-body">
+                      <div class="col-md-12">
+                        <div class="row">
+                          <div class="form-group col-md-6">
+                            <label class="form-label" for="vertical-language"> How have you heard about us?&nbsp;*<span><label
+                                  style="font-weight: lighter;" *ngIf="submitted && f.howHeardAboutUs.errors"
+                                  style="color:red;">&nbsp;Required</label></span></label>
+                            <ng-select 
+                            [items]="emptype"
+                             [multiple]="false"
+                              [closeOnSelect]="true"
+                               [searchable]="true"
+                              bindLabel="name"
+                               bindValue="name"
+                                name="howHeardAboutUs"
+                                 id="howHeardAboutUs"
+                              placeholder="Select "
+                               formControlName="howHeardAboutUs"
+                              [ngClass]="{ 'is-invalid': submitted && f.howHeardAboutUs.errors }">
+                              <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                <span class="ng-value-label"> {{ item.name }}</span>
+                                <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                              </ng-template>
+                            </ng-select>
+                          </div>
+                          <div class="form-group col-md-6">
+                            <label class="form-label">Marketing Option</label>
+                            <div>
+                              <label><input type="radio" formControlName="marketingOptIn" [value]="true"> Yes</label>
+                            </div>
+                            <div>
+                              <label><input type="radio" formControlName="marketingOptIn" [value]="false"> No</label>
+                            </div>
+                            <div *ngIf="submitted && f.isCn_CellPhone.errors" style="color: red;">Please select an option</div>
+                          </div>
+                        </div>
+
+  
+  
+  
+                      </div>
+  
+  
+                    </div>
+                  </core-card>
+  
+  
+                </div>
+                <div class="vertical-hr">
+                    <hr>
+                  </div>
+                <div #contacts id="account-contacts" class="content" tabindex="0"
+                (mouseover)="checkFocusOnDiv('#s-contacts')">
+                <core-card [actions]="['collapse']">
+                  <span class="card-title">Sites</span>
+                  <div class="card-body">
+                    <div formArrayName="sites">
+                        <span class="card-title">Site Info</span>
+
+                        <div *ngFor="let site of sitesFormArray.controls; let i = index" [formGroupName]="i">
+                           <div class="row">
+               
+
+
+                      <div class="form-group col-md-6">
+                        <label class="form-label" for="SiteType">Site Type &nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && sitesFormArray.at(i).get('siteType').errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <ng-select 
+                        [items]=" SiteTypeList"
+                         [multiple]="false"
+                          [closeOnSelect]="true"
+                          [searchable]="true" 
+                          bindLabel="name"
+                           bindValue="id" 
+                           name="SiteType" 
+                           id=" SiteType"
+                          placeholder="Select Site Type" formControlName="siteType"
+                          [ngClass]="{ 'is-invalid': submitted && sitesFormArray.at(i).get('siteType').errors }">
+                          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label"> {{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                      <div class="form-group col-md-6">
+                        <label class="form-label" for="Stories">Stories&nbsp;*<span><label
+                              style="font-weight: lighter;" *ngIf="submitted && sitesFormArray.at(i).get('stories').errors"
+                              style="color:red;">&nbsp;Required</label></span></label>
+                        <ng-select 
+                        [items]=" storiesList"
+                         [multiple]="false"
+                          [closeOnSelect]="true"
+                          [searchable]="true" 
+                          bindLabel="name"
+                           bindValue="id" 
+                           name="stories" 
+                           id=" stories"
+                          placeholder="Select Site Type" formControlName="stories"
+                          [ngClass]="{ 'is-invalid': submitted &&sitesFormArray.at(i).get('stories').errors }">
+                          <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                            <span class="ng-value-label"> {{ item.name }}</span>
+                            <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="address">Address </label>
+                                    <input type="text" id="address" formControlName="address" class="form-control"
+                                      placeholder="Driver License Number" />
+                                  </div>
+                                  <div class="form-group col-md-6">
+                                    <label class="form-label" for="gateCode">Gate Code</label>
+                                    <input type="text" id="gateCode" class="form-control" formControlName="gateCode"
+                                      placeholder="Social Security Number" />
+                                  </div>
+                            </div>
+                            <span class="card-title">Site Contact</span>
+                            <div class="custom-control custom-checkbox">
+                                <input type="checkbox" class="custom-control-input" id="defaultCustomerCheckbox" formControlName="isDefaultCustomer">
+                                <label class="custom-control-label" for="defaultCustomerCheckbox">Same As Customer Conatct</label>
+                            </div>
+                            <div class="row">
+                        
+                                <div class="form-group col-md-6">
+                                  <label class="form-label" for="vertical-username"> Name&nbsp;*<span><label
+                                        style="font-weight: lighter;" *ngIf="submitted && sitesFormArray.at(i).get('name').errors"
+                                        style="color:red;">&nbsp;Required</label></span></label>
+                                  <input type="text" id="name" name="name" class="form-control" formControlName="name"
+                                    [ngClass]="{ 'is-invalid': submitted && sitesFormArray.at(i).get('name').errors}"
+                                    placeholder="Contact Name" />
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="form-label" for="vertical-username">Email&nbsp;*<span><label
+                                          style="font-weight: lighter;" *ngIf="submitted && sitesFormArray.at(i).get('emailAddress').errors"
+                                          style="color:red;">&nbsp;Required</label></span></label>
+                                    <input type="text" id="email" name="email" class="form-control" formControlName="emailAddress"
+                                      [ngClass]="{ 'is-invalid': submitted && sitesFormArray.at(i).get('emailAddress').errors }" placeholder="Email Address" />
+                                  </div>
+                          </div>
+                          <div class="row">
+                            <div class="form-group col-md-6">
+                              <label class="form-label" for="vertical-username">Contact Number&nbsp;*
+                                <span>
+                                  <label style="font-weight: lighter;" *ngIf="submitted && sitesFormArray.at(i).get('phoneNumber').errors" style="color:red;">
+                                    &nbsp;Required
+                                  </label>
+                                </span>
+                              </label>
+                              <input type="text" id="phone" class="form-control" formControlName="phoneNumber"
+                                [ngClass]="{ 'is-invalid': submitted && sitesFormArray.at(i).get('phoneNumber').errors }" placeholder="(XXX) XXX-XXXX"
+                                (input)="onInput($event)" />
+                            </div>
+                            <div class="form-group col-md-6">
+                              <label class="form-label">Is it a Cell Phone?</label>
+                              <div>
+                                <label><input type="radio" formControlName="isCellPhone" [value]="true"> Yes</label>
+                              </div>
+                              <div>
+                                <label><input type="radio" formControlName="isCellPhone" [value]="false"> No</label>
+                              </div>
+                              <div *ngIf="submitted && sitesFormArray.at(i).get('isCellPhone').errors" style="color: red;">Please select an option</div>
+                            </div>
+                          </div>
+                        </div>
+                    </div>
+                    <!-- <button type="button" class="btn btn-primary mt-3" (click)="addSiteInfo()">Add Site Info</button> -->
+
+                  </div>
+                </core-card>
+
+              </div>
+                <div style="margin-left: 20px;margin-bottom: 20px;">
+                  <button [disabled]="savingData" class="btn btn-primary" rippleEffect type="submit"
+                    style="margin-right:10px;"><i data-feather="check"></i><span style="margin-left:5px;"> <span
+                        *ngIf="savingData" class="spinner-border spinner-border-sm mr-1"></span>Save</span></button>
+                  <a class="btn btn-outline-primary" (click)="BacktoList()" rippleEffect>Discard</a>
+                </div>
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </section>
+  
+    </div>
+  </div>
+  
+  <ng-template #LeavePageModel let-modal>
+    <div class="modal-header">
+      <h5 class="modal-title" id="myModalLabel160">Discard Changes</h5>
+      <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body" tabindex="0" ngbAutofocus>
+      <p>Are you sure you want to discard changes to Add Account?</p>
+      <button class="btn btn-primary">Save changes</button> <button class="btn btn-outline-primary"
+        style="margin-left: 15px;">Discard</button>
+    </div>
+  </ng-template>

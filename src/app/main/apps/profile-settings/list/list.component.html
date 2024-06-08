@@ -1,0 +1,836 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+      <section id="page-account-settings">
+          <div class="row nav-vertical d-flex">
+              <div class="col-md-2 mb-2 mb-md-0">
+                  <ul ngbNav #navVertical="ngbNav" class="nav nav-pills flex-column nav-left">
+                      <li class="nav-item" ngbNavItem>
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-general" data-toggle="pill" href="#account-vertical-general" aria-expanded="true">
+                              <i data-feather="user" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">General</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <!-- <div class="media">
+                                          <a href="javascript:void(0);" class="mr-25">
+                                          <img [src]="avatarImage" class="rounded mr-50" alt="profile image" height="76" width="80" />
+                                          </a>
+                                          <div class="media-body mt-75 ml-1">
+                                          <button (click)="file.click()" for="account-upload" class="btn btn-sm btn-primary mb-75 mr-75" rippleEffect>
+                                              Upload
+                                          </button>
+                                          <input type="file" #file id="account-upload" hidden accept="image/*" (change)="uploadImage($event)"/>
+                                          <button class="btn btn-sm btn-outline-secondary mb-75" rippleEffect>Reset</button>
+                                          <p>Allowed JPG, GIF or PNG. Max size of 800kB</p>
+                                          </div>
+                                      </div> -->
+
+                                      <form class="validate-form mt-2" (ngSubmit)="(profileUpdateForm.form.valid)" #profileUpdateForm="ngForm">
+                                          <div class="row">
+                                              <div class="col-12 col-sm-6">
+                                                  <div class="form-group">
+                                                      <label for="account-name">First Name</label>
+                                                      <input [(ngModel)]="user.userName" type="text" class="form-control" id="account-firstname" name="firstname" />
+                                                  </div>
+                                              </div>
+                                              <div class="col-12 col-sm-6">
+                                                  <div class="form-group">
+                                                      <label for="account-username">Last Name</label>
+                                                      <input [(ngModel)]="user.surname" type="text" class="form-control" id="account-lastname" name="lastname" />
+                                                  </div>
+                                              </div>
+                                              <div class="col-12 col-sm-6">
+                                                  <div class="form-group">
+                                                      <label for="account-name">Username</label>
+                                                      <input [(ngModel)]="user.name" type="text" class="form-control" id="account-username" name="username" />
+                                                  </div>
+                                              </div>
+                                              <div class="col-12 col-sm-6">
+                                                  <div class="form-group">
+                                                      <label for="account-e-mail">E-mail</label>
+                                                      <input [(ngModel)]="user.emailAddress" type="email" class="form-control" id="account-e-mail" name="email" />
+                                                  </div>
+                                              </div>
+                                              <div class="col-12">
+                                                  <button (click)="updateUser(profileUpdateForm)" type="submit" class="btn btn-primary mt-2 mr-1" rippleEffect>Save changes</button>
+                                                  <!-- <button type="reset" class="btn btn-outline-secondary mt-2" rippleEffect>Cancel</button> -->
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </ng-template>
+                      </li>
+                      <li class="nav-item" ngbNavItem>
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-password" data-toggle="pill" href="#account-vertical-password" aria-expanded="false">
+                              <i data-feather="lock" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">Change Password</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <!-- form -->
+                                      <form class="validate-form" (ngSubmit)="(passwordUpdateForm.form.valid)" #passwordUpdateForm="ngForm">
+                                          <div class="row">
+                                              <div class="col-12">
+                                                  <div class="form-group">
+                                                      <label for="account-old-password">Old Password</label>
+                                                      <div class="input-group form-password-toggle input-group-merge">
+                                                          <input [type]="passwordTextTypeOld ? 'text' : 'password'"
+                                                                 class="form-control"
+                                                                 [(ngModel)]="password.currentPassword"
+                                                                 id="account-old-password"
+                                                                 name="password"
+                                                                 placeholder="Old Password" />
+                                                          <div class="input-group-append">
+                                                              <span class="input-group-text cursor-pointer">
+                                                                  <i class="feather font-small-4"
+                                                                     [ngClass]="{'icon-eye-off': passwordTextTypeOld, 'icon-eye': !passwordTextTypeOld}"
+                                                                     (click)="togglePasswordTextTypeOld()"></i>
+                                                              </span>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col-12">
+                                                  <div class="form-group">
+                                                      <label for="account-new-password">New Password</label>
+                                                      <div class="input-group form-password-toggle input-group-merge">
+                                                          <input [type]="passwordTextTypeNew ? 'text' : 'password'"
+                                                                 id="account-new-password"
+                                                                 name="new-password"
+                                                                 [(ngModel)]="password.newPassword"
+                                                                 class="form-control"
+                                                                 placeholder="New Password" />
+                                                          <div class="input-group-append">
+                                                              <span class="input-group-text cursor-pointer">
+                                                                  <i class="feather font-small-4"
+                                                                     [ngClass]="{'icon-eye-off': passwordTextTypeNew, 'icon-eye': !passwordTextTypeNew}"
+                                                                     (click)="togglePasswordTextTypeNew()"></i>
+                                                              </span>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                              <!-- <div class="col-12 col-sm-6">
+                                                <div class="form-group">
+                                                  <label for="account-retype-new-password">Retype New Password</label>
+                                                  <div class="input-group form-password-toggle input-group-merge">
+                                                    <input
+                                                      [type]="passwordTextTypeRetype ? 'text' : 'password'"
+                                                      class="form-control"
+                                                      id="account-retype-new-password"
+                                                      name="confirm-new-password"
+                                                      placeholder="New Password"
+                                                    />
+                                                    <div class="input-group-append">
+                                                      <span class="input-group-text cursor-pointer"
+                                                        ><i class="feather font-small-4"
+                                                          [ngClass]="{
+                                                            'icon-eye-off': passwordTextTypeRetype,
+                                                            'icon-eye': !passwordTextTypeRetype
+                                                          }"
+                                                          (click)="togglePasswordTextTypeRetype()"
+                                                        ></i
+                                                      ></span>
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </div> -->
+                                              <div class="col-12">
+                                                  <button (click)="updatePassword(passwordUpdateForm)" type="submit" class="btn btn-primary mr-1 mt-1" rippleEffect>Save changes</button>
+                                                  <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </ng-template>
+                      </li>
+
+                      <li class="nav-item" ngbNavItem *ngIf="isTenant">
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-phoneNumber" data-toggle="pill" href="#account-vertical-phoneNumber" aria-expanded="false">
+                              <i data-feather="phone" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">Phone Number</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <form class="validate-form">
+                                          <div class="row">
+                                              <div class="col-12 ">
+                                                  <div class="form-group">
+                                                      <label for="account-phone">Phone</label>
+                                                      <input type="text" class="form-control" id="account-phone" placeholder="Phone number" name="phone" />
+                                                  </div>
+                                              </div>
+                                              <div class="col-12">
+                                                  <button type="submit" class="btn btn-primary mt-1 mr-1" rippleEffect>Save changes</button>
+                                                  <!-- <button type="reset" class="btn btn-outline-secondary mt-1" rippleEffect>Cancel</button> -->
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </ng-template>
+                      </li>
+                      <li class="nav-item" ngbNavItem *ngIf="isTenant">
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-subscriptions" data-toggle="pill" href="#account-vertical-subscriptions" aria-expanded="false">
+                              <i data-feather="shopping-bag" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">Subscriptions</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <form class="validate-form">
+                                          <div class="content-buttons col-md-12">
+                                              <div class="content2">
+                                                  <!-- <div class="heading">
+                                                      <div class="choose-the-purpose">Upgrade Your Package</div>
+                                                  </div> -->
+                                                  <!-- pricing plan cards -->
+                                                  <div class="row pricing-card">
+                                                      <div class="col-12 col-sm-12 col-md-12 col-lg-12 mx-auto">
+                                                          <div class="row">
+                                                              <div class="col-12 col-md-4" >
+                                                                  <div class="card basic-pricing popular text-center mb-0" style="border: 1px solid rgba(34, 41, 47, 0.125);">
+                                                                      <div class="card-body p-1" >
+                                                                          <h1 class="mb-1">{{row.packageName}}</h1>
+                                                                          <h6 class="mb-2">Business texting inbox accessible on all devices.</h6>
+                                                                          <div class="annual-plan mb-2">
+                                                                              <div class="plan-price">
+                                                                                  <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                                                                                  <span class="pricing-basic-value font-weight-bolder text-primary">{{row.packagePrice}}</span>
+                                                                                  <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/{{row.validity ? 'Month' : 'Year' }}</sub>
+                                                                              </div>
+                                                                          </div>
+                                                                          <h6 class="mb-0 font-weight-bolder">
+                                                                              {{row.teamMembers}} User Seat Included
+                                                                              <div>
+                                                                                  <small>Additional User will be Charged as ${{row.addTeamMemberPrice}}/Member/{{row.validity ? 'Month' : 'Year' }}</small>
+                                                                              </div>
+                                                                          </h6>
+                                                                          <h6 class="mt-1 font-weight-bolder">
+                                                                              {{row.smsCredits}} Free SMS Credits a Month
+                                                                              <div><small>Additional Credits will be Charged as ${{row.addCreditPrice}}/SMS</small></div>
+                                                                          </h6>
+                                                                          <hr>
+                                                                          <ul class="list-group list-group-circle text-left">
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  {{row.teamMembers}} Team Member
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  Personal Inbox: {{row.personalInbox ? 'Yes' : 'No'}}
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  {{row.teamInbox ? 'Basic' : 'Advanced' }} Team Inbox
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  {{row.contacts}} Contacts
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  Team Delegation For Contacts:
+                                                                                  <ng-container *ngIf="row.teamDelegationForContacts">
+                                                                                      <ng-container *ngIf="row.teamMembers === 1; else noMinUsers">
+                                                                                          Yes (2 User min)
+                                                                                      </ng-container>
+                                                                                      <ng-template #noMinUsers>
+                                                                                          Yes
+                                                                                      </ng-template>
+                                                                                  </ng-container>
+                                                                                  <ng-container *ngIf="!row.smsSenderDelegationToMember">
+                                                                                      No
+                                                                                  </ng-container>
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                {{row.smsSender}} SMS Sender (Mobile Number)
+                                                                                <ng-container *ngIf="row.addNumberPrice == 0; else addSenderPrice">
+                                                                                    
+                                                                                </ng-container>
+                                                                                <ng-template #addSenderPrice>
+                                                                                    <small>Additional Sender will be Charged as ${{row.addNumberPrice}}/Sender/{{row.validity ? 'Month' : 'Year' }}</small>
+                                                                                </ng-template>
+                                                                            </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  SMS Sender Delegation To Member: {{row.smsSenderDelegationToMember ? 'Yes' : 'No'}}
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  {{row.templates}} SMS Templates
+                                                                              </li>
+                                                                              <li class="list-group-item pb-sm-0">
+                                                                                  Broadcast to {{row.broadcasts}} Contacts
+                                                                              </li>
+                                                                          </ul>
+                                                                          <button class="btn btn-primary btn-block" (click)="openModal(packageForm)">Change Package</button>
+                                                                      </div>
+                                                                  </div>
+                                                              </div>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                      </form>
+                                  </div>
+                              </div>
+                          </ng-template>
+                      </li>
+                      <li class="nav-item" ngbNavItem *ngIf="isTenant">
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-teamManagement" data-toggle="pill" href="#account-vertical-teamManagement" aria-expanded="false">
+                              <i data-feather="users" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">Team Management</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <button class="btn btn-primary ml-1" (click)="modalAddUser(modalForm)" rippleEffect>
+                                          <i data-feather="plus" class="d-sm-none d-inline-block mr-0 mr-sm-1"></i><span class="d-none d-sm-inline-block">Invite New Teammate</span>
+                                      </button>
+                                  </div>
+                              </div>
+                          </ng-template>
+                          <ng-template #modalForm let-modal>
+                              <div class="modal-header">
+                                  <h5 class="modal-title" id="myModalLabel160">{{UserLabel}}</h5>
+                                  <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                              <div class="modal-body" tabindex="0" ngbAutofocus>
+                                  <form class="add-new-user modal-content pt-0" *ngIf="this.tenantUsers < this.packageUsers; else elseTemplate" (ngSubmit)="(newUserForm.form.valid)" #newUserForm="ngForm">
+                                      <div class="modal-body flex-grow-1">
+                                          <div class="form-group">
+                                              <label class="form-label" for="basic-icon-default-uname">Username <span style="color:red;">*</span></label>
+                                              <input type="text"
+                                                     id="basic-icon-default-uname"
+                                                     class="form-control dt-uname"
+                                                     aria-describedby="basic-icon-default-uname2"
+                                                     name="user-name"
+                                                     [(ngModel)]="invitedUserName"
+                                                     [class.error]="newUserForm.submitted && FUserNameRef.invalid"
+                                                     #FUserNameRef="ngModel"
+                                                     required />
+                                              <span *ngIf="newUserForm.submitted && FUserNameRef.invalid" class="invalid-form">
+                                                  <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">This field is required!</small>
+                                              </span>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="form-label" for="basic-icon-default-email">Email <span style="color:red;">*</span></label>
+                                              <input type="text"
+                                                     id="basic-icon-default-email"
+                                                     class="form-control dt-email"
+                                                     aria-describedby="basic-icon-default-email2"
+                                                     name="user-email"
+                                                     [(ngModel)]="invitedUserEmail"
+                                                     [class.error]="newUserForm.submitted && FEmailRef.invalid"
+                                                     #FEmailRef="ngModel"
+                                                     required />
+                                              <span *ngIf="newUserForm.submitted && FEmailRef.invalid" class="invalid-form">
+                                                  <small class="form-text text-danger" *ngIf="FEmailRef.errors.required">This field is required!</small>
+                                              </span>
+                                          </div>
+                                          <div class="form-group">
+                                              <label class="form-label" for="user-role">User Role <span class="text-danger">*</span></label>
+                                              <ng-select [items]="roles"
+                                                         [closeOnSelect]="false"
+                                                         [searchable]="true"
+                                                         bindLabel="name"
+                                                         name="selectLanguage"
+                                                         placeholder="Select Role"
+                                                         [(ngModel)]="selectMultiSelected">
+                                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                                      <span class="ng-value-label"> {{ item.displayName }}</span>
+                                                      <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                                  </ng-template>
+                                              </ng-select>
+                                          </div>
+                                          <button type="submit" class="btn btn-primary mr-1" (click)="submit(newUserForm)" rippleEffect>Submit</button>
+                                          <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+                                      </div>
+                                  </form>
+                                  <ng-template #elseTemplate>
+                                      <div class="d-flex justify-content-center align-items-center">
+                                          <div class="text-center">
+                                              <h4>You need to Upgrade your Package First, if you want to Invite Team Member.</h4>
+                                              <button type="submit" class="btn btn-primary mr-1" rippleEffect>Upgrade Package</button>
+                                              <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>Cancel</button>
+                                          </div>
+                                      </div>
+                                  </ng-template>
+                              </div>
+                          </ng-template>
+                      </li>
+                      <li class="nav-item" ngbNavItem>
+                          <a ngbNavLink class="nav-link d-flex py-75" id="account-pill-notifications" data-toggle="pill" href="#account-vertical-notifications" aria-expanded="false">
+                              <i data-feather="bell" class="font-medium-3 mr-1"></i>
+                              <span class="font-weight-bold">Notifications</span>
+                          </a>
+                          <ng-template ngbNavContent>
+                              <div class="card">
+                                  <div class="card-body">
+                                      <div class="row">
+                                          <div class="col-md-6 col-12">
+                                              <div class="d-flex justify-content-between align-items-center m-1">
+                                                  <label class="d-flex align-items-center">
+                                                      Show
+                                                      <select class="form-control mx-25" [(ngModel)]="selectedOption">
+                                                          <option value="10">10</option>
+                                                          <option value="25">25</option>
+                                                          <option value="50">50</option>
+                                                          <option value="100">100</option>
+                                                      </select>
+                                                      entries
+                                                  </label>
+                                              </div>
+                                          </div>
+                                          <div class="col-md-6 col-12 d-flex justify-content-start justify-content-md-end">
+                                              <div class="d-flex align-items-center justify-content-end pr-1 pb-1 pb-md-0">
+                                                  <label class="d-flex align-items-center ml-1 ml-md-0">
+                                                      Search:
+                                                      <input [(ngModel)]="searchValue" name="searchValue" type="search" class="form-control ml-25" (keyup)="filterUpdate($event)" (search)="filterUpdate($event)" />
+                                                  </label>
+                                              </div>
+                                          </div>
+                                      </div>
+                                      <ngx-datatable [rows]="notifcationrows"
+                                                     [rowHeight]="50"
+                                                     class="bootstrap core-bootstrap"
+                                                     [limit]="selectedOption"
+                                                     [columnMode]="ColumnMode.force"
+                                                     [headerHeight]="50"
+                                                     [footerHeight]="50"
+                                                     [scrollbarH]="true">
+                                          <ngx-datatable-column name="Heading" prop="title" [width]="200">
+                                              <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                                                  <div class="d-flex align-items-center">
+                                                      <div class="cell-line-height">
+                                                          <a routerLink="/apps/user/user-view/{{ row.id }}" class="font-medium-1 d-block"><span class="font-weight-bold">{{ title }}</span></a>
+                                                          <span class="text-muted font-small-2">{{ row.title }}</span>
+                                                      </div>
+                                                  </div>
+                                              </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column name="Detail" prop="detail"></ngx-datatable-column>
+                                          <ngx-datatable-column name="New" prop="isRead" [width]="50">
+                                              <ng-template let-status="value" ngx-datatable-cell-template>
+                                                  <div class="badge badge-pill"
+                                                       [ngClass]="{'badge-light-success': status == true, 'badge-light-secondary': status == false}">
+                                                      {{ status }}
+                                                  </div>
+                                              </ng-template>
+                                          </ngx-datatable-column>
+                                      </ngx-datatable>
+                                  </div>
+                              </div>
+                          </ng-template>
+                      </li>
+                  </ul>
+              </div>
+              <div [ngbNavOutlet]="navVertical" class="col-12 col-md-10"></div>
+          </div>
+      </section>
+  </div>
+</div>
+
+
+
+
+<ng-template #packageForm let-modal>
+    <div class="modal-header">
+        <h5 class="modal-title">Upgrade Your Package</h5>
+        <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="content-wrapper m-2">
+        <div class="content-body">
+            <form [formGroup]="packageForm">
+                <div class="col-md-12">
+                    <div class="row pricing-card">
+                        <div class="col-12 col-md-4" *ngFor="let row of packages">
+                            <div class="card basic-pricing popular text-center">
+                                <ng-container *ngIf="row.id == tenant.package">
+                                    <div class="plan-price">
+                                        <span class="pricing-basic-value font-weight-bolder text-primary">Current Package</span>
+                                    </div>
+                                </ng-container>
+                                <div class="card-body" [ngClass]="{ 'selected': row.isSelected }" (click)="selectCard(row)">
+                                    <h1 class="mb-1">{{row.packageName}}</h1>
+  
+                                    <h6 class="mb-2">Business texting inbox accessible on all devices.</h6>
+  
+                                    <div class="annual-plan mb-2">
+                                        <div class="plan-price">
+                                            <sup class="font-medium-1 font-weight-bold text-primary">$ </sup>
+                                            <span class="pricing-basic-value font-weight-bolder text-primary">{{row.packagePrice}}</span>
+                                            <sub class="pricing-duration text-body font-medium-1 font-weight-bold">/{{row.validity ? 'Month' : 'Year' }}</sub>
+                                        </div>
+                                    </div>
+  
+                                    <h6 class="mb-0 font-weight-bolder">
+                                        {{row.teamMembers}} User Seat Included
+                                        <div>
+                                            <small>
+                                                Additional User will be Charged as ${{row.addTeamMemberPrice}}/Member/{{row.validity ? 'Month' : 'Year' }}
+                                            </small>
+                                        </div>
+                                    </h6>
+  
+                                    <h6 class="mt-1 font-weight-bolder">
+                                        {{row.smsCredits}} Free SMS Credits a Month
+                                        <div>
+                                            <small>Additional Credits will be Charged as ${{row.addCreditPrice}}/SMS</small>
+                                        </div>
+                                    </h6>
+  
+                                    <hr>
+                                    <ul class="list-group list-group-circle text-left">
+                                        <li class="list-group-item pb-sm-0">
+                                            {{row.teamMembers}} Team Member
+                                        </li>
+  
+                                        <li class="list-group-item pb-sm-0">
+                                            Personal Inbox: {{row.personalInbox ? 'Yes' : 'No'}}
+                                        </li>
+  
+                                        <li class="list-group-item pb-sm-0">
+                                            {{row.teamInbox ? 'Basic' : 'Advanced' }} Team Inbox
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            {{row.contacts}} Contacts
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            Team Delegation For Contacts:
+                                            <ng-container *ngIf="row.teamDelegationForContacts">
+                                                <ng-container *ngIf="row.teamMembers == 1; else noMinUsers">
+                                                    Yes (2 User min)
+                                                </ng-container>
+                                                <ng-template #noMinUsers>
+                                                    Yes
+                                                </ng-template>
+                                            </ng-container>
+                                            <ng-container *ngIf="!row.teamDelegationForContacts">
+                                                No
+                                            </ng-container>
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            {{row.smsSender}} SMS Sender (Mobile Number)
+                                            <ng-container *ngIf="row.addNumberPrice == 0; else addSenderPrice">
+  
+                                            </ng-container>
+                                            <ng-template #addSenderPrice>
+                                                <small>Additional Sender will be Charged as ${{row.addNumberPrice}}/Sender/{{row.validity ? 'Month' : 'Year' }}</small>
+                                            </ng-template>
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            SMS Sender Delegation To Member: {{row.smsSenderDelegationToMember ? 'Yes' : 'No'}}
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            {{row.templates}} SMS Templates
+                                        </li>
+                                        <li class="list-group-item pb-sm-0">
+                                            Broadcast to {{row.broadcasts}} Contacts
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-center">
+                    <button (click)="openModal(PriceForm)"
+                            type="submit"
+                            class="btn btn-primary btn-next"
+                            rippleEffect
+                            [disabled]="!isPlanSelected">
+                        <span class="align-middle d-sm-inline-block d-none">Change Package</span>
+                        <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+                    </button>
+                </div>
+            </form>
+  
+        </div>
+    </div>
+  </ng-template>
+  
+  
+  <ng-template #PriceForm let-modal>
+      <div class="modal-header">
+          <h5 class="modal-title">Proceed with Payment</h5>
+          <button type="button" class="close" (click)="modal.dismiss('Cross click')" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      <div class="content2 m-2">
+          <div class="heading">
+              <div class="choose-the-purpose">Billing Information</div>
+              <div class="what-will-you-be-using-this-tool-for">
+                  Provide Billing Information?
+              </div>
+          </div>
+  
+          <div class="options">
+              <div class="mb-1" data-kt-buttons="true" data-kt-initialized="1">
+                  <div class="row">
+                      <div class="col-sm col-xs-6 billing">
+                          <input type="radio" class="btn-check" formControlName="OnPaymentMethode" value="mastercard" id="mastercard" style="display:none;">
+                          <label for="mastercard" class="btn labelcheck" style="border: 0.5px dashed;width:100%" onmouseover="this.style.background='darkslateblue';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#7f7f7f'">
+                              <span class="fw-bold fs-3"><img alt="Mastercard_Logo" height="24px" src="assets/images/logo/Mastercard_Logo.png"></span>
+                          </label>
+                      </div>
+                      <div class="col-sm col-xs-6 billing">
+                          <input type="radio" class="btn-check" formControlName="OnPaymentMethode" value="visa" id="visa" style="display:none;">
+                          <label for="visa" class="btn labelcheck" style="border: 0.5px dashed;width:100%" onmouseover="this.style.background='darkslateblue';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#7f7f7f'">
+                              <span class="fw-bold fs-3">
+                                  <img alt="Visa-Logo" height="24px" src="assets/images/logo/Visa-Logo.png">
+                              </span>
+                          </label>
+                      </div>
+                      <div class="col-sm col-xs-6 billing">
+                          <input type="radio" class="btn-check" formControlName="OnPaymentMethode" value="discover" id="discover" style="display:none;">
+                          <label for="discover" class="btn labelcheck" style="border: 0.5px dashed;width:100%" onmouseover="this.style.background='darkslateblue';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#7f7f7f'">
+                              <span class="fw-bold fs-3">
+                                  <img alt="Discover-logo" height="24px" src="assets/images/logo/Discover-logo.png">
+                              </span>
+                          </label>
+                      </div>
+                      <div class="col-sm col-xs-6 billing">
+                          <input type="radio" class="btn-check" formControlName="OnPaymentMethode" value="amex" id="amex" style="display:none;">
+                          <label for="amex" class="btn labelcheck" style="border: 0.5px dashed;width:100%" onmouseover="this.style.background='darkslateblue';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#7f7f7f'">
+                              <span class="fw-bold fs-3">
+                                  <img alt="Group" height="24px" src="assets/images/logo/Group 1.svg">
+                              </span>
+                          </label>
+                      </div>
+                      <div class="col-sm col-xs-6 billing">
+                          <input type="radio" class="btn-check" formControlName="OnPaymentMethode" value="dinersclub" id="dinersclub" style="display:none;">
+                          <label for="dinersclub" class="btn labelcheck" style="border: 0.5px dashed;width:100%" onmouseover="this.style.background='darkslateblue';this.style.color='white'" onmouseout="this.style.background='white';this.style.color='#7f7f7f'">
+                              <span class="fw-bold fs-3">
+                                  <img alt="Diners_Club_Logo" height="24px" src="assets/images/logo/Diners_Club_Logo.png">
+                              </span>
+                          </label>
+                      </div>
+                  </div>
+              </div>
+              <div class="row">
+                  <div class="col-sm-6">
+                      <div class="card">
+                          <div class="card-body">
+                              <div class="form-group row mb-50">
+                                  <div class="col-sm-12">
+                                      <label class="mb-50" for="card-holder-name">
+                                          <strong>Name:</strong>
+                                          <span style="color:red"> *</span>
+                                      </label>
+                                      <input 
+                                      type="text"
+                                      id="card-holder-name"
+                                      class="form-control"       
+                                      placeholder="Name on Card"
+                                      name="nameOnCard"
+                                      [(ngModel)]="cardNameValue"
+                                      required />
+                                      <label *ngIf="NameonCardErrorMessage" class="error-message">{{NameonCardErrorMessage}}</label>
+                                  </div>
+                              </div>
+                              <div class="form-group row mb-50">
+                                  <div class="col-sm-12">
+                                      <label class="mb-50" for="card-number">
+                                          <strong>Card Number:</strong>
+                                          <span style="color:red"> *</span>
+                                      </label>
+                                      <input 
+                                      type="text" 
+                                      id="cardnumber"
+                                      class="form-control"  
+                                      placeholder="Card Number" 
+                                      name="cardnumber" 
+                                      [(ngModel)]="cardNumberValue"
+                                      (input)="checkMaxLength($event.target.value)"
+                                      required />
+                                      <span *ngIf="CardNumberErrorMessage" class="invalid-form">
+                                          <small class="form-text text-danger">{{CardNumberErrorMessage}}</small>
+                                      </span>
+                                  </div>
+                              </div>
+                              <div class="row mb-50">
+                                  <div class="col-sm-6">
+                                      <label class="mb-50" for="card-holder-cvv">
+                                          <strong>EXP Date:</strong>
+                                          <span style="color:red"> *</span>
+                                      </label>
+                                      <input 
+                                      type="text"
+                                      id="cardexpiry"
+                                      class="form-control"      
+                                      placeholder="MM/YY"
+                                      name="cardexpiry"
+                                      [(ngModel)]="cardExpValue"
+                                      (input)="validateCardExpiry($event.target.value)" 
+                                      required/>
+                                      <span *ngIf="cardexpiryMessage" class="invalid-form">
+                                          <small class="form-text text-danger">{{cardexpiryMessage}}</small>
+                                      </span>
+                                  </div>
+                                  
+                                  <div class="col-sm-6">
+                                      <label class="mb-50" for="card-holder-cvv">
+                                          <strong>CVV:</strong>
+                                          <span style="color:red"> *</span>
+                                      </label>
+                                      <input 
+                                      type="text"
+                                      id="cardcvv"
+                                      class="form-control"
+                                      placeholder="Enter CVV"
+                                      name="cardcvv"
+                                      [(ngModel)]="cardCvvValue"
+                                      (input)="validateCVV($event.target.value)"
+                                      required />
+                                      <span *ngIf="cardcvvMessage" class="invalid-form">
+                                          <small class="form-text text-danger">{{cardcvvMessage}}</small>
+                                      </span>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div> 
+                  <div class="col-sm-6" *ngIf="selectedRow">
+                      <div class="payment-type">
+                          <div class="amount-payable checkout-options">
+                              <div class="card">
+                                  <div class="card-header">
+                                      <h1 class="card-title ">Payment Summary</h1>
+                                  </div>
+                                  <div class="card-body">
+                                      <ul class="list-unstyled price-details">
+                                        <li class="price-detail">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label >
+                                                        <h2>Details</h2>
+                                                    </label>
+                                                </div>
+                                                 <div class="col-3 text-center">                                         
+                                                    <label>
+                                                        <h2>Unit Price</h2>
+                                                    </label>
+                                                </div>
+
+                                                <div class="col-3">
+                                                    <label style="float:right">
+                                                        <h2>Amount</h2>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </li>
+                                          <hr class="mt-0">
+                                          <li class="price-detail">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label >
+                                                        <strong>{{selectedRow.packageName}}</strong>
+                                                    </label>
+                                                </div>
+                                                 <div class="col-3 text-center" >                                         
+                                                    <label>
+                                                        <strong>${{selectedRow.packagePrice}}</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label style="float:right">
+                                                        <strong>${{selectedRow.packagePrice}}</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </li>
+                                          <li class="price-detail">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label >
+                                                        <strong>Additional Messages</strong>
+                                                    </label>
+                                                </div>
+                                                 <div class="col-3 text-center" >                                         
+                                                    <label>
+                                                        <strong>0 X $0.03</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label style="float:right">
+                                                        <strong>$0</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </li>
+                                          <li class="price-detail">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label >
+                                                        <strong>Additional Users</strong>
+                                                    </label>
+                                                </div>
+                                                 <div class="col-3 text-center" >                                         
+                                                    <label>
+                                                        <strong>0 X $10</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label style="float:right">
+                                                        <strong>$0</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </li>
+                                          <li class="price-detail">
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <label >
+                                                        <strong>Previous Package Credit</strong>
+                                                    </label>
+                                                </div>
+                                                 <div class="col-3 text-center" >                                         
+                                                    <label>
+                                                        <strong>0</strong>
+                                                    </label>
+                                                </div>
+                                                <div class="col-3">
+                                                    <label style="float:right">
+                                                        <strong>$10</strong>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                          </li>
+                                      </ul>
+                                      <hr />
+                                      <ul class="list-unstyled price-details">
+                                          <li class="price-detail">
+                                              <label><strong>Total</strong></label>
+                                              <label style="float:right">
+                                                  <strong>${{selectedRow.packagePrice}}</strong>
+                                              </label>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <div class="d-flex justify-content-center">
+              <button (click)="ValidatePaymentMethod()"
+                      type="button"
+                      class="btn btn-primary btn-next"
+                      rippleEffect>
+                  <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                  <span class="align-middle d-sm-inline-block d-none">Proceed with Payment</span>
+                  <i data-feather="arrow-right" class="align-middle ml-sm-25 ml-0"></i>
+              </button>
+          </div>
+  
+      </div>
+  </ng-template>

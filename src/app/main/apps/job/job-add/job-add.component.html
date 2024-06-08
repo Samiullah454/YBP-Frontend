@@ -1,0 +1,397 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ JobToEdit ? 'Edit Job' : 'Add Job' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="saveJob()" #JobForm="ngForm">
+        <!-- Job Name -->
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Customer Info:</h5>
+                    </div> 
+                    <div class="card-body">
+                        <div class="form-row">
+                            
+                             
+                            <div class="form-group col-md-6">
+                                <div class="form-group">
+                                  <label class="form-label" for="vertical-language">Select Customer: </label>
+                                  <div class="d-flex">
+                                    <ng-select
+                                     [items]="Customers" 
+                                     [multiple]="false"
+                                      [closeOnSelect]="true"
+                                      [searchable]="true"
+                                       bindLabel="contactName" 
+                                       bindValue="id" 
+                                       (ngModelChange)="updateCustomerDetails()"
+                                       (change)="updateCustomerDetails()"
+                                       [(ngModel)]="newJob.customerId"
+                                      name="contactName" 
+                                      id="contactName" 
+                                      placeholder="Select Customer"
+                                      
+                                       class="flex-grow-1">
+                                      <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                        <span class="ng-value-label">{{ item.contactName }}</span>
+                                        <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                      </ng-template>
+                                    </ng-select>
+                                  </div>
+                                </div>
+                            </div>
+                           
+                              
+                          <div class="form-group col-md-6">
+                            <label for="customerPhoneNumber">Phone Number:</label>
+                            <input type="text" class="form-control" id="customerPhoneNumber" name="customerPhoneNumber" [ngModel]="selectedCustomer?.contactNumber" disabled>
+                          </div>
+                      
+                          <div class="form-group col-md-6">
+                            <label for="customerEmail">Email:</label>
+                            <input type="text" class="form-control" id="customerEmail" name="customerEmail" [ngModel]="selectedCustomer?.email" disabled>
+                          </div>
+                        </div>
+                      </div>
+                      
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Job Info:</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <label for="Jobtype">Job Type:</label>
+                                <select class="form-control" id="Jobtype" name="Jobtype" [(ngModel)]="newJob.jobTypeId"
+                                    required>
+                                    <option *ngFor="let type of JobTypes" [value]=type.id>{{ type.name }}</option>
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label for="estimatedHours">Estimated Hours:</label>
+                                <input type="number" class="form-control" id="estimatedHours" name="estimatedHours"
+                                    [(ngModel)]="newJob.estimatedHours" required>
+                            </div>
+                            <div class="form-group col-md-12">
+                                <label for="description">Job Details:</label>
+                                <textarea class="form-control" id="description" name="description"
+                                    [(ngModel)]="newJob.description">
+                            </textarea>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Check Lists</h5>
+                    </div>
+                    <div class="card-body">
+        
+                        <!-- Use *ngIf to check if options is not null or undefined -->
+                        <ng-container *ngIf="options && options.length > 0; else noChecklist">
+                            <label for="selectedOptions">Select Checklist:</label><br>
+                            <div *ngFor="let option of options" class="form-check form-check-inline">
+                                <input class="form-check-input" type="checkbox" id="{{ option.id }}" name="selectedOptions"
+                                    [checked]="checklist && checklist.includes(option.id)"
+                                    (click)="onOptionsChange($event, option.id)">
+                                <label class="form-check-label" for="{{ option.id }}">{{ option.name }}</label>
+                            </div>
+                        </ng-container>
+        
+                        <!-- Display this message if options is null or empty -->
+                        <ng-template #noChecklist>
+                            <p>No checklist available.</p>
+                        </ng-template>
+        
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Schedule Info:</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                            <div class="form-group col-md-4">
+                                <label for="scheduledDateTime">Scheduled Date:</label>
+                                <input type="date" class="form-control" id="scheduledDateTime" name="scheduledDateTime"
+                                    [(ngModel)]="newJob.scheduledDateTime" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="startTime">Start Time:</label>
+                                <input type="time" class="form-control" id="startTime" name="startTime"
+                                    [(ngModel)]="newJob.startTime" required>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="endTime">End Time:</label>
+                                <input type="time" class="form-control" id="endTime" name="endTime" [(ngModel)]="newJob.endTime"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="form-row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="card-title">Select Services:</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group">
+                              <label class="form-label" for="vertical-language">Select Service Type *<span></span></label>
+                              <div class="d-flex">
+                                <ng-select
+                                 [items]="servicetype" 
+                                 [multiple]="false"
+                                  [closeOnSelect]="true"
+                                  [searchable]="true"
+                                   bindLabel="name" 
+                                   bindValue="id" 
+                                   (ngModelChange)="onServiceChange($event)"
+                                   [(ngModel)]="selectedServiceType"
+                                  name="servicetype" 
+                                  id="servicetype" 
+                                  placeholder="Select Service"
+                                  
+                                  class="flex-grow-1">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                    <span class="ng-value-label">{{ item.name }}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                  </ng-template>
+                                </ng-select>
+                              </div>
+                            </div>
+                          </div>
+    
+                          <!-- Multiple Selected Services Dropdown (using ng-select) -->
+                          <div class="form-group col-md-6">
+                            <div class="form-group">
+                              <label class="form-label" for="vertical-language">Select Service *<span></span></label>
+                              <div class="d-flex">
+                                <ng-select
+                                 [items]="services" 
+                                 [multiple]="true"
+                                  [closeOnSelect]="true"
+                                   [searchable]="true"
+                                  bindLabel="serviceName"
+                                   bindValue="id"
+                                    name="services"
+                                     id="services"
+                                     placeholder="Select Service"
+                                     [(ngModel)]="selectedServices"
+                                     (ngModelChange)="ServiceChange($event)"
+                                class="flex-grow-1">
+                                  <ng-template ng-label-tmp let-item="item" let-clear="clear">
+                                    <span class="ng-value-label">{{ item.serviceName }}</span>
+                                    <span class="ng-value-icon right" (click)="clear(item)" aria-hidden="true">×</span>
+                                  </ng-template>
+                                </ng-select>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="card">
+            <div class="card-header">
+                <h5 class="card-title">Crew Group:</h5>
+            </div>
+            <div class="card-body">
+
+                <!-- Add a checkbox -->
+                <div class="form-row">
+                    <div class="form-group">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="showDropdownCheckbox"
+                                (change)="onCrewRequiredChange()" [(ngModel)]="newJob.crewRequired" name="crewRequired">
+                            <label class="form-check-label" for="showDropdownCheckbox">Is Crew Group Required?</label>
+                        </div>
+                    </div>
+                    <div class="form-group"  *ngIf="selectedServices !== null">
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="checkbox" id="filterByService"
+                                (change)="filterTechnicians()" [(ngModel)]="filterbyservice" name="filterByService">
+                            <label class="form-check-label" for="filterByService">Filter Technician By Services?</label>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add the dropdown, conditionally based on the checkbox state -->
+                <div *ngIf="newJob.crewRequired" class="form-group">
+                    <label for="crewGroupId">Crew Group:</label>
+                    <select class="form-control" id="crewGroupId" name="crewGroupId" [(ngModel)]="newJob.crewGroupId"
+                        (change)="filterTechnicians()" required>
+                        <option *ngFor="let crewgroup of crewgroups" [value]=crewgroup.id>{{
+                            crewgroup.crewGroupName }}</option>
+                    </select>
+
+                </div>
+                <h2 style="text-align: left; margin-bottom: 20px;">Technician Details</h2>
+
+                <ngx-datatable class="material" [rows]="filteredTechnicians" [rowHeight]="50"
+                    class="bootstrap core-bootstrap" [columnMode]="ColumnMode.force" [headerHeight]="50"
+                    [footerHeight]="50" [scrollbarH]="true"
+                    style="box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 12px; overflow: hidden; font-family: 'Arial', sans-serif;">
+
+                    <ngx-datatable-column name="Name" prop="technicianName">
+                        <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <div class="cell-line-height">
+                                    <div class="font-medium-1 d-block">
+                                        <span class="font-weight-bold">{{ row.technicianName }}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+                    <ngx-datatable-column name="Shift" prop="Shift">
+                        <ng-template let-row="row" let-name="value" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <div class="cell-line-height">
+                                    <div class="font-medium-1 d-block">
+                                        <div class="form-row">
+                                            <span class="font-weight-bold" [class.disabled]="!row.shifts">
+                                                {{ row.shifts ? row.shifts.shiftName : 'No Shift' }}
+                                            </span>
+                    
+                                            <div class="checkbox-row" *ngIf="row.shifts">
+                                                <label *ngFor="let day of row.shifts.shiftDays" class="checkbox-label">
+                                                    <input type="checkbox" [checked]="!!row.shifts" disabled />
+                                                    {{ mapDaysToWeek(day) }}
+                                                </label>
+                                            </div>
+                                        </div>
+                                      
+                                        
+                                        
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf="row.shifts">
+                                <div style="height: 20px; background-color: rgb(75, 75, 242);width: 350px; border-radius: 5px; display: flex; justify-content: space-between; margin: 0 10px; ">
+                                    <span class="span">{{ row.shifts.startTime | timeFormat }}</span>
+                                    <span class="span">{{ calculateDuration(row.shifts.startTime, row.shifts.endTime) }}</span>
+                                    <span class="span">{{ row.shifts.endTime | timeFormat }}</span>
+                                </div>
+                            </div>
+                            
+                            
+                        </ng-template>
+                    </ngx-datatable-column>
+                    
+                    
+
+
+
+                    <ngx-datatable-column *ngIf="!newJob.crewRequired" name="Select" prop="crewRequired">
+                        <ng-template let-row="row" ngx-datatable-cell-template>
+                            <div class="d-flex align-items-center">
+                                <div class="cell-line-height">
+                                    <div class="font-medium-1 d-block">
+                                        <input type="checkbox" (click)="updateTechnician(row.id, $event.target.checked)"
+                                            [checked]="isTechnicianSelected(row.id)">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </ngx-datatable-column>
+
+                </ngx-datatable>
+
+
+
+
+            </div>
+
+
+        </div>
+ 
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Administrator Notes:</label><br>
+              
+                    <textarea class="form-control" id="administratorNotes" name="administratorNotes"
+                    [(ngModel)]="newJob.administratorNotes">
+                </textarea>
+
+                
+                
+            </div>
+            <div class="form-group col-md-6">
+                <label>Approvel Required?:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="approvalRequired"
+                        [(ngModel)]="newJob.approvalRequired" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="approvalRequired"
+                        [(ngModel)]="newJob.approvalRequired" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Show Instrcution For Technician?:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="instrctionForTechnician"
+                        [(ngModel)]="newJob.instrctionForTechnician" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="instrctionForTechnician"
+                        [(ngModel)]="newJob.instrctionForTechnician" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label>Show Instrcution For Scheduler??:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="instrctionForScheduler"
+                        [(ngModel)]="newJob.instrctionForScheduler" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="instrctionForScheduler"
+                        [(ngModel)]="newJob.instrctionForScheduler" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">{{ JobToEdit ? 'Update' : 'Add' }} Job</button>
+    </form>
+
+</div>

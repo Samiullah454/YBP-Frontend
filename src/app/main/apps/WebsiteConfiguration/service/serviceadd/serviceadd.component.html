@@ -1,0 +1,533 @@
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- User List -->
+    <section class="users-list-wrapper">
+      <div class="card">
+        <div class="card-header">
+          <h4>Manage Section</h4>
+        </div>
+        <div class="card-body">
+          <form (ngSubmit)="onSubmit()">
+            <div class="form-row">
+              <div class="form-group col-md-4">
+                <label for="sectionType">Section Type:</label>
+                <ng-select
+                  [items]="sectionTypes"
+                  bindLabel="value"
+                  bindValue="id"
+                  [(ngModel)]="sectionDetails.sectionType"
+                  id="sectionType"
+                  name="sectionType"
+                  required
+                ></ng-select>
+                <div *ngIf="(sectionDetails.sectionType !== 4) && (sectionDetails.sectionType !== 5)">
+                  <label for="sectionTitle">Section Title:</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  [(ngModel)]="sectionDetails.sectionTitle"
+                  id="sectionTitle"
+                  name="sectionTitle"
+                  required
+                />
+              </div>
+                
+
+                <div class="form-row" style="margin-top: 10px">
+                  <label>Visibility:</label>
+                  <div style="padding-inline-start: 10px; margin: 10px">
+                    <label
+                      ><input
+                        type="radio"
+                        [(ngModel)]="sectionDetails.isVisble"
+                        value="true"
+                        name="visibility"
+                      />
+                      Visible</label
+                    >
+                  </div>
+                  <div style="padding-inline-start: 10px; margin: 10px">
+                    <label
+                      ><input
+                        type="radio"
+                        [(ngModel)]="sectionDetails.isVisble"
+                        value="false"
+                        name="visibility"
+                      />
+                      Hidden</label
+                    >
+                  </div>
+                </div>
+              </div>
+
+              <div class="form-group col-md-8" *ngIf="(sectionDetails.sectionType !== 4) && (sectionDetails.sectionType !== 5)">
+                <label for="sectionDescription">Section Description:</label>
+                <fieldset class="form-group">
+                  <textarea
+                    class="form-control"
+                    [(ngModel)]="sectionDetails.sectionDescription"
+                    id="sectionDescription"
+                    name="sectionDescription"
+                    rows="5"
+                    placeholder="Textarea"
+                    required
+                  ></textarea>
+                </fieldset>
+              </div>
+            </div>
+
+            <!-- Services Section -->
+            <div *ngIf="sectionDetails.sectionType == 1">
+              <h4>Services</h4>
+              <div
+                class="row d-flex align-items-end"
+                *ngFor="let service of services; let i = index"
+              >
+                <!-- Service Details -->
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="title{{ i }}">Service Title:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="service.title"
+                      id="title{{ i }}"
+                      name="serviceTitle{{ i }}"
+                    />
+
+                    <label for="iconClass{{ i }}">Services Icon Class:</label>
+                    <ng-select
+                      [items]="icofontIcons"
+                      bindLabel="class"
+                      bindValue="class"
+                      [(ngModel)]="service.iconClass"
+                      name="serviceIconClass{{ i }}"
+                    >
+                      <ng-template ng-option-tmp let-item="item">
+                        <i [ngClass]="item.class"></i> {{ item.class }}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="description{{ i }}"
+                      >Services Description:</label
+                    >
+                    <fieldset class="form-group">
+                      <textarea
+                        class="form-control"
+                        id="description{{ i }}"
+                        [(ngModel)]="service.description"
+                        rows="4"
+                        placeholder="Textarea"
+                        name="serviceDescription{{ i }}"
+                      ></textarea>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-2 col-12 mb-70">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="deleteService(i)"
+                      rippleEffect
+                    >
+                      <i data-feather="trash-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Service Button -->
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-icon btn-primary"
+                    type="button"
+                    (click)="addService()"
+                    rippleEffect
+                  >
+                    <i data-feather="plus" class="mr-25"></i>
+                    <span>Add New Service</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Pricings Section -->
+            <!-- Pricings Section -->
+            <div *ngIf="sectionDetails.sectionType == 2">
+              <h4>Pricing</h4>
+              <div
+                class="row align-items-start"
+                *ngFor="let pricing of pricingDetails; let i = index"
+              >
+                <!-- Pricing Details -->
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="title{{ i }}">Title:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="pricing.title"
+                      id="title{{ i }}"
+                      name="pricingTitle{{ i }}"
+                    />
+                  </div>
+                </div>
+
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="iconClass{{ i }}">Icon Class:</label>
+                    <ng-select
+                      [items]="icofontIcons"
+                      bindLabel="class"
+                      bindValue="class"
+                      [(ngModel)]="pricing.iconClass"
+                      name="pricingIconClass{{ i }}"
+                    >
+                      <ng-template ng-option-tmp let-item="item">
+                        <i [ngClass]="item.class"></i> {{ item.class }}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-md-2 col-12">
+                  <div class="form-group">
+                    <label for="price{{ i }}">Price:</label>
+                    <input
+                      type="number"
+                      class="form-control"
+                      [(ngModel)]="pricing.price"
+                      id="price{{ i }}"
+                      name="pricingPrice{{ i }}"
+                    />
+                  </div>
+                </div>
+                <div class="col-md-2 col-12 mb-70" style="margin-top: 20px">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="deletePricing(i)"
+                      rippleEffect
+                    >
+                      <i data-feather="trash-2"></i> Pricing
+                    </button>
+                  </div>
+                </div>
+
+                <hr />
+                <!-- Items -->
+                <!-- Items -->
+                <div class="col-md-12">
+                  <h4>Items</h4>
+                  <div
+                    class="row"
+                    *ngFor="let item of pricing.items; let j = index"
+                  >
+                    <div class="col-md-4 col-12">
+                      <div class="form-group">
+                        <label for="itemTitle{{ i }}_{{ j }}"
+                          >Item Title:</label
+                        >
+                        <input
+                          type="text"
+                          class="form-control"
+                          [(ngModel)]="item.title"
+                          id="itemTitle{{ i }}_{{ j }}"
+                          name="itemTitle{{ i }}_{{ j }}"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-md-4 col-12">
+                      <div class="form-group">
+                        <label for="itemIconClass{{ i }}_{{ j }}"
+                          >Item Icon Class:</label
+                        >
+                        <ng-select
+                          [items]="itemIcons"
+                          bindLabel="class"
+                          bindValue="class"
+                          [(ngModel)]="item.iconClass"
+                          name="itemIconClass{{ i }}_{{ j }}"
+                        >
+                          <ng-template ng-option-tmp let-item="item">
+                            <i [ngClass]="item.class"></i> {{ item.class }}
+                          </ng-template>
+                        </ng-select>
+                      </div>
+                    </div>
+                    <div
+                      class="col-md-4 col-12 text-right"
+                      style="margin-top: 30px"
+                    >
+                      <div class="form-group">
+                        <button
+                          class="btn btn-sm btn-outline-danger"
+                          (click)="removeItem(pricing, j)"
+                          rippleEffect
+                        >
+                          <i data-feather="trash-2"></i> Delete Item
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Add Item Button -->
+                <div class="col-md-12">
+                  <div class="row justify-content-end">
+                    <div class="col-auto">
+                      <button
+                        class="btn btn-sm btn-icon btn-primary"
+                        type="button"
+                        (click)="addItem(pricing)"
+                        rippleEffect
+                      >
+                        <i data-feather="plus" class="mr-25"></i> Add Item
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Add Pricing Button -->
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-icon btn-primary"
+                    type="button"
+                    (click)="addPricing()"
+                    rippleEffect
+                  >
+                    <i data-feather="plus" class="mr-25"></i> Add New Pricing
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="sectionDetails.sectionType == 3">
+              <h4>Features</h4>
+              <div
+                class="row d-flex align-items-end"
+                *ngFor="let feature of features; let i = index"
+              >
+                <!-- Service Details -->
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="title{{ i }}">Feature Title:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="feature.title"
+                      id="featuretitle{{ i }}"
+                      name="featureTitle{{ i }}"
+                    />
+
+                    <label for="featureiconClass{{ i }}">Features Icon Class:</label>
+                    <ng-select
+                      [items]="icofontIcons"
+                      bindLabel="class"
+                      bindValue="class"
+                      [(ngModel)]="feature.iconClass"
+                      name="featureIconClass{{ i }}"
+                    >
+                      <ng-template ng-option-tmp let-item="item">
+                        <i [ngClass]="item.class"></i> {{ item.class }}
+                      </ng-template>
+                    </ng-select>
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="featuredescription{{ i }}"
+                      >Features Description:</label
+                    >
+                    <fieldset class="form-group">
+                      <textarea
+                        class="form-control"
+                        id="featuredescription{{ i }}"
+                        [(ngModel)]="feature.description"
+                        rows="4"
+                        placeholder="Textarea"
+                        name="featureDescription{{ i }}"
+                      ></textarea>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-2 col-12 mb-70">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="deleteFeature(i)"
+                      rippleEffect
+                    >
+                      <i data-feather="trash-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Service Button -->
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-icon btn-primary"
+                    type="button"
+                    (click)="addFeature()"
+                    rippleEffect
+                  >
+                    <i data-feather="plus" class="mr-25"></i>
+                    <span>Add New Feature</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="sectionDetails.sectionType == 4">
+              <h4>Schedule</h4>
+              <div
+                class="row d-flex align-items-end"
+                *ngFor="let scheduleItem of scheduleItems; let i = index"
+              >
+                <!-- Service Details -->
+                <div class="col-md-4 col-12">
+                  <div class="form-group">
+                    <label for="scheduleItemTitle{{ i }}">Title:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="scheduleItem.title"
+                      id="scheduleItemtitle{{ i }}"
+                      name="scheduleItemTitle{{ i }}"
+                    />
+                    <label for="scheduleItemsubTitle{{ i }}">Sub Title:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="scheduleItem.subtitle"
+                      id="scheduleItemsubtitle{{ i }}"
+                      name="scheduleItemsubTitle{{ i }}"
+                    />
+                   
+                  </div>
+                </div>
+                <div class="col-md-6 col-12">
+                  <div class="form-group">
+                    <label for="scheduleItemTitledescription{{ i }}"
+                      > Description:</label
+                    >
+                    <fieldset class="form-group">
+                      <textarea
+                        class="form-control"
+                        id="scheduleItemdescription{{ i }}"
+                        [(ngModel)]="scheduleItem.description"
+                        rows="4"
+                        placeholder="Textarea"
+                        name="scheduleItemDescription{{ i }}"
+                      ></textarea>
+                    </fieldset>
+                  </div>
+                </div>
+                <div class="col-md-2 col-12 mb-70">
+                  <div class="form-group">
+                    <button
+                      class="btn btn-outline-danger"
+                      (click)="delscheduleItem(i)"
+                      rippleEffect
+                    >
+                      <i data-feather="trash-2"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- Add Service Button -->
+              <div class="row">
+                <div class="col-12">
+                  <button
+                    class="btn btn-icon btn-primary"
+                    type="button"
+                    (click)="addscheduleItem()"
+                    rippleEffect
+                  >
+                    <i data-feather="plus" class="mr-25"></i>
+                    <span>Add New </span>
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div *ngIf="sectionDetails.sectionType == 5">
+              <h4>Facts And Figures</h4>
+              <div
+                class="row d-flex align-items-end"
+                *ngFor="let factAndFigure of factAndFigures ; let i = index"
+              >
+                <!-- Service Details -->
+                <div class="col-md-3 col-12">
+                  <div class="form-group">
+                    <label for="Projects">No of Projects:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="factAndFigure.project"
+                      id="Projects"
+                      name="Projects"
+                    />
+                   
+                  </div>
+                </div>
+                <div class="col-md-3 col-12">
+                  <div class="form-group">
+                    <label for="developer">No of Developers:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="factAndFigure.developer"
+                      id="developer"
+                      name="developer"
+                    />
+                   
+                  </div>
+                </div>
+                <div class="col-md-3 col-12">
+                  <div class="form-group">
+                    <label for="client">No of Clients:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="factAndFigure.client"
+                      id="client"
+                      name="client"
+                    />
+                   
+                   
+                  </div>
+                </div>
+                <div class="col-md-3 col-12">
+                  <div class="form-group">
+                    <label for="experince">Years of Experince:</label>
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="factAndFigure.experince"
+                      id="experince"
+                      name="experince"
+                    />
+                    
+                   
+                  </div>
+                </div>
+                
+              </div>
+              <!-- Add Service Button -->
+              
+            </div>
+            <!-- Submit Button -->
+            <div class="row justify-content-end">
+              <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>

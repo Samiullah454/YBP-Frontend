@@ -1,0 +1,23 @@
+<svg width="202" height="56" viewBox="0 0 202 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="20" y="16" width="162" height="24" rx="12" fill="#A8AAAE"/>
+<rect x="20" y="16" width="162" height="24" rx="12" fill="white" fill-opacity="0.8"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M32.667 22.6665V33.3332L41.3337 27.9998L32.667 22.6665Z" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M32.667 22.6665V33.3332L41.3337 27.9998L32.667 22.6665Z" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M99 28H122" stroke="#A8AAAE" stroke-width="2" stroke-linecap="round"/>
+<path d="M55 27C54.4477 27 54 27.4477 54 28C54 28.5523 54.4477 29 55 29V27ZM55 29H91V27H55V29Z" fill="#7F7F7F"/>
+<circle cx="95" cy="28" r="3.5" fill="#7367F0"/>
+<circle cx="95" cy="28" r="3.5" stroke="#7367F0"/>
+<circle cx="95" cy="28" r="3.5" stroke="white" stroke-opacity="0.6"/>
+<path d="M142 25.3335C142.839 25.963 143.333 26.951 143.333 28.0002C143.333 29.0494 142.839 30.0373 142 30.6668" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M142 25.3335C142.839 25.963 143.333 26.951 143.333 28.0002C143.333 29.0494 142.839 30.0373 142 30.6668" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M143.8 23.3335C145.209 24.4726 146.029 26.1878 146.029 28.0002C146.029 29.8125 145.209 31.5277 143.8 32.6668" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M143.8 23.3335C145.209 24.4726 146.029 26.1878 146.029 28.0002C146.029 29.8125 145.209 31.5277 143.8 32.6668" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M136 30.0002H134.667C134.298 30.0002 134 29.7017 134 29.3336V26.6669C134 26.2987 134.298 26.0002 134.667 26.0002H136L138.333 23.0002C138.454 22.7664 138.727 22.6552 138.976 22.7384C139.226 22.8216 139.377 23.0742 139.333 23.3336V32.6669C139.377 32.9262 139.226 33.1789 138.976 33.2621C138.727 33.3452 138.454 33.2341 138.333 33.0002L136 30.0002" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M136 30.0002H134.667C134.298 30.0002 134 29.7017 134 29.3336V26.6669C134 26.2987 134.298 26.0002 134.667 26.0002H136L138.333 23.0002C138.454 22.7664 138.727 22.6552 138.976 22.7384C139.226 22.8216 139.377 23.0742 139.333 23.3336V32.6669C139.377 32.9262 139.226 33.1789 138.976 33.2621C138.727 33.3452 138.454 33.2341 138.333 33.0002L136 30.0002" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="166" cy="28.0002" r="0.666667" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<circle cx="166" cy="28.0002" r="0.666667" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="166" cy="32.6667" rx="0.666667" ry="0.666667" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="166" cy="32.6667" rx="0.666667" ry="0.666667" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="166" cy="23.3332" rx="0.666667" ry="0.666667" stroke="#4B465C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<ellipse cx="166" cy="23.3332" rx="0.666667" ry="0.666667" stroke="white" stroke-opacity="0.2" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

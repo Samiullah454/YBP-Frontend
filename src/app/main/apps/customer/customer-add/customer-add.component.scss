@@ -1,0 +1,368 @@
+@import '@core/scss/base//bootstrap-extended/include'; // Components includes
+@import '~bs-stepper/dist/css/bs-stepper.min.css';
+@import '@core/scss/base/plugins/forms/account-form';
+@import '@core/scss/base/plugins/forms/form-validation.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/base/pages/app-user.scss';
+
+
+.responsive-textarea {
+    width: 100%; /* Take full width of the container */
+    min-height: 100px; /* Set minimum height to ensure visibility */
+    font-size: 16px; /* You can adjust the font size as needed */
+    padding: 10px; /* Add padding for better appearance */
+    resize: vertical; /* Allow vertical resizing */
+    border: 1px solid #ccc; /* Add a border for visual distinction */
+  }
+
+
+
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,400;1,700&display=swap');
+
+
+
+.containerfile {
+  width: 100%;
+  display: flex;
+  background-color: #fcfcfc;
+}
+
+.cardfile {
+  border-radius: 10px;
+  background-color: #ffffff;
+  width: 100%;
+}
+.drop_box {
+  margin: 10px 0;
+  padding: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border: 2px dotted #a3a3a3;
+  border-radius: 5px;
+}
+
+.drop_box h4 {
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.drop_box p {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 12px;
+  color: #a3a3a3;
+}
+
+.uploadbtn {
+  text-decoration: none;
+  background-color: #005af0;
+  color: #ffffff;
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  transition: 0.3s;
+}
+
+.uploadbtn:hover{
+  text-decoration: none;
+  background-color: #ffffff;
+  color: #005af0;
+  padding: 10px 20px;
+  border: none;
+}
+.containerfile input {
+  margin: 10px 0;
+  width: 100%;
+  background-color: #e2e2e2;
+  border: none;
+  outline: none;
+  padding: 12px 20px;
+  border-radius: 4px;
+}
+.card .card-header
+{
+    padding: 1rem;
+    padding-bottom: 0rem;
+    padding-left: 0rem;
+
+}
+
+.fade:not(.show){
+    opacity: 1;
+}
+.bs-stepper.vertical .bs-stepper-content .content:not(.active)
+{
+    display: block;
+}
+.vertical .bs-stepper-pane.fade.dstepper-none, .vertical .content.fade.dstepper-none
+{
+    visibility: visible;
+}
+.bs-stepper .content.fade, .bs-stepper-pane.fade
+{
+    visibility: visible;
+}
+
+html .content
+{
+    min-height: calc(0%);
+}
+
+.card .card-title
+{
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+  .card {
+    border: none;
+    margin-bottom: 0; 
+    box-shadow: 0 0px 0px 0;
+    transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
+}
+.bs-stepper {
+  background-color: transparent;
+   box-shadow: 0 0px 0px 0;
+  border-radius: 0.5rem;
+}
+
+.bs-stepper.vertical .bs-stepper-content {
+  width: 100%;
+  padding-top: 0rem;
+}
+.bs-stepper .bs-stepper-content {
+  padding: 0rem 0rem;
+}
+
+.scrollable-div {
+  /* Enable scrolling when content overflows */
+  overflow: auto;
+}
+
+/* Default height for small screens */
+.responsive-div {
+  height: 300px;
+}
+
+/* Media query for medium-sized screens (e.g., tablets) */
+@media (min-width: 768px) {
+  .responsive-div {
+    height: auto;
+  }
+  .bs-stepper-header{
+
+    background-color: white;
+    padding-top: 0;
+  }
+  body {
+    overflow: auto;
+  }
+  
+}
+
+
+@media (max-width: 992px){
+.bs-stepper.vertical .bs-stepper-header {
+    align-items: flex-start;
+    position: initial;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  .bs-stepper.vertical .bs-stepper-header {
+    align-items: flex-start;
+    position: initial;
+    width: auto;
+    margin-bottom: 20px;
+}
+
+.responsive-div {
+  height: 600px;
+}
+ .hidonMobileonly
+ {
+   display: none;
+ }
+ .card .card-title
+ {
+    font-size: 1rem;
+ }
+ .card .card-header
+ {
+   margin-left: 0rem;
+   padding-left: 0rem;
+ }
+ .logo
+ {
+  font-size: 0.5rem;
+ }
+ .card .card-header .heading-elements
+ {
+   padding-left: 0rem;
+   
+ }
+ body {
+  overflow: auto;
+}
+}
+
+
+/* Media query for large screens (e.g., desktops) */
+@media (min-width: 800px) {
+  .responsive-div {
+    height: 480px;
+  }
+ 
+  
+}
+@media (max-width: 1000px) {
+  .responsive-div {
+    height: 600px;
+  }
+  .hidonMobileonly
+ {
+   display: none;
+ }
+  .hidonMobile
+  {
+    display: none;
+  }
+  
+}
+
+@media (min-width: 1550px) {
+  .responsive-div {
+    height: 700px;
+  }
+}
+
+
+
+.bs-stepper-header{
+
+  background-color: white;
+  position: fixed;
+  padding-top: 0;
+  width: 18%;
+  padding-top: 0.23rem;
+}
+
+.feather feather-clock
+{
+
+  color: red;
+}
+
+.vertical-hr {
+  width: 35px;
+  height: 15px;
+  display: flex;
+  /* align-items: center; */
+  justify-content: center;
+}
+
+.vertical-hr hr {
+  margin: 0;
+  border: none;
+  border-left: 1px dashed #ccc;
+  height: 100%;
+  transform: rotate(0deg);
+}
+
+.progress-vertical {
+  height: 7rem;
+  width: 20px;
+}
+
+.progress-bar-vertical {
+  transform: rotate(180deg);
+  transform-origin: top;
+}
+
+.bs-stepper.vertical .bs-stepper-header .step .step-trigger {
+  padding: 0.5rem 0;
+}
+.progress {
+  display: flex;
+  height: 0.857rem;
+  overflow: hidden;
+  line-height: 0;
+  font-size: 0.857rem;
+  background-color: rgba(115, 103, 240, 0.12);
+  border-radius: 0rem;
+}
+.bs-stepper .bs-stepper-header .step {
+  margin-bottom: 0.15rem;
+  margin-top: 0.15rem;
+}
+
+label {
+  color: #5e5873;
+  font-size: 0.857rem;
+  font-weight: 600;
+}
+
+.bs-stepper.vertical .bs-stepper-header {
+   border-right: none;
+  border-bottom: none;
+}
+
+.clickable-image {
+  cursor: pointer; /* Change the cursor to a hand on hover */
+}
+
+th.sticky {
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: #f2f2f2; /* Set background color as needed */
+  padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+td.sticky
+{
+  position: sticky;
+  left: 0;
+  z-index: 1;
+  background-color: whitesmoke; /* Set background color as needed */
+  padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  table-layout: auto;
+}
+
+th {
+  resize: horizontal;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.custom-header-class {
+  background-color: #9b66d8;
+  color: white;
+  text-align: center;
+}
+
+.custom-cell-class {
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}

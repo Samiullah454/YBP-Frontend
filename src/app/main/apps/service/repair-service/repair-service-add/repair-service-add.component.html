@@ -1,0 +1,80 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ serviceToEdit ? 'Edit Service' : 'Add Service' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="saveService()" #ServiceForm="ngForm">
+        <!-- Service Name -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="servicename">Service Name:</label>
+                <input type="text" class="form-control" id="servicename" name="servicename"
+                    [(ngModel)]="newservice.serviceName" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="servicetype">Service Type:</label>
+                <select class="form-control" id="servicetype" name="servicetype" [(ngModel)]="newservice.repairServiceTypeID"
+                    required>
+                    <option *ngFor="let type of Types" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Frequency -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="FlatRate">Flat Repair Rate ($):</label>
+                <input type="number" class="form-control" id="FlatRate" name="FlatRate"
+                    [(ngModel)]="newservice.flatRepairFee" required>
+            </div>
+
+            <!-- Service Type -->
+
+            <div class="form-group col-md-6">
+                <label for="TimeFrameInHours">Time Frame In Hours:</label>
+                <input type="number" class="form-control" id="TimeFrameInHours" name="TimeFrameInHours"
+                    [(ngModel)]="newservice.timeFrame" required>
+            </div>
+
+            <!-- Is Active -->
+
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label>Is Warranty Provided?:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="IsAdjustedInRepair"
+                        [(ngModel)]="newservice.warrantyProvided" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="IsAdjustedInRepair"
+                        [(ngModel)]="newservice.warrantyProvided" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="warrantyDays">Warranty Days:</label>
+                <input type="number" class="form-control" id="warrantyDays" name="warrantyDays"
+                    [(ngModel)]="newservice.warrantyDays" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="numberOfTechs">Technician Required:</label>
+                <input type="number" class="form-control" id="numberOfTechs" name="numberOfTechs"
+                    [(ngModel)]="newservice.numberOfTechs" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="newservice.description">
+            </textarea>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">{{ serviceToEdit ? 'Update' : 'Add' }} Service</button>
+    </form>
+
+</div>

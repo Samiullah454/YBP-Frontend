@@ -1,0 +1,51 @@
+<div class="modal-header">
+    <h4 *ngIf="callerParameter === 'diagnosticServiceType'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }}Diagnostic Service Type</h4>
+    <h4 *ngIf="callerParameter === 'repairServiceType'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }}Repair Service Type</h4>
+    <h4 *ngIf="callerParameter === 'parttype'" class="modal-title">{{ typeToEdit ? 'Edit Part Type' : 'Add ' }}Part Type</h4>
+    <h4 *ngIf="callerParameter === 'serviceContractType'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }} Service Contract Type</h4>
+    <h4 *ngIf="callerParameter === 'warrantyClaimServiceType'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }} Warranty Claim Service Type</h4>
+    <h4 *ngIf="callerParameter === 'checklist'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }} Check list</h4>
+    <h4 *ngIf="callerParameter === 'jobtype'" class="modal-title">{{ typeToEdit ? 'Edit ' : 'Add ' }} Job Type</h4>
+
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="savetype()" #typeform="ngForm">
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label  for="typeName">Type Name:</label>
+
+                <input  type="text" class="form-control" id="typeName"
+                    name="typeName" [(ngModel)]="newtype.name" required>
+             
+            </div>
+            <div class="form-group col-md-6">
+                <label>Is Active:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="isActive"
+                        [(ngModel)]="newtype.isActive" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="isActive"
+                        [(ngModel)]="newtype.isActive" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="form-group">
+            <label for="description">Description:</label>
+            <textarea class="form-control" id="description" name="description" [(ngModel)]="newtype.description">
+            </textarea>
+        </div>
+        <button *ngIf="callerParameter === 'checklist'" class="modal-title" type="submit" class="btn btn-primary">{{ typeToEdit ?
+            'Update' : 'Add' }} Check List</button>
+       <button *ngIf="callerParameter !== 'checklist'" class="modal-title" type="submit" class="btn btn-primary">{{ typeToEdit ?
+                'Update' : 'Add' }} Type</button>
+
+
+    </form>
+</div>

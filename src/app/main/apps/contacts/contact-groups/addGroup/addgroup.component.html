@@ -1,0 +1,64 @@
+<form [formGroup]="addRoleForm" (ngSubmit)="onSubmit()" class="row g-3">
+  <div class="col-12 mb-4">
+    <div class="form-group">
+      <label class="form-label" for="modalRoleName"
+        >Group Name <span style="color: red">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        formControlName="rolename"
+        placeholder="Enter group name"
+        [ngClass]="{ 'is-invalid': submitted && f.rolename.errors }"
+        tabindex="-1"
+        required
+      />
+    </div>
+    <div *ngIf="f.rolename.errors" class="invalid-feedback">
+      <div>Group name required</div>
+    </div>
+  </div>
+  <div class="col-12" *ngIf="LoadedData">
+    <h5>Contacts</h5>
+    <!-- Permission table -->
+    <div class="table-responsive">
+      <table class="table table-flush-spacing">
+        <tbody>
+          <tr *ngFor="let module of tempData">
+            <td>
+              <input
+                type="checkbox"
+                class="custom-checkbox"
+                id="chk_{{ module.id }}"
+                [checked]="isChecked(module)"
+                value="{{ module }}"
+                name="chk_{{ module.id }}"
+                (change)="onCheckboxChange(module)"
+              />
+            </td>
+            <td class="text-nowrap fw-medium">{{ module.firstName }}</td>
+            <td class="text-nowrap fw-medium">{{ module.lastName }}</td>
+            <td class="text-nowrap fw-medium">{{ module.mobileNumber }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Permission table -->
+  </div>
+  <div class="col-12" *ngIf="LoadingData" style="text-align: center">
+    <label>Loading Permissions</label>
+    <span class="spinner-border spinner-border-sm mr-1"></span>
+  </div>
+  <div class="col-12 text-right mt-4">
+    <button
+      type="submit"
+      class="btn btn-primary me-sm-3 me-1"
+      style="margin-right: 15px"
+    >
+      <span *ngIf="Saving" class="spinner-border spinner-border-sm mr-1"></span>
+      Submit
+    </button>
+  </div>
+</form>

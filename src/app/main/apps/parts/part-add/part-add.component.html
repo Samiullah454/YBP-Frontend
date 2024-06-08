@@ -1,0 +1,139 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ partToEdit ? 'Edit Part' : 'Add Part' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="savepart()" #partForm="ngForm">
+        <!-- part
+ Name -->
+        <h5>Part Information:</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="partname">Part Name:</label>
+                <input type="text" class="form-control" id="partName" name="partName" [(ngModel)]="newpart.partName" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="partType">Part Type:</label>
+                <select class="form-control" id="partTypeId" name="partTypeId" [(ngModel)]="newpart.partTypeId" required>
+                    <option *ngFor="let type of Types" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Frequency -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="partDescription">Part Description:</label>
+                <input type="text" class="form-control" id="partDescription" name="partDescription" [(ngModel)]="newpart.partDescription" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="manufacturer">Manufacturer:</label>
+                <input type="text" class="form-control" id="manufacturer" name="manufacturer" [(ngModel)]="newpart.manufacturer" required>
+            </div>
+            <!-- partType -->
+
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="manufpartNo">Manufacturer Part No:</label>
+                <input type="text" class="form-control" id="manufpartNo" name="manufpartNo"
+                    [(ngModel)]="newpart.manufpartNo" required>
+            </div>
+        </div>
+        <h5>Fulfillment & Shipping:</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="partname"> Days Required:</label>
+                <input type="number" class="form-control" id="shippingDays" name="shippingDays" [(ngModel)]="newpart.shippingDays" required>
+            </div>
+            <!-- Is Active -->
+            <div class="form-group col-md-6">
+                <label>Is Back Order:</label><br>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeYes" name="backOrder" [(ngModel)]="newpart.isBackOrdered" [value]="true">
+                    <label class="form-check-label" for="activeYes">Yes</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" id="activeNo" name="backOrder" [(ngModel)]="newpart.isBackOrdered" [value]="false">
+                    <label class="form-check-label" for="activeNo">No</label>
+                </div>
+            </div>
+
+        </div>
+        <h5>Part Pricing :</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="FlatRate">TA SKU:</label>
+                <input type="text" class="form-control" id="taSKU" name="taSKU" [(ngModel)]="newpart.tAskSKU" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="TimeFrameInHours">Manufacturer Price:</label>
+                <input type="number" class="form-control" id="manufacturerPrice" name="manufacturerPrice" [(ngModel)]="newpart.manufacturerPrice" required>
+            </div>
+        </div>
+        <h5>TA Part Mark Up:</h5>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="FlatRate">TA Price:</label>
+                <input type="text" class="form-control" id="taPrice" name="taPrice" [(ngModel)]="newpart.taPrice" required>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="partType">Matrk In % Or $:</label>
+                <select class="form-control" id="markupType" name="markupType" [(ngModel)]="newpart.markupType" required>
+                    <option *ngFor="let type of MarkUpType" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-4">
+                <label for="TimeFrameInHours"> MArkup Value:</label>
+                <input type="number" class="form-control" id="taMarkupPercentage" name="taMarkupPercentage" [(ngModel)]="newpart.markupAmount" required>
+            </div>
+        </div>
+        <h5>Warranty :</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="partType">Manufacturer Warranty Durration :</label>
+                <select class="form-control" id="manufWaDuration" name="manufWaDuration" [(ngModel)]="newpart.manufWaDuration" required>
+                    <option *ngFor="let type of TaType" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="manufacturerWarranty">Manufacturer Warranty:</label>
+                <input type="number" class="form-control" id="maufWarranty" name="maufWarranty"
+                    [(ngModel)]="newpart.maufWarranty" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="partType">TA Warranty Durration :</label>
+                <select class="form-control" id="manufWaDuration" name="manufWaDuration" [(ngModel)]="newpart.taWaDuration" required>
+                    <option *ngFor="let type of TaType" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="taWarranty">TA Warranty:</label>
+                <input type="number" class="form-control" id="taWarranty" name="taWaDuration"
+                    [(ngModel)]="newpart.taWarranty" required>
+            </div>
+        </div>
+        <h5>Security/Advance Amount</h5>
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="partType">Security/Advance Type:</label>
+                <select class="form-control" id="secAdvAmtType" name="secAdvAmtType" [(ngModel)]="newpart.secAdvAmtType" required>
+                    <option *ngFor="let type of SecAdvType" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="amount">Amount:</label>
+                <input type="number" class="form-control" id="amount" name="amount" [(ngModel)]="newpart.secAdvAmount" required>
+            </div>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">{{ partToEdit
+            ? 'Update' : 'Add' }} part
+        </button>
+    </form>
+
+</div>

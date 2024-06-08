@@ -1,0 +1,29 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ industryToEdit ? 'Edit Industry' : 'Add Industry' }}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <form (ngSubmit)="saveIndustry()" #industryForm="ngForm">
+    <div class="form-group">
+      <label for="name">Name:</label>
+      <input 
+      type="text" 
+      class="form-control" 
+      id="industryName
+      " name="industryName
+      " [(ngModel)]="newIndustry.industryName
+      " required>
+    </div>
+    <div class="form-group">
+      <label for="status">Status:</label>
+      <select class="form-control" id="status" name="status" [(ngModel)]="newIndustry.status" required>
+        <option value="0">Deactive</option>
+        <option value="1">Active</option>
+        <option value="2">Draft</option>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-primary">{{ industryToEdit ? 'Update' : 'Add' }} Industry</button>
+  </form>
+</div>

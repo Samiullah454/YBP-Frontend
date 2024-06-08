@@ -1,0 +1,179 @@
+<!-- slider.component.html -->
+<div class="content-wrapper container-xxl p-0">
+  <div class="content-body">
+    <!-- content-header component -->
+    <app-content-header [contentHeader]="contentHeader"></app-content-header>
+    <div class="card">
+      <div class="card-body">
+        <div class="row">
+          <div class="col-5">
+          
+            <div class="form-group">
+              <label for="title">Title:</label>
+              <input
+                  type="text"
+                  class="form-control"
+                  id="title"
+                  placeholder="Title"
+                  [(ngModel)]="title"
+                  #titleInput="ngModel"
+                  name="title"
+                  required
+              />
+              <div *ngIf="submitted && titleInput.invalid && titleInput.touched" class="text-danger">Title is required.</div>
+          </div>
+          <div class="form-group">
+            <label for="wordtohighlight">Word To Highlight:</label>
+            <input
+                type="text"
+                class="form-control"
+                id="wordtohighlight"
+                placeholder="Word To Highlight"
+                [(ngModel)]="focusedWord"
+                #wordtohighlightInput="ngModel"
+                name="wordtohighlight"
+                required
+            />
+            <div *ngIf="submitted && wordtohighlightInput.invalid && wordtohighlightInput.touched" class="text-danger">Title is required.</div>
+        </div>
+          <div class="form-group">
+              <label for="description">Description:</label>
+              <textarea
+                  class="form-control"
+                  id="description"
+                  placeholder="Description"
+                  [(ngModel)]="description"
+                  #descriptionInput="ngModel"
+                  name="description"
+                  required
+              ></textarea>
+              <div *ngIf="submitted && descriptionInput.invalid && descriptionInput.touched" class="text-danger">Description is required.</div>
+          </div>
+          
+          
+          <div>
+              <fieldset class="form-group">
+                  <label for="file-upload-single">Select Image:</label>
+                  <div class="custom-file">
+                      <input
+                          (change)="onFileSelected($event)"
+                          type="file"
+                          class="custom-file-input"
+                          type="file"
+                          ng2FileSelect
+                          [uploader]="uploader"
+                          id="file-upload-single"
+                          name="image"
+                          required
+                      />
+                      <label class="custom-file-label">Choose file</label>
+                  </div>
+                  <div *ngIf="!uploader.queue.length && submitted" class="text-danger">Image is required.</div>
+              </fieldset>
+          </div>
+          
+            </div>
+         
+          <div class="col-7">
+          <!-- Display Selected Image -->
+          <div  *ngIf="selectedImage">
+            <h4>Selected Image Preview</h4>
+            <img
+              [src]="selectedImage"
+              alt="Selected Image"
+              class="img-fluid"
+              style="max-width: 509px; max-height: 226px"
+            />
+          </div>
+          </div>
+        </div>
+
+        <div class="col-lg-12 overflow-auto">
+          <div class="d-flex justify-content-between mb-1">
+            <h4>Upload</h4>
+            <!-- <p>Queue length: {{ uploader?.queue?.length }}</p> -->
+          </div>
+
+          <table class="table">
+            <thead>
+              <tr>
+                <th width="50%">Name</th>
+                <th>Size</th>
+                <th>Progress</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of uploader.queue">
+                <td>
+                  <strong>{{ item?.file?.name }}</strong>
+                </td>
+                <td *ngIf="uploader.options.isHTML5" nowrap>
+                  {{ item?.file?.size / 1024 / 1024 | number : ".2" }} MB
+                </td>
+                <td *ngIf="uploader.options.isHTML5">
+                  <ngb-progressbar
+                    type="primary"
+                    [value]="item.progress"
+                  ></ngb-progressbar>
+                </td>
+                <td class="text-center">
+                  <span *ngIf="item.isSuccess"
+                    ><i data-feather="check"></i
+                  ></span>
+                  <span *ngIf="item.isCancel"
+                    ><i data-feather="slash"></i
+                  ></span>
+                  <span *ngIf="item.isError"
+                    ><i data-feather="x-circle"></i
+                  ></span>
+                </td>
+                <td nowrap>
+                  <button
+                    type="button"
+                    class="btn btn-raised btn-outline-success btn-sm mr-50"
+                    (click)="item.upload()"
+                    [disabled]="
+                      item.isReady || item.isUploading || item.isSuccess
+                    "
+                    rippleEffect
+                  >
+                    <span data-feather="upload"></span>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-raised btn-outline-warning btn-sm mr-50"
+                    (click)="item.cancel()"
+                    [disabled]="!item.isUploading"
+                    rippleEffect
+                  >
+                    <i data-feather="slash"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn btn-raised btn-outline-danger btn-sm"
+                    (click)="item.remove()"
+                    rippleEffect
+                  >
+                    <i data-feather="trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-xl-2 col-md-2 col-2 mb-1 mt-3">
+          <button
+            type="button"
+            class="btn btn-primary"
+            rippleEffect
+            (click)="addSlider()"
+          >
+            Add Slider
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

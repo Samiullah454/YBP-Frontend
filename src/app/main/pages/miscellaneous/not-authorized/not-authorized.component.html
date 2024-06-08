@@ -1,0 +1,26 @@
+<!-- Not authorized-->
+<div class="misc-wrapper">
+  <a class="brand-logo" href="javascript:void(0);">
+    <img src="{{ coreConfig.app.appLogoImage }}" alt="brand-logo" height="28" />
+    </a
+  >
+  <div class="misc-inner p-2 p-sm-3">
+    <div class="w-100 text-center">
+      <h2 class="mb-1">You are not authorized! 🔐</h2>
+      <p>You do not have permission to access this page or resource.</p>
+      <p>Please contact your administrator if you believe this is an error.</p>
+      <a class="btn btn-primary mb-1 btn-sm-block" routerLink="/dashboard/analytics" rippleEffect
+        >Back to Dashboard</a
+      ><img
+        class="img-fluid"
+        [src]="
+          coreConfig.layout.skin === 'dark'
+            ? 'assets/images/pages/not-authorized-dark.svg'
+            : 'assets/images/pages/not-authorized.svg'
+        "
+        alt="Not authorized page"
+      />
+    </div>
+  </div>
+</div>
+<!-- / Not authorized-->

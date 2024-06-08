@@ -1,0 +1,42 @@
+@import '@core/scss/angular/libs/datatables.component.scss';
+@import '@core/scss/base/pages/app-user.scss';
+@import '@core/scss/angular/libs/select.component.scss';
+/* Add this to your component's styles or your global styles */
+
+.checkbox-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+
+.checkbox-label {
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+}
+
+.shift-days-label {
+  font-size: 0.8em;
+  color: #666;
+  margin-right: 5px;
+}
+
+/* You can customize the above styles based on your design preferences */
+.checkbox-row {
+  margin-top: 5px; /* Adjust the margin-top value based on your preference */
+}
+
+.checkbox-label input[type="checkbox"] {
+  margin: 0 5px;/* Adjust the margin-right value based on your preference */
+  background-color: rgb(0, 119, 128); /* Change the color to your desired green color */
+}
+
+.span {
+  color: antiquewhite;
+}
+
+
+
+
+
+

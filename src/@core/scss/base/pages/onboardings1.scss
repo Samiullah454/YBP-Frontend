@@ -1,0 +1,214 @@
+@import '../bootstrap-extended/include'; // Bootstrap includes
+@import '../components/include'; // Components includes
+
+
+.box {
+    background-color: transparent;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.box .lift-section-wrapper {
+    border: 0px none;
+    height: 688px;
+    width: 501px;
+}
+
+.box .lift-section {
+    align-items: center;
+    background-color: var(--primary-color-base);
+    border-radius: 20px;
+    display: flex;
+    gap: 10px;
+    height: 688px;
+    justify-content: center;
+    left: 0;
+    padding: 132px 72px;
+    position: fixed;
+    top: 0;
+    width: 501px;
+}
+
+.box .content {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    gap: 56px;
+    margin-bottom: -44.5px;
+    margin-top: -44.5px;
+    position: relative;
+    width: fit-content;
+}
+
+.box .logo {
+    height: 58px;
+    min-width: 197px;
+    object-fit: cover;
+    position: relative;
+}
+
+.box .progress-bar {
+    align-items: flex-start;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: 310px;
+}
+
+.box .div {
+    align-items: flex-start;
+    display: flex;
+    gap: 18.93px;
+    margin-right: -3.46px;
+    position: relative;
+    width: 313.46px;
+}
+
+.box .num-line {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    width: fit-content;
+}
+
+.box .element {
+    align-items: center;
+    background-color: var(--white);
+    border-radius: 7.1px;
+    box-shadow: 0px 2.37px 4.73px #a5a3ae4c;
+    display: flex;
+    gap: 11.83px;
+    height: 44px;
+    justify-content: center;
+    padding: 9.46px;
+    position: relative;
+    width: 44px;
+}
+
+.box .text-wrapper {
+    color: var(--primary-color-base);
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-size: 17.7px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24.8px;
+    margin-top: -1.15px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.box .line {
+    height: 48px;
+    min-width: 1px;
+    object-fit: cover;
+    position: relative;
+}
+
+.box .text {
+    align-items: flex-start;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    position: relative;
+}
+
+.box .title {
+    color: var(--white);
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-size: 17.7px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24.8px;
+    margin-top: -1.18px;
+    position: relative;
+    white-space: nowrap;
+    width: 247px;
+}
+
+.box .subtext {
+    color: var(--white);
+    font-family: "Montserrat-Regular", Helvetica;
+    font-size: 16.4px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    width: 247px;
+}
+
+.box .div-wrapper {
+    align-items: center;
+    border: 1px dashed;
+    border-color: var(--primary-color-200);
+    border-radius: 7.1px;
+    box-shadow: 0px 2.37px 4.73px #a5a3ae4c;
+    display: flex;
+    gap: 11.83px;
+    height: 44px;
+    justify-content: center;
+    padding: 9.46px;
+    position: relative;
+    width: 44px;
+}
+
+.box .text-wrapper-2 {
+    color: var(--primary-color-200);
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-size: 17.7px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24.8px;
+    margin-top: -0.96px;
+    position: relative;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.box .title-2 {
+    color: var(--primary-color-200);
+    font-family: "Montserrat-SemiBold", Helvetica;
+    font-size: 17.7px;
+    font-weight: 600;
+    letter-spacing: 0;
+    line-height: 24.8px;
+    margin-top: -1.18px;
+    position: relative;
+    white-space: nowrap;
+    width: 247px;
+}
+
+.box .p {
+    color: var(--primary-color-200);
+    font-family: "Montserrat-Regular", Helvetica;
+    font-size: 16.4px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: normal;
+    position: relative;
+    width: 247px;
+}
+
+.box .already-have-account {
+    color: transparent;
+    font-family: "Montserrat-Regular", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 22px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: fit-content;
+}
+
+.box .span {
+    color: #c7c2f9;
+}
+
+.box .text-wrapper-3 {
+    color: #fdfdfd;
+}

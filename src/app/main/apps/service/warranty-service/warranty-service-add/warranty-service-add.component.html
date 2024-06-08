@@ -1,0 +1,53 @@
+<div class="modal-header">
+    <h4 class="modal-title">{{ serviceToEdit ? 'Edit Service' : 'Add Service' }}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="closeModal()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form (ngSubmit)="saveService()" #ServiceForm="ngForm">
+        <!-- Service Name -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="name">Service Name:</label>
+                <input type="text" class="form-control" id="name" name="name"
+                    [(ngModel)]="newservice.serviceName" required>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="servicetype">Service Type:</label>
+                <select class="form-control" id="servicetype" name="servicetype" [(ngModel)]="newservice.warrantyClaimServiceTypeId"
+                    required>
+                    <option *ngFor="let type of Types" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="claimServiceFee">Claim Service Fee:</label>
+                <input type="number" class="form-control" id="claimServiceFee" name="claimServiceFee"
+                    [(ngModel)]="newservice.claimServiceFee" required>
+            </div>
+        </div>
+
+        <!-- Frequency -->
+        <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="associatedService">Associated Service Type:</label>
+                <select class="form-control" id="associatedService" name="associatedService" [(ngModel)]="newservice.associatedService"  (change)="onchange(newservice.associatedService)" required>
+                    <option *ngFor="let type of associatedService" [value]=type.id>{{ type.name }}</option>
+                </select>
+            </div>
+
+            <div class="form-group col-md-6">
+                <label for="servicename">Associated Service Name:</label>
+                <select class="form-control" id="servicename" name="servicename" [(ngModel)]="selectedServiceId" required>
+                    <option value="" disabled selected>Select an option</option>
+                    <option *ngFor="let type of associatedServicelist" [value]="type.id">{{ type.serviceName }}</option>
+                </select>
+            </div>
+            
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" class="btn btn-primary">{{ serviceToEdit ? 'Update' : 'Add' }} Service</button>
+    </form>
+
+</div>

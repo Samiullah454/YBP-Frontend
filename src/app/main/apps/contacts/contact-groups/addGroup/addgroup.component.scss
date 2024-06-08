@@ -1,0 +1,11 @@
+@import '@core/scss/base/bootstrap-extended/include'; // Bootstrap includes
+@import '@core/scss/base/pages/page-auth.scss';
+@import '@core/scss/angular/libs/toastr.component.scss';
+@import '@core/scss/angular/libs/sweet-alerts.component.scss';
+@import '@core/scss/base/plugins/forms/form-validation.scss';
+
+.custom-checkbox 
+{
+     margin-left: auto;
+     margin-right: 5px;
+}

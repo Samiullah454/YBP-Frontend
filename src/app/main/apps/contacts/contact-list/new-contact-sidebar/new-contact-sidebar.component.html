@@ -1,0 +1,373 @@
+<form
+  class="add-new-user modal-content pt-0"
+  (ngSubmit)="(newContactForm.form.valid)"
+  #newContactForm="ngForm"
+>
+  <div class="modal-body flex-grow-1">
+    <h4 class="mb-0">Details</h4>
+    <hr class="mt-0" />
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">Title</label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Mr / Mrs / Miss"
+            aria-label="jdoe1"
+            name="tilte"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.title"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-fullname"
+            >First Name <span style="color: red">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control dt-full-name"
+            id="basic-icon-default-fullname"
+            placeholder="First Name"
+            name="first-name"
+            [(ngModel)]="contact.firstName"
+            [class.error]="newContactForm.submitted && FNameRef.invalid"
+            #FNameRef="ngModel"
+            required
+            aria-label="user name"
+            aria-describedby="basic-icon-default-fullname2"/>
+          <span *ngIf="newContactForm.submitted && FNameRef.invalid" class="invalid-form">
+            <small class="form-text text-danger" *ngIf="FNameRef.errors.required">
+              This field is required!
+            </small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">
+            Middle Name
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Middle Name"
+            aria-label="jdoe1"
+            name="middle-name"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.middleName"
+            #FSurNameRef="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">
+            Last Name 
+            <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Last Name"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            name="last-name"
+            [(ngModel)]="contact.lastName"
+            [class.error]="newContactForm.submitted && FUserNameRef.invalid"
+            #FUserNameRef="ngModel"
+            required/>
+          <span *ngIf="newContactForm.submitted && FUserNameRef.invalid" class="invalid-form">
+            <small class="form-text text-danger" *ngIf="FUserNameRef.errors.required">
+              This field is required!
+            </small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">
+            Suffix
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Suffix"
+            name="suffix"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.suffix"
+            #FSurNameRef="ngModel"
+          />
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">
+            Mobile Number <span style="color: red">*</span>
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="(480) 240-7200"
+            name="mobile-name"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.mobileNumber"
+            [class.error]="newContactForm.submitted && FSurNameRef.invalid"
+            #FSurNameRef="ngModel"
+            required
+            (input)="limitInputLength($event)"/>
+          <span *ngIf="newContactForm.submitted && FSurNameRef.invalid" class="invalid-form">
+            <small class="form-text text-danger" *ngIf="FSurNameRef.errors.required">
+              This field is required!
+            </small>
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <div class="form-group mb-0">
+          <label class="form-label" for="basic-icon-default-uname">
+            Email Address
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Email Address"
+            name="email"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.email"/>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <div class="form-group">
+          <label class="form-label" for="basic-icon-default-uname">
+            Created Date
+          </label>
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            name="created-At"
+            [(ngModel)]="contact.createdAt"
+            readonly/>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="mb-0">Addresses</h4>
+    <hr class="mt-0" />
+
+    <div class="row">
+      <div class="col-md-6">
+        <h6>Billing</h6>
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Address Line 1"
+            name="billing-address-line-1"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.billingAddressLine1"/>
+        </div>      
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Address Line 2"
+            name="billing-address-line-2"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.billingAddressLine2"/>
+        </div>
+        <div class="row">
+          <div class="col-md-4 pr-0">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="City"
+                name="billing-address-city"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.billingAddressCity"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="State"
+                name="billing-address-state"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.billingAddressState"/>
+            </div>
+          </div>
+          <div class="col-md-4 pl-0">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="Postal Code"
+                name="billing-address-postal-code"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.billingAddressPostalCode"/>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <h6>Service/Shipping</h6>
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Address Line 1"
+            name="shipping-address-line-1"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.shippingAddressLine1"/>
+        </div>
+      
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Address Line 2"
+            name="shipping-address-line-2"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.shippingAddressLine2"/>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 pr-0">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="City"
+                name="shipping-address-city"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.shippingAddressCity"/>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="State"
+                name="shipping-address-state"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.shippingAddressState"/>
+            </div>
+          </div>
+          <div class="col-md-4 pl-0">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="Postal Code"
+                name="shipping-address-postal-code"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.shippingAddressPostalCode"/>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h4 class="mb-0">More Info</h4>
+    <hr class="mt-0" />
+
+    <div class="row">
+      <div class="col-md-4">
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Company"
+            name="company"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.company">
+        </div>
+      </div>
+      <div class="col-md-4">      
+        <div class="form-group">
+          <input
+            type="text"
+            id="basic-icon-default-uname"
+            class="form-control dt-uname"
+            placeholder="Website"
+            name="website"
+            aria-label="jdoe1"
+            aria-describedby="basic-icon-default-uname2"
+            [(ngModel)]="contact.website">
+        </div>
+      </div>
+
+          <div class="col-md-4">
+            <div class="form-group">
+              <input
+                type="text"
+                id="basic-icon-default-uname"
+                class="form-control dt-uname"
+                placeholder="Company Email"
+                name="company-email"
+                aria-label="jdoe1"
+                aria-describedby="basic-icon-default-uname2"
+                [(ngModel)]="contact.companyEmail"/>
+            </div>
+          </div>
+    </div>
+
+    <button type="submit" class="btn btn-primary mr-1" (click)="submit(newContactForm)" rippleEffect>
+      Submit
+    </button>
+    <button type="reset" class="btn btn-outline-secondary" (click)="close()" rippleEffect>
+      Cancel
+    </button>
+  </div>
+</form>
